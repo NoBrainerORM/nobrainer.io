@@ -1,0 +1,104 @@
+---
+layout: docs
+title: Configuration
+prev_section: differences_from_other_orms
+next_section: models
+permalink: /configuration/
+---
+
+NoBrainer can be configured by calling `NoBrainer.configure { }`.  
+With a Rails application, you may place this configuration block in an
+initializer, such as `config/initializers/nobrainer.rb`.
+The settings are shown with their default values:
+
+{% highlight ruby %}
+NoBrainer.configure do |config|
+  # The rethinkdb_url specifies the RethinkDB database connection url.
+  # When left unspecified, NoBrainer picks a database connection by default.
+  # The default is to use localhost, with a database name matching the
+  # Rails application name and the Rails environment.
+  # NoBrainer will also look for environment variables such as RETHINKDB_URL,
+  # or a combination of RETHINKDB_HOST, RETHINKDB_PORT, and RETHINKDB_AUTH.
+  config.rethinkdb_url = "rethinkdb://localhost/#{Rails.app_name}_#{Rails.env}"
+
+  # NoBrainer uses logger to emit debugging information.
+  # If the logger is set in debug mode with:
+  #  NoBrainer.logger.log_level = Logger::DEBUG
+  # Then each database query will be emitted to the log file.
+  config.logger = Rails.logger || Logger.new(STDERR)
+
+  # NoBrainer will colorize the queries if colorize_logger is true.
+  # Specifically, NoBrainer will colorize management RQL queries in yellow,
+  # write queries in red and read queries in green.
+  config.colorize_logger = true
+
+  # You probably do not want to use both NoBrainer and ActiveRecord in your
+  # application. NoBrainer will emit a warning if you do so.
+  # You can turn off the warning if you want to use both.
+  config.warn_on_active_record = true
+
+  # auto_create_databases allows NoBrainer to create databases on demand.
+  # This behavior is similar to MongoDB.
+  config.auto_create_databases = true
+
+  # auto_create_tables allows NoBrainer to create tables on demand.
+  # This behavior is similar to MongoDB.
+  # Note that this will not auto create indexes for you.
+  # You still need to run `rake db:update_indexes` to create the indexes.
+  config.auto_create_tables = true
+
+  # cache_documents enables the document cache on NoBrainer.
+  # The caching behavior is further explained in the caching section.
+  # It is strongly encouraged to leave this on, but if you decide
+  # to turn this off, please fill a bug report to tell us why.
+  config.cache_documents = true
+
+  # When the network connection is lost, NoBrainer will the query 10 times
+  # before giving up. Note that this can be a problem with non idempotent
+  # queries such as increments. Setting it to 0 disable reconnections.
+  config.max_reconnection_tries = 10
+
+  # Configures the durability for database writes.
+  # In test mode and development mode the durability is soft by default,
+  # otherwise hard.
+  config.durability = Rails.env.in? %w(test development) ? :soft : :hard
+
+  # include_root_in_json sets the global setting for model JSON conversion.
+  # If you like to have the class name in the JSON, say true.
+  config.include_root_in_json = false
+end
+{% endhighlight %}
+
+Removing ActiveRecord
+---------------------
+
+NoBrainer can coexist with ActiveRecord at runtime, but the two conflicts on the
+rake tasks. It's best to remove ActiveRecord unless you plan to use both SQL
+and RethinkDB in your application.
+
+### With a fresh Rails app
+
+If your Rails application is not yet created, you can create your rails app with:
+
+{% highlight bash %}
+rails new app_name --skip-active-record
+{% endhighlight %}
+
+### With an existing Rails app
+
+To remove ActiveRecord from an existing Rails application, three steps must be done:
+
+1) Open `config/application.rb`. On line 3, replace `require 'rails/all'` with:
+
+{% highlight ruby %}
+# require 'active_record/railtie'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'sprockets/railtie'
+require 'rails/test_unit/railtie'
+{% endhighlight %}
+
+2) Comment all the configuration options in `config/environments/*.rb` that
+contains `active_record`.
+
+3) Remove `config/database.yml`, and anything in `db/` except `db/seeds.rb`.

@@ -1,0 +1,15 @@
+---
+---
+
+{% capture screen %}
+{% include css/normalize.css %}
+{% include css/gridism.css %}
+{% include css/pygments.css %}
+{% include css/style.css %}
+{% endcapture %}
+
+{% if site.GH_ENV %}
+  {{ screen | strip_newlines | remove: '  ' }}
+{% else %}
+  {{ screen }}
+{% endif %}
