@@ -1,5 +1,6 @@
 publish:
 	jekyll build
+	@[[ `git status -s` == "" ]] || (echo "git is dirty"; exit 1)
 	git branch -D gh-pages || true
 	git checkout --orphan gh-pages
 	ls | grep -v _site | xargs rm -rf

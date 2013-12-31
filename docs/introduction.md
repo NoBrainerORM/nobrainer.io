@@ -98,6 +98,6 @@ The roadmap without order is:
 
 ## Changelog
 
-### 0.8 -- end of 2013
+### 0.8.0 -- Dec. 31st 2013
 
 * First documented release of NoBrainer.
