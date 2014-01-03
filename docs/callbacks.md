@@ -16,7 +16,7 @@ class Model
   after_save { puts "Saved!" }
   after_save :say_hello
 
-  def hello
+  def say_hello
     puts 'hello'
   end
 end

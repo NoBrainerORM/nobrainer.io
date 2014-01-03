@@ -16,5 +16,7 @@ on the NoBrainer Github project page.
 on the nobrainer.io Github project page.
 * You can also try [stackoverflow](http://stackoverflow.com/questions/tagged/nobrainer).
 
-Note: You can create a Github issue even if you just have a regular question and
+You can create a Github issue even if you just have a regular question and
 not necessarily experiencing an issue.
+
+You can also create a Github issue for a feature request.

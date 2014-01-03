@@ -30,13 +30,25 @@ end
 {% endhighlight %}
 
 When a class method is found in a chain of criteria, the method is executed and
-the returned criterion is merged with the chain. Example with the previous
+the returned criterion is merged with the chain. Example with the previously
 declared scope:
 
 {% highlight ruby %}
 Model.where(:email => /@gmail/).active.count
 # Equivalent to
 Model.where(:email => /@gmail/).where(:active => true }.count
+{% endhighlight %}
+
+Scopes can accept arguments. Example:
+
+{% highlight ruby %}
+class Model
+  def self.created_before(time)
+    where(:created_at.lt => time)
+  end
+end
+
+Model.created_before(1.week.ago).count
 {% endhighlight %}
 
 ## Default Scopes
@@ -83,3 +95,4 @@ NoBrainer will not use the default scopes in the following cases:
 2. When using `validates_uniqueness_of :some_field`, NoBrainer will not use the
    default scope to find any duplicates of `some_field`.
 3. When using `find()` or `find!()`.
+4. When using `belongs_to` associations.

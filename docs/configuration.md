@@ -47,12 +47,6 @@ NoBrainer.configure do |config|
   # You still need to run `rake db:update_indexes` to create the indexes.
   config.auto_create_tables = true
 
-  # cache_documents enables the document cache on NoBrainer.
-  # The caching behavior is further explained in the caching section.
-  # It is strongly encouraged to leave this on, but if you decide
-  # to turn this off, please fill a bug report to tell us why.
-  config.cache_documents = true
-
   # When the network connection is lost, NoBrainer will the query 10 times
   # before giving up. Note that this can be a problem with non idempotent
   # queries such as increments. Setting it to 0 disable reconnections.
@@ -62,10 +56,6 @@ NoBrainer.configure do |config|
   # In test mode and development mode the durability is soft by default,
   # otherwise hard.
   config.durability = Rails.env.in? %w(test development) ? :soft : :hard
-
-  # include_root_in_json sets the global setting for model JSON conversion.
-  # If you like to have the class name in the JSON, say true.
-  config.include_root_in_json = false
 end
 {% endhighlight %}
 

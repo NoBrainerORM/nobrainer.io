@@ -38,29 +38,29 @@ NoBrainer.run(:profile => true) { |r| r.table('users').count }
 {% endhighlight %}
 
 Because running queries with certain options is useful (profiling, durability,
-etc.), NoBrainer provides a method `with_options()` which specifies what options
+etc.), NoBrainer provides a method `NoBrainer.with()` which specifies what options
 to run the RQL queries with. For example:
 
 {% highlight ruby %}
-NoBrainer.with_options(:use_outdated => true) do
+NoBrainer.with(:use_outdated => true) do
   User.each { ... }
 end
 {% endhighlight %}
 
-Note that `with_options()` will pass options to the run RQL command. To understand
+`NoBrainer.with()` will pass options to the run RQL command. To understand
 the implications of this, consider the following example:
 
 {% highlight ruby %}
-criteria = NoBrainer.with_options(:use_outdated => true) { User.all }
+criteria = NoBrainer.with(:use_outdated => true) { User.all }
 criteria.count
 {% endhighlight %}
 
 The criteria will not use the defined options, because the RQL command is
-actually ran when calling `count`, which is outside the `with_options()` block.
-It is a bad practice to return criteria from a `with_options()`
+actually ran when calling `count`, which is outside the `NoBrainer.with()` block.
+It is a bad practice to return criteria from a `NoBrainer.with()`
 block. More information can be found in the multi-tenancy section.
 
-`with_options()` can be nested, and is thread safe.
+`NoBrainer.with()` can be nested, and is thread safe.
 
 ## Generating RQL from NoBrainer
 

@@ -10,8 +10,8 @@ NoBrainer breaks a couple of established patterns to provide an API that is
 predictable and consistent:
 
 * When using `find()` and no document has been found, NoBrainer will not raise
-  an exception, but return nil. To get the traditional ActiveRecord behavior, one must
-  use `find!()` which raises when the target is not found.
+  an exception, but return `nil`. To get the traditional `find()` ActiveRecord
+  behavior, one must use `find!()` which raises when the target is not found.
   This behavior matches the semantics of `first` and `first!`.
 * RethinkDB does not support transactions, so you need to be in control of when
   a database write happens. NoBrainer never autosaves a model behind the scenes.

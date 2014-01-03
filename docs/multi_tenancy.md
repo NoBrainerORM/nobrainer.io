@@ -24,10 +24,10 @@ NoBrainer.with_database('client1')
 end
 {% endhighlight %}
 
-Note that `NoBrainer.with_database(name)` is an alias for
-`NoBrainer.with_options(:db => name)`, which can be seen as a thread safe
+`NoBrainer.with_database(name)` is an alias for
+`NoBrainer.with(:db => name)`, which can be seen as a thread safe
 version of the [`r.use()`](http://www.rethinkdb.com/api/ruby/#use).
-This means that all the rules of `with_options` applies. Specifically, you
+This means that all the rules of `NoBrainer.with` applies. Specifically, you
 should never leak a criteria outside a `with_database()` block. For example:
 
 {% highlight ruby %}

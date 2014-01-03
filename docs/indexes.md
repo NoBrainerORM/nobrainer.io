@@ -49,7 +49,7 @@ end
 ## Using Indexes
 
 Because RethinkDB requires explicit index usage, NoBrainer tries to
-leverage indexes to write efficient queries implicitly. For example:
+leverage indexes to compile efficient queries implicitly. For example:
 
 {% highlight ruby %}
 # Implicit use of indexes
@@ -57,8 +57,11 @@ leverage indexes to write efficient queries implicitly. For example:
 # Use the index declared on the belongs_to association
 author.posts.each { }
 
-# Also use the post_id index.
+# Also use the author_id index with a get_all
 Author.includes(:posts).first
+
+# Also use the author_id index with a get_all
+Post.where(:author_id.in => [1,2,3]).each { }
 
 # Use the full_name_compound index
 Author.where(:first_name => 'John', :last_name => 'Saucisse')
@@ -114,4 +117,4 @@ Model.perform_update_indexes # Update indexes on a specific model
 {% endhighlight %}
 
 `update_indexes` will drop indexes that are no longer declared. This might be a
-bit dangerous, so we want to provide some confirmation measures in the future.
+bit dangerous, so we want to provide some sort of confirmations in the future.

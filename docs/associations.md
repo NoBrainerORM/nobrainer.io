@@ -49,6 +49,7 @@ The following describes the different options `has_many` accepts:
 * `:class_name`: the targets class name. Defaults to `Target`.
 * `:dependent`: configure the destroy behavior further explained below. Defaults
   to `nil`.
+* `:through`: See the `has_many through` association below.
 
 The dependent option tells what to do when destroying an owner that has many
 targets with a `before_destroy` callback. The different dependent values are:
@@ -68,6 +69,10 @@ The following describes the behavior of `has_many` associations:
   This also mean that you cannot use `post.comments.build`. Rather, you should use
   `Comment.create(:post => post)` and have a presence validation on post.
 
+* Loading targets through `instance.targets` will automatically set their
+  matching `belongs_to` associations to `instance`, with or without eager
+  loading.
+
 * `instance.targets` returns the criteria `Target.where(foreign_key => owner.id)`,
   which is cached. This means that you will always get the same instance of
   criteria on a given instance, which will cache enumerated documents.
@@ -78,10 +83,12 @@ section](/docs/caching).
 
 {% highlight ruby %}
 class Post
+  include NoBrainer::Document
   has_many :comments
 end
 
 class Comment
+  include NoBrainer::Document
   belongs_to :post
 end
 
@@ -94,14 +101,41 @@ post.comments.reload
 post.comments.to_a # contains a comment.
 {% endhighlight %}
 
----
+## has\_many through Association
 
-The `belongs_to` and `has_many` associations have no knowledge of each other.
-This can be implement in the future (with an `inverse_of` option) to optimize certain
-queries (esp. with eager loading).
+The `has_many` syntax is the following: `has_many :targets, :through => :association`.
+`targets` must be an defined association on the through `association`. You may
+go through any associations. No other options are supported.
 
-`has_many through` association is not implemented yet. However, this feature is
-high priority.
+The implementation of `has_many` through is essentially a thin wrapper around the
+eager loading functionality, which implies that reading a `has_many` through
+association will not yield a criteria, but a plain unmodifiable array which gets cached.
+
+The following show an example of using a `has_many` through association:
+
+{% highlight ruby %}
+class Author
+  include NoBrainer::Document
+  has_many :posts
+  has_many :comments, :through => :posts
+end
+
+class Post
+  include NoBrainer::Document
+  belongs_to :author
+  has_many :comments
+end
+
+class Comment
+  include NoBrainer::Document
+  belongs_to :post
+end
+
+author = Author.create
+post = Post.create(:author => author)
+2.times { Comment.create(:post => post) }
+author.comments # returns the two comments
+{% endhighlight %}
 
 ## has\_and\_belongs\_to\_many Association
 
@@ -110,24 +144,37 @@ own join table as such:
 
 {% highlight ruby %}
 class Patient
+  include NoBrainer::Document
   has_many :appointments
-  has_many :physicians, :through => :appointments # Not yet implemented
+  has_many :physicians, :through => :appointments
 end
 
 class Appointment
+  include NoBrainer::Document
   belongs_to :patient
   belongs_to :physician
 end
 
 class Physician
+  include NoBrainer::Document
   has_many :appointments
-  has_many :patients, :through => :appointments # Not yet implemented
+  has_many :patients, :through => :appointments
 end
 {% endhighlight %}
 
 ## has\_one Association
 
-The `has_one` association is not implemented yet.
+The `has_one` association is a `has_many` with the following differences:
+
+* The target name is assumed to be singular instead of plural.
+* Reading the target of a `has_one` association returns a single document,
+  unlike a `has_many` which returns an array of documents.
+  Nevertheless, NoBrainer will emit warnings if your association has more than
+  one element.
+
+Note that the `dependent` option will still behave like a `has_many`
+association. In other words, all the targets matching the foreign key of the
+owner will be subject to the `destroy` behavior, not just the first one.
 
 ## accept_nested_attributes_for
 
@@ -139,4 +186,4 @@ sort of features belongs in a separate gem anyway because it's a crazy feature.
 You can retrieve the association declarations with `Model.association_metadata`.
 It returns a hash of the form `{target_name => metadata_instance}`.
 Association instances can be retrieved on a model instance with
-`model_instance.association(metadata_instance)`.
+`model_instance.associations[metadata_instance]`.

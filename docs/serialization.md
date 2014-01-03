@@ -25,6 +25,3 @@ class Model
   self.include_root_in_json = true
 end
 {% endhighlight %}
-
-If you wish to set this setting globally, you may set `include_root_in_json` in
-the NoBrainer [configuration](/docs/configuration).

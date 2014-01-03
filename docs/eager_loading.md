@@ -13,15 +13,18 @@ queries issue.  Suppose we have posts and comments:
 
 {% highlight ruby %}
 class Author
+  include NoBrainer::Document
   has_many :posts
 end
 
 class Post
+  include NoBrainer::Document
   belongs_to :author
   has_many :comments
 end
 
 class Comment
+  include NoBrainer::Document
   belongs_to :post
 end
 {% endhighlight %}
@@ -48,27 +51,31 @@ comments.each do |comment|
 end
 {% endhighlight %}
 
-`includes()` accepts arrays and hashes to describe which association to eager load.
-For example, to load all the related to the first Author in 5 queries:
-
 {% highlight ruby %}
-Author.includes(:posts => [:author, :comments => :post]).first
+Post.includes(:author, :comments).each do |post|
+  post.author
+  post.comments.each { ... }
+end
 {% endhighlight %}
 
-Note that the author and posts will be loaded twice, and posts will be loaded twice
-because NoBrainer does not realize that the belongs_to associations correspond
-to an already loaded has\_many association.
-Something more efficient will be implemented in the future.
+`includes()` accepts arrays and hashes to describe the associations to eager load.
+For example:
+
+{% highlight ruby %}
+Model1.includes(:model2, :model3 => [:model4, :model5 => :model6])
+{% endhighlight %}
 
 NoBrainer allows criteria to be specified on how to include these associations.
 When specifying criteria, nested includes can be used to further load associations.
 For example:
 
 {% highlight ruby %}
-Author.includes(:posts => Post.where(:body => /rethinkdb/).includes([
-                            :author,
+Author.includes(:posts => Post.where(:body => /rethinkdb/).includes(
                             :comments => Comment.order_by(:created_at)]).first
 {% endhighlight %}
+
+Remember that NoBrainer will use the models default scopes on all association
+except on the `belongs_to` associations.
 
 NoBrainer uses `in` queries such as `Model.where(foreign_key.in => [ids])` to retrieve
 associations and can leverage secondary indexes.

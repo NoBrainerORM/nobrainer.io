@@ -22,7 +22,7 @@ required tables for you by default. If you wish to change this behavior, you
 may change the NoBrainer [configuration](/docs/configuration) with
 `auto_create_databases = false` and `auto_create_tables = false`.
 
-The default table name is `class.name.underscore.gsub('/', '__').pluralize`.
+The default table name is `class.name.tableize.gsub('/', '__')`.
 You may change the table name as described in the
 [multi tenancy section](/docs/multi_tenancy).
 

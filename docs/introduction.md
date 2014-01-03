@@ -17,6 +17,7 @@ section](/docs/differences_from_other_orms/).
 
 NoBrainer depends on a couple of things:
 
+* The RethinkDB database.
 * NoBrainer runs on Ruby MRI 1.9.3+, Ruby MRI 2.x, JRuby in 1.9+ mode.
 * NoBrainer can be used without Rails, but plays nicely with Rails3 and Rails4.
 * NoBrainer depends on the [`rethinkdb`](https://rubygems.org/gems/rethinkdb),
@@ -25,7 +26,6 @@ NoBrainer depends on a couple of things:
       [`middleware`](https://github.com/mitchellh/middleware) gems.
       These dependencies are automatically pulled in when you install the
       `nobrainer` gem.
-* The RethinkDB database.
 
 When running on Heroku, the RethinkDB database connection string is auto-detected.
 
@@ -53,7 +53,9 @@ Declare a model in `app/models/user.rb`:
 
 {% highlight ruby %}
 class User
+  include NoBrainer::Document
   field :name
+  field :email
 end
 {% endhighlight %}
 
@@ -62,9 +64,8 @@ end
 In a Rails console, you can create models which will be persisted to the database:
 
 {% highlight ruby %}
-User.create!(:name => 'Maureen')
-User.create!(:name => 'Johnny')
-User.count # returns 2
+User.create(:name => 'Nico', :email => 'nicolas@viennot.biz')
+User.count # returns 1
 {% endhighlight %}
 
 ---
@@ -74,30 +75,42 @@ A Rails application example using NoBrainer can be found
 
 ## Roadmap
 
-The roadmap without order is:
+The roadmap is the following. Items at the beginning of the list are somewhat higher priority.
 
-* implement `has_one` association.
-* implement `has_many` through association.
-* Support `pluck()`, `without()`.
-* Field types, especially dealing with array, hashes and sets.
-* Support different way to store times (utc or timezoned).
-* Dirty tracking should track changes in hashes.
-* Use dirty tracking to do efficient updates.
-* Make `includes()` a little more efficient when it comes to eager loading both
-  sides of an association.
-* Support for read-only fields.
-* Support for field aliases and/or custom primary key names.
 * Leverage indexes for comparison operators (using `between()`).
-* Implement the associated validator.
-* Support some form of single embedded documents (some sort of nice wrapper for
-  hashes).
+* Support Field types, especially dealing with array, hashes and sets.
+* Support different way to store times (utc or timezoned).
 * Support for instrumentation such as New Relic.
 * Support for popular gems such as Devise.
-* Give some progress bars on the indexing, and also countdowns/confirmation before dropping indexes.
-* Accept multiple database connections strings for failovers.
+* Support joins.
+* Dirty tracking should track changes in hashes.
+* Use dirty tracking to do efficient updates.
+* Support for field aliases and/or custom primary key names.
+* Support for read-only fields.
+* Support some form of single embedded documents (some sort of nice wrapper for hashes).
+* Implement the associated validator.
 * Generic "polymorphic" support for `belongs_to` associations.
+* Give some progress bars on the indexing, and also countdowns/confirmation before dropping indexes.
+* Support `pluck()`, `without()`.
+* Accept multiple database connections strings for failovers.
 
 ## Changelog
+
+### 0.9.0 -- Jan. 5th 2014
+
+* Removed the `auto_include_timestamps` and `include_root_in_json` settings.
+  Because The order in which the models are declared and NoBrainer configured affected
+  the result. Related issue [#52](https://github.com/nviennot/nobrainer/issues/52)
+* Removed the `cache_documents` setting because it should not be broken.
+* Bug fix with `order_by()` which would try to use an index after a RQL
+  `filter()` or `get_all()`.
+* `includes()` no longer kill the criteria cache.
+* Loading a `has_many` association will set the corresponding
+  `belongs_to` association, with or without eager loading.
+* Added the `has_many through` association. The implementation is done through
+  eager loading.
+* Added the `has_one` association.
+* Renamed `with_options()` -> `with()`.
 
 ### 0.8.0 -- Dec. 31st 2013
 

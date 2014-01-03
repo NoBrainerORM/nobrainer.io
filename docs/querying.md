@@ -97,13 +97,19 @@ Below a couple of examples to show the usage of `order_by()`:
 * The latest specified `order_by()` wins. For example,
   `order_by(:field1).order_by(:field2)` is equivalent to `order_by(:field2)`.
 
-Note: NoBrainer always `order_by(:id => :asc)` by default.
+NoBrainer always `order_by(:id => :asc)` by default.
+
+`order_by()` will try to use one of your declared indexes for performance when
+possible. Learn more about indexes in the [indexes section](/docs/indexes).
 
 ### skip()/offset()/limit()
 
 * `criteria.skip(n)` will skip `n` documents.
 * `criteria.offset(n)` is an alias for `criteria.skip(n)`.
 * `criteria.limit(n)` limits the number of returned documents to `n`.
+
+When compiling the RQL query, the skip/limit directives are applied at the end
+of the RQL query, regardless of their position on the criteria.
 
 ### raw
 
