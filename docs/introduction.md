@@ -95,6 +95,7 @@ The roadmap without order is:
 * Support for popular gems such as Devise.
 * Give some progress bars on the indexing, and also countdowns/confirmation before dropping indexes.
 * Accept multiple database connections strings for failovers.
+* Generic "polymorphic" support for `belongs_to` associations.
 
 ## Changelog
 
