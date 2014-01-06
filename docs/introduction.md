@@ -95,6 +95,11 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 
 ## Changelog
 
+### git HEAD
+
+* Fixed a `NameError` bug when trying to include the `DynamicAttributes` module.
+Issue: [#54](https://github.com/nviennot/nobrainer/issues/54).
+
 ### 0.9.1 -- Jan. 5th 2014
 
 * Added Rails generators for models
