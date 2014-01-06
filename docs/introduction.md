@@ -81,7 +81,6 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 * Support Field types, especially dealing with array, hashes and sets.
 * Support different way to store times (utc or timezoned).
 * Support for instrumentation such as New Relic.
-* Support for popular gems such as Devise.
 * Support joins.
 * Dirty tracking should track changes in hashes.
 * Use dirty tracking to do efficient updates.
@@ -95,6 +94,11 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 * Accept multiple database connections strings for failovers.
 
 ## Changelog
+
+### 0.9.1 -- Jan. 5th 2014
+
+* Added Rails generators for models
+* Removed unecessary ActiveSupport requires.
 
 ### 0.9.0 -- Jan. 5th 2014
 

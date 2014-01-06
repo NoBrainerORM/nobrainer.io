@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Communication
-prev_section: multi_tenancy
+prev_section: 3rd_party_integration
 next_section: faq
 permalink: /communication/
 ---
