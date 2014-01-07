@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Timestamps
-prev_section: fields
+prev_section: types
 next_section: serialization
 permalink: /timestamps/
 ---
@@ -12,8 +12,8 @@ NoBrainer timestamps all your documents by default.
 Timestamps are performed by inserting the following in your model:
 
 {% highlight ruby %}
-field :created_at
-field :updated_at
+field :created_at, :type => Time
+field :updated_at, :type => Time
 
 before_create { self.created_at = Time.now }
 before_save   { self.updated_at = Time.now }

@@ -29,8 +29,9 @@ callback behavior in NoBrainer differs in two ways compared to most ORMs:
 
 1. Returning `false` in a `before_*` callback does not halt the chain.
 This way you will not halt the chain by mistake when using with boolean
-attributes. You can always raise an exception, or add an error to the `errors`
-array if you intent to halt the chain.
+attributes. If your intention is to halt the chain, you can always raise an
+exception, or add an error to the `instance.errors` array in the case of a
+`before_validation` callback.
 
 2. Validation is performed after the `before_save/create/update` callbacks.
 In other words, validation is performed right before the data is about

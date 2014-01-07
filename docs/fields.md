@@ -2,7 +2,7 @@
 layout: docs
 title: Fields
 prev_section: models
-next_section: timestamps
+next_section: types
 permalink: /fields/
 ---
 
@@ -52,6 +52,9 @@ For example, `self[attr]` calls `read_attribute(attr)` which calls `self.attr`.
 
 If you wish to override an attribute getter or setter, you may define
 the `attr` and `attr=` methods in your class. `super` can be used as usual.
+The setters are used when reading a document from the database. Keep
+this in mind when you see a `NoMethodError` when reading documents from
+your database. The use of dynamic attributes can be useful in this situation.
 
 Note that there is no `attr_protected` method to control mass assignments.
 Sanitize your attributes the Rails4 way with
@@ -69,22 +72,13 @@ field :created_at,  :default => ->{ Time.now }
 {% endhighlight %}
 
 Defaults values are assigned whenever a model is instantiated in memory, which
-happens when `Model.new` is called. Note that reading a model from the database
-calls `Model.new`.
+happens when `Model.new` is called. Reading a model from the database
+calls `Model.new` and therefore performs default value assignments.
 
 A default value is only assigned when the corresponding attribute has not been
 set. For example, calling `Model.create(:created_at => nil)` will not trigger
 the default value assignment on `created_at`. Please create a Github issue
 if this behavior is a problem for you.
-
-## Field Types
-
-NoBrainer does not support explicit field types yet. NoBrainer assumes that you are
-passing the right value types and will forward them straight to RethinkDB.
-This can be a security concern for your application as RethinkDB will accept
-hashes and array as field values.
-The use of [strong parameters](https://github.com/rails/strong_parameters)
-mitigates this issue though.
 
 ## Primary Key
 

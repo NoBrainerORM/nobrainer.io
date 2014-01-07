@@ -78,7 +78,6 @@ A Rails application example using NoBrainer can be found
 The roadmap is the following. Items at the beginning of the list are somewhat higher priority.
 
 * Leverage indexes for comparison operators (using `between()`).
-* Support Field types, especially dealing with array, hashes and sets.
 * Support different way to store times (utc or timezoned).
 * Support for instrumentation such as New Relic.
 * Support joins.
@@ -91,15 +90,17 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 * Generic "polymorphic" support for `belongs_to` associations.
 * Give some progress bars on the indexing, and also countdowns/confirmation before dropping indexes.
 * Support `pluck()`, `without()`.
+* Support type definitions like `{String => Integer}`.
 * Accept multiple database connections strings for failovers.
 
 ## Changelog
 
-### git HEAD
+### 0.10.0 -- Jan. 6th 2014
 
 * Fixed a `NameError` bug when trying to include the `DynamicAttributes` module.
 Issue: [#54](https://github.com/nviennot/nobrainer/issues/54).
 * Make the associations hackable.
+* Implementation of the type checking/casting mechanism.
 
 ### 0.9.1 -- Jan. 5th 2014
 

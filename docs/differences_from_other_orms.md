@@ -23,11 +23,14 @@ predictable and consistent:
   because it became a common pattern to use `before_save` callbacks to modify
   model data. Validations should thus be performed after such callbacks.
 * Returning false in a `before_*` callback does not halt the chain. If you want
-  to abort the chain, you must be explicit by adding an error to the model,
-  or raising an exception.
+  to abort the chain, you must be explicit by raising an exception or
+  adding an error to the model in the case of a `before_validation` callback.
 * The latest `order_by()` wins when chaining queries.
+* Specifying types on fields introduces safe type casting and performs automatic
+  validations.
+* `instance.reload` will also clear all the instance variable of an instance.
 * NoBrainer is small and simple to understand. Mongoid is ~12,000 LOC and
-  ActiveRecord is ~20,000 LOC. On the other hand, NoBrainer is less than 2,000 LOC.
+  ActiveRecord is ~20,000 LOC. On the other hand, NoBrainer is around 2,000 LOC.
   Of course NoBrainer does not support the vast amount of features that these
   two other frameworks support, but perhaps it's better that way. For example,
   a feature like `accepts_nested_attributes_for` will never be implemented in
