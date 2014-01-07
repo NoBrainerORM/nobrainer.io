@@ -99,6 +99,7 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 
 * Fixed a `NameError` bug when trying to include the `DynamicAttributes` module.
 Issue: [#54](https://github.com/nviennot/nobrainer/issues/54).
+* Make the associations hackable.
 
 ### 0.9.1 -- Jan. 5th 2014
 

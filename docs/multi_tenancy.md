@@ -19,7 +19,7 @@ You may use `NoBrainer.with_database` to change the default database to use on
 the connection.
 
 {% highlight ruby %}
-NoBrainer.with_database('client1')
+NoBrainer.with_database('client1') do
   Project.each { ... }
 end
 {% endhighlight %}

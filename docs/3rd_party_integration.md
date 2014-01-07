@@ -22,3 +22,8 @@ Use devise as usual.
 
 If devise does not work, make sure that your `config/initializers/devise.rb` file
 contains `require 'devise/orm/nobrainer'`.
+
+## Awesome Print
+
+[awesome_print](https://github.com/michaeldv/awesome_print) pretty prints objects.
+NoBrainer support is built in.
