@@ -256,3 +256,14 @@ article ul li, article ol li {
 article ul li blockquote {
   margin: 10px 0;
 }
+
+.social-buttons {
+  text-align: right;
+  margin-top: -51px;
+  margin-right: 5px;
+}
+
+.twitter {
+  margin-bottom: 8px;
+  margin-right: 1px;
+}

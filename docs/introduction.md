@@ -10,8 +10,9 @@ NoBrainer is an ORM for [RethinkDB](http://rethinkdb.com).
 The goal of NoBrainer is to provide a similar interface compared to ActiveRecord
 and Mongoid to build data models on top of RethinkDB. Nevertheless, NoBrainer
 breaks a couple of established patterns to provide a consistent API. You may
-read more about these differences in the [next
-section](/docs/differences_from_other_orms/).
+read more about these differences in the [next section](/docs/differences_from_other_orms/).
+
+NoBrainer is written and maintained by <a href="https://twitter.com/nviennot">Nicolas Viennot</a>.
 
 ## Dependencies
 
