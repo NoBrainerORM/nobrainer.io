@@ -8,7 +8,7 @@ permalink: /eager_loading/
 
 ## The N+1 Queries issue
 
-NoBrainer allows eager loading of associations with `includes()` to avoid the N+1
+NoBrainer allows eager loading of associations with `preload()` to avoid the N+1
 queries issue.  Suppose we have posts and comments:
 
 {% highlight ruby %}
@@ -39,12 +39,12 @@ comments.each do |comment|
 end
 {% endhighlight %}
 
-## Using includes()
+## Using preload()
 
-We can use `includes` to eager load the models to reduce the number of queries to 3:
+We can use `preload` to eager load the models to reduce the number of queries to 3:
 
 {% highlight ruby %}
-comments = Comment.includes(:post => :author)
+comments = Comment.preload(:post => :author)
                   .order_by(:created_at => :desc).limit(100)
 comments.each do |comment|
   puts comment.post.author
@@ -52,26 +52,26 @@ end
 {% endhighlight %}
 
 {% highlight ruby %}
-Post.includes(:author, :comments).each do |post|
+Post.preload(:author, :comments).each do |post|
   post.author
   post.comments.each { ... }
 end
 {% endhighlight %}
 
-`includes()` accepts arrays and hashes to describe the associations to eager load.
+`preload()` accepts arrays and hashes to describe the associations to eager load.
 For example:
 
 {% highlight ruby %}
-Model1.includes(:model2, :model3 => [:model4, :model5 => :model6])
+Model1.preload(:model2, :model3 => [:model4, :model5 => :model6])
 {% endhighlight %}
 
 NoBrainer allows criteria to be specified on how to include these associations.
-When specifying criteria, nested includes can be used to further load associations.
+When specifying criteria, nested preload can be used to further load associations.
 For example:
 
 {% highlight ruby %}
-Author.includes(:posts => Post.where(:body => /rethinkdb/).includes(
-                            :comments => Comment.order_by(:created_at)]).first
+Author.preload(:posts => Post.where(:body => /rethinkdb/).preload(
+                 :comments => Comment.order_by(:created_at)]).first
 {% endhighlight %}
 
 Remember that NoBrainer will use the models default scopes on all association

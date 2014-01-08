@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: Field Types
+title: Types
 prev_section: fields
 next_section: timestamps
 permalink: /types/
@@ -30,6 +30,7 @@ The behavior is the following:
 
 * The default field type is `Object`, meaning that anything will do and values
   will be delivered to the database as is. Note that the `id` field has no enforced type.
+* Declaring a `Boolean` field adds an `attr?` getter for convenience.
 * When assigning an attribute to a _value_, NoBrainer will attempt to cast the given value
   to the correct type in a safe manner if the value does not match the specified type
   as described below. If the casting operation fails, then NoBrainer leaves the
@@ -64,6 +65,9 @@ NoBrainer performs safe casting for the following types:
 
 * Strings are converted to floats only when the resulting integer can be
   converted back to the original stripped string, excluding leading `0`'s.
+  Be aware that the current mechanism assume that the decimal separator is
+  `"."'`. No localization is performed, meaning that using `","` as a decimal
+  separator will not work.
 * Integers are accepted.
 * Any other values will be ignored.
 
@@ -95,6 +99,27 @@ class User
 end
 
 {% endhighlight %}
+
+---
+
+Other types are directly passed to the database driver.
+
+Regarding date/time types, here is what you need to know:
+
+* The RethinkDB driver only supports `Time` serialization/deserialization.
+  Note that in Ruby `1.9+`, there is no longer the need to use the `DateTime` type
+  as the `Time` type no longer has restrictive bounds.
+* Times are serialized by the driver by passing to the database a special hash
+  containing `time.to_f` and its timezone. The database takes this value and
+  truncates it to get a precision of a millisecond.
+* Due to the loss of precision, it seems a bit scary to use `Times` to represent
+  `Dates` because the floating point precision is insufficient to prevent
+  jumps over days when working really far from 1970. We'll address this issue in the future.
+* When writing your application tests, you have to keep this loss of precision
+  in mind when using `==` on times. Applying `to_i` before comparing times is a
+  good workaround.
+
+---
 
 If this behavior does not match your expectations, please open an issue on
 Github.

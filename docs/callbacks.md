@@ -6,15 +6,18 @@ next_section: validations
 permalink: /callbacks/
 ---
 
-## Declaring callbacks
+## Declaring Callbacks
 
 To declare callbacks, NoBrainer follows the same calling convention as other
-ORMs. Typically:
+ORMs as it reuses the `ActiveModel` callback logic. Typically:
 
 {% highlight ruby %}
 class Model
-  after_save { puts "Saved!" }
-  after_save :say_hello
+  include NoBrainer::Document
+  field :alive, :type => Boolean
+
+  before_save { puts "going to save!" }
+  after_save :say_hello, :if => :alive?
 
   def say_hello
     puts 'hello'
@@ -25,7 +28,7 @@ end
 ## Differences with other ORMs
 
 NoBrainer does not stick to the traditional callback implementation. The
-callback behavior in NoBrainer differs in two ways compared to most ORMs:
+callback behavior in NoBrainer differs in three ways compared to most ORMs:
 
 1. Returning `false` in a `before_*` callback does not halt the chain.
 This way you will not halt the chain by mistake when using with boolean
@@ -42,36 +45,44 @@ before changing it. This behavior has the drawback of having non validated data
 present while running before callbacks.  This downside is not so bad because in
 this case, the persist operation is likely to fail anyway.
 
+3. The `initialize` callbacks are also triggered during `reload`.
+
 ## Orders of Callbacks
 
-The following describes the order of callbacks.
+The following describes the order of callbacks:
 
-When a document is created and persisted for the first time in the database the
-following callbacks are run (create):
+* When a document is initialized with `new`, or when loaded from the database,
+  or reinitialized with `reload`:
 
-* `before_save`
-* `before_create`
-* `before_validation`
-* `after_validation`
-* (document is inserted)
-* `after_create`
-* `after_save`
+  * `before_initialize`
+  * document is (re-)initialized
+  * `after_initialize`
 
-When an existing document is updated with save (update):
+* When a document is created and persisted for the first time in the database the
+  following callbacks are run (create):
 
-* `before_save`
-* `before_update`
-* `before_validation`
-* `after_validation`
-* (document is updated)
-* `after_update`
-* `after_save`
+  * `before_save`
+  * `before_create`
+  * `before_validation`
+  * `after_validation`
+  * document is inserted
+  * `after_create`
+  * `after_save`
 
-When an existing document is destroyed:
+* When an existing document is updated with save (update):
 
-* `before_destroy`
-* (document is deleted)
-* `after_destroy`
+  * `before_save`
+  * `before_update`
+  * `before_validation`
+  * `after_validation`
+  * document is updated
+  * `after_update`
+  * `after_save`
 
-There is no `after_initialize` nor `after_find` callbacks. If you need such
-callbacks, please make a request on Github.
+* When an existing document is destroyed:
+
+  * `before_destroy`
+  * document is deleted
+  * `after_destroy`
+
+`around_*` callbacks are available as usual.

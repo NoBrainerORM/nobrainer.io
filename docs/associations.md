@@ -176,6 +176,9 @@ Note that the `dependent` option will still behave like a `has_many`
 association. In other words, all the targets matching the foreign key of the
 owner will be subject to the `destroy` behavior, not just the first one.
 
+The `has_one through` association follow the same rules as the `has_many through`
+association.
+
 ## accept_nested_attributes_for
 
 This will never be implemented since `has_many` associations are read only. This

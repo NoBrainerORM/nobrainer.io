@@ -14,25 +14,29 @@ The following methods are available on the `Model` class:
 
 * `Model.new(attrs)` instantiate a new Model instance. Default values are set
   and `attrs` is passed to `assign_attributes`.
-* `Model.create(attrs)` calls `Model.new(attrs)` and then `save`
-* `Model.create!(attrs)` calls `Model.new(attrs)` and then `save!`
-* `Model.insert_all(doc1, doc2, ..., docN)` is used for bulk inserts. This method
+* `Model.create(attrs)` calls `Model.new(attrs)` and then `save`.
+* `Model.create!(attrs)` calls `Model.new(attrs)` and then `save!`.
+* `Model.insert_all([doc1, doc2, ..., docN])` is used for bulk inserts. This method
   receives a list of hashes, and will not instantiate any models. Instead it
-  passes the document hashes in bulk to the database to perform efficient writes.
+  passes the document in bulk to the database to perform efficient writes.
+  If the documents `id`s are left unspecified, the database will assign
+  default UUIDs and `insert_all` will return the list of generated ids.
+  You may use `NoBrainer::Document::Id.generate` to generate MongoDB style ids
+  to match the format of model instances.
 * `Model.sync` is a wrapper for [`r.sync()`](http://www.rethinkdb.com/api/ruby/#sync).
 
 The following predicates are available on a model instance:
 
-* `new_record?` returns true if the instance has not yet been persisted
-* `destroyed?` returns true if the instance has been destroyed
+* `new_record?` returns true if the instance has not yet been persisted.
+* `destroyed?` returns true if the instance has been destroyed.
 * `persisted?` returns true if the instance has been persisted and not destroyed.
 
 The following methods are available on a model instance:
 
 * `save` returns true if the instance was valid and saved, otherwise false.
 * `save!` calls `save` and raises `NoBrainer::Error::DocumentInvalid` if `save` returned false.
-* `update_attributes()` calls `assign_attributes()` and `save`
-* `update_attributes!()` calls `assign_attributes()` and `save!`
+* `update_attributes()` calls `assign_attributes()` and `save`.
+* `update_attributes!()` calls `assign_attributes()` and `save!`.
 * `update(&block)` performs an update on the instance with a given RQL
   lambda expression. This can be interesting to perform atomic operations.
   Example: `instance.update { |doc| { :field1 => doc[:field1] * 1 } }`.  
@@ -45,10 +49,12 @@ The following methods are available on a model instance:
   callbacks.
 * `destroy` fires the destroy callbacks and removes the document from the database.
 * `reload` removes any instance variables that the instance may have to nuke any
-  sort of cache. `reload` then loads a fresh record from the database.
+  sort of cache. `reload` then loads a fresh record from the database and
+  triggers the `initialize` callbacks while setting all the attributes back.
   You may pass an option `:keep_ivars => true` to prevent `reload` from cleaning
-  up the instance variables. A `NoBrainer::Error::DocumentNotFound` error will
-  be raised if the document can no longer be found.
+  up the instance variables.  
+  A `NoBrainer::Error::DocumentNotFound` error will be raised if the document
+  can no longer be found.
 
 Neither `update()`, `replace()`, `delete`, `destroy`, `save`, `save!` will raise.
 These methods will silently fail if the document is no longer in the database

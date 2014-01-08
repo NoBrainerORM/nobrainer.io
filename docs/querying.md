@@ -69,7 +69,7 @@ documents if `value1 != value2`, even when using a `default_scope`.
 
 * `where()` can also take a block to specify an additional RQL filter.
 
-* Nested hash queries are not yet supported. Use a RQL filter in this case.
+* Nested hash queries with keywords are not yet supported. Use a RQL filter in this case.
 
 As an example, one can construct such query:
 
@@ -138,9 +138,9 @@ generation. If the index cannot be used, an exception is raised.
 
 Read more about caches in the [caching section](/docs/caching).
 
-### includes()
+### preload()
 
-* `criteria.includes(:some_association)` eager loads the association. Read more
+* `criteria.preload(:some_association)` eager loads the association. Read more
 about eager loading in the [eager loading section](/docs/eager_loading).
 
 ## Terminating a Criteria
@@ -179,6 +179,13 @@ deletes the documents. Returns the array of destroyed instances.
 
 The bang versions raise a `NoBrainer::Error::DocumentNotFound` exception if not found
 instead of returning `nil`.
+
+### find()
+
+* `Model.find(id)` is equivalent to `Model.unscoped.where(:id => id).first`.
+* `Model.find!(id)` is equivalent to `Model.unscoped.where(:id => id).first!`.
+
+Note that `find()` is only defined on the `Model` class, and not on criteria.
 
 ### inc_all/dec_all
 

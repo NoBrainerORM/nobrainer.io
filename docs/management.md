@@ -27,7 +27,7 @@ socket when waiting for data to be received. Instead, the RethinkDB gem
 spawns a listener thread on the connection, parses the responses, and
 wake up the appropriate thread waiting on its data.
 
-## Managing databases
+## Managing Databases
 
 NoBrainer comes with a couple of helper methods to manage databases that simply
 wraps the RQL equivalents:
@@ -44,7 +44,7 @@ If you need helpers to create all the tables of your models with some sort of
 rake command because you are not using the auto table create feature, please
 create an issue on Github.
 
-## Cleaning up
+## Cleaning Up
 
 When running tests, it is important to have an easy way to cleanup the database.
 `NoBrainer.purge!` will truncate all the existing tables leaving the index
@@ -55,4 +55,24 @@ your test suite.
 
 ## Managing Indexes
 
-Explained in the Index section.
+Explained in the [indexes section](/docs/indexes).
+
+## Rake Tasks
+
+When using Rails, NoBrainer implements a few rake tasks:
+
+{% highlight bash %}
+rake db:drop           # Drop the database
+rake db:update_indexes # Create and drop indexes on the database
+rake db:seed           # Load seed data from db/seeds.rb
+rake db:setup          # Equivalent to db:update_indexes + db:seed
+rake db:reset          # Equivalent to db:drop + db:setup
+{% endhighlight %}
+
+If you are using both ActiveRecord and NoBrainer, they will probably conflict on
+the rake tasks, so it might be better to not use them for now. In the future
+NoBrainer will be a little more considerate.
+
+Note that NoBrainer relies on the configuration settings `auto_create_databases`
+and `auto_create_tables` to create the database and tables. In the future,
+NoBrainer will explicitly create the database and tables.

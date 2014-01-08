@@ -111,6 +111,26 @@ You must include the `NoBrainer::Document::DynamicAttributes` mixin in your mode
 By doing so, you will be able to read/write arbitrary attributes to your model with
 `read_attribute()`/ `[]` and `write_attribute()`/`[]=`.
 
+## Types
+
+Field types can be declared as such:
+
+{% highlight ruby %}
+field :email, :type => String
+{% endhighlight %}
+
+Read the [types section](/docs/types) to learn more.
+
+## Validations
+
+Validations can be declared directly on the field declaration:
+
+{% highlight ruby %}
+field :email, :validates => { :format => { :with => /@/ } }
+{% endhighlight %}
+
+Read the [validations section](/docs/validations) to learn more.
+
 ## Indexes
 
 A index can be declared on a field as such:
@@ -123,8 +143,9 @@ Read the [indexes section](/docs/indexes) to learn more.
 
 ## Reflection
 
-You can access the field definitions with `Model.fields`. It returns
-a hash of the form `{:field_name => options}`.
+You can access the field definitions with `Model.fields`.  
+It returns a hash of the form `{:field_name => options}`.
 
-Note that you can undefine a previously defined field with
-`Model.remove_field(field_name)`.
+You can undefine a previously defined field with
+`Model.remove_field(field_name)`. This feature is needed
+when disabling timestamps for example.

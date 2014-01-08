@@ -40,6 +40,17 @@ To really ensure uniqueness, you must either:
    auxiliary table by using a dummy model.
 3. Use another system such as Redis or ZooKeeper to perform a distributed lock.
 
+## How to declare validations in a nutshell
+
+There are four ways to declare validations with NoBrainer:
+
+* Using the old way: `validate_presence_of :field_name`
+* The new way: `validates :field_name1, :field_name2, :presence => true`
+* Directly on the field declaration: `field :field_name, :validates => { :presence => true }`.
+* Using types: `field :field_name, :type => Integer`. This will validate that the
+  given field is an integer. Read more about the type checking mechanism in the
+  [types section](/docs/types).
+
 ## When are validations performed?
 
 ### Validations are performed on:

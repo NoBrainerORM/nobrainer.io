@@ -30,7 +30,7 @@ predictable and consistent:
   validations.
 * `instance.reload` will also clear all the instance variable of an instance.
 * NoBrainer is small and simple to understand. Mongoid is ~12,000 LOC and
-  ActiveRecord is ~20,000 LOC. On the other hand, NoBrainer is around 2,000 LOC.
+  ActiveRecord is ~20,000 LOC. On the other hand, NoBrainer is less than 2,500 LOC.
   Of course NoBrainer does not support the vast amount of features that these
   two other frameworks support, but perhaps it's better that way. For example,
   a feature like `accepts_nested_attributes_for` will never be implemented in

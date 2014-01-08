@@ -19,12 +19,16 @@ generating queries as RethinkDB does not use indexes automatically.
 
 {% highlight ruby %}
 class Post
+  include Nobrainer::Document
+
   # Indexes can be declared on belongs_to and fields declarations
   belongs_to :author, :index => true  # Simple index
   field :tags, :index => :multi # Multi index
 end
 
 class Author
+  include Nobrainer::Document
+
   field :tags
   field :first_name
   field :last_name
@@ -34,6 +38,7 @@ class Author
 
   # Simple index
   index :first_name
+  index :created_at
 
   # Multi index
   index :tags, :multi => true
@@ -57,11 +62,14 @@ leverage indexes to compile efficient queries implicitly. For example:
 # Use the index declared on the belongs_to association
 author.posts.each { }
 
-# Also use the author_id index with a get_all
-Author.includes(:posts).first
+# Also use the author_id index with a get_all query
+Author.preload(:posts).first
 
-# Also use the author_id index with a get_all
+# Also use the author_id index with a get_all query
 Post.where(:author_id.in => [1,2,3]).each { }
+
+# Uses the created_at index with a between query
+Author.where(:created_at.gt => 1.year.ago)
 
 # Use the full_name_compound index
 Author.where(:first_name => 'John', :last_name => 'Saucisse')
@@ -82,10 +90,12 @@ Because of the implicit/explicit usage of indexes, NoBrainer does not allow a
 compound or arbitrary index to have the same name as a regular field.
 Otherwise, the query would be ambiguous: would we be filtering on the field or the index?
 
-
-You can chain criteria with `with_index(index_name)` to force NoBrainer to use a
-specific index. An error `NoBrainer::Error::CannotUseIndex`
-will be raised if the index cannot be used.
+When NoBrainer has the choice to use different indexes, and because RethinkDB
+supports the use of only one index, NoBrainer has to pick one. The rule is to
+pick the index that was declared the earliest during the application load.
+To manually sepecify which index to use, chaining criteria with
+`with_index(index_name)` forces NoBrainer to use the given index.
+An error `NoBrainer::Error::CannotUseIndex` will be raised if the index cannot be used.
 You may also chain `without_index` to disable the usage of indexes.
 
 To test your code and do some profiling, you may use `criteria.used_index` to get the

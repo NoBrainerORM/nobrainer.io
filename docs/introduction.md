@@ -8,9 +8,11 @@ permalink: /introduction/
 
 NoBrainer is an ORM for [RethinkDB](http://rethinkdb.com).
 The goal of NoBrainer is to provide a similar interface compared to ActiveRecord
-and Mongoid to build data models on top of RethinkDB. Nevertheless, NoBrainer
-breaks a couple of established patterns to provide a consistent API. You may
-read more about these differences in the [next section](/docs/differences_from_other_orms/).
+and Mongoid to build data models on top of RethinkDB while providing precise
+semantics.
+Nevertheless, NoBrainer breaks a couple of established patterns to provide a
+consistent API. You may read more about these differences in the [next
+section](/docs/differences_from_other_orms/).
 
 NoBrainer is written and maintained by <a href="https://twitter.com/nviennot">Nicolas Viennot</a>.
 
@@ -78,23 +80,42 @@ A Rails application example using NoBrainer can be found
 
 The roadmap is the following. Items at the beginning of the list are somewhat higher priority.
 
-* Leverage indexes for comparison operators (using `between()`).
-* Support different way to store times (utc or timezoned).
-* Support for instrumentation such as New Relic.
-* Support joins.
-* Dirty tracking should track changes in hashes.
 * Use dirty tracking to do efficient updates.
-* Support for field aliases and/or custom primary key names.
+* Should we add configuration option to default field types to be strings by default?
+  Or perhaps raise if a field does not have an explicitly defined type?
+* Support queuable atomic operations.
+* `where()` queries should cast the value arguments to their given declared
+  types to allow queries like `User.where(:age.gt => '23')`.
+  We should throw an invalid type error if we cannot cast values to
+  their corresponding field types. This is a good thing to avoid query injection
+  vulnerabilities.
+* Support query keywords in nested documents to allow things like:
+  `User.where(:address => { :zipcode.not => 1024 })`.
+* Support for field aliases
+* Support custom primary key names.
 * Support for read-only fields.
-* Support some form of single embedded documents (some sort of nice wrapper for hashes).
-* Implement the associated validator.
-* Generic "polymorphic" support for `belongs_to` associations.
-* Give some progress bars on the indexing, and also countdowns/confirmation before dropping indexes.
 * Support `pluck()`, `without()`.
+* Support different way to store times (utc or timezoned).
+* Support joins.
+* Give some progress bars on the indexing, and also countdowns/confirmation before dropping indexes.
 * Support type definitions like `{String => Integer}`.
+* Support for instrumentation hooks such as New Relic.
+* Support generic "polymorphic" support for `belongs_to` associations.
+* Support embedded documents. Embedding should be done by using the type system like regular fields.
 * Accept multiple database connections strings for failovers.
+* Rake tasks should explicitly create database/tables
+* Make NoBrainer really fast.
 
 ## Changelog
+
+### 0.11.0 -- Jan. 7th 2014
+
+* Using indexes for `gt`, `gte`, `lt`, `lte` operators when possible.
+* Renamed `criteria.includes()` to `criteria.preload()`.
+* Added a `:validates` option on fields.
+* Fixed dirty tracking with mutable values such as hashes and array.
+* Added `initialize` callbacks.
+* Boolean types adds a `field_name?` method for convenience.
 
 ### 0.10.0 -- Jan. 6th 2014
 

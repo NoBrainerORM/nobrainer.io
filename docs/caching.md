@@ -41,7 +41,7 @@ criteria.first       # Calls the database again and returns nothing.
 
 Chaining a criteria always returns a new instance. For example
 `criteria.limit(10000)` will return a new criteria instance with an empty cache.
-Nevertheless, chaining `includes()` will carry the cache over when present,
+Nevertheless, chaining `preload()` will carry the cache over when present,
 and will eager load missing documents on top of the existing caches.
 
 If you do not want to use the cache, you can chain `without_cache` in the
