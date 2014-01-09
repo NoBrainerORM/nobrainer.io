@@ -107,7 +107,7 @@ Other types are directly passed to the database driver.
 Regarding date/time types, here is what you need to know:
 
 * The RethinkDB driver only supports `Time` serialization/deserialization.
-  Note that in Ruby `1.9+`, there is no longer the need to use the `DateTime` type
+  Note that in Ruby 1.9+, there is no longer the need to use the `DateTime` type
   as the `Time` type no longer has restrictive bounds.
 * Times are serialized by the driver by passing to the database a special hash
   containing `time.to_f` and its timezone. The database takes this value and
