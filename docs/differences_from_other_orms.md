@@ -6,8 +6,8 @@ next_section: configuration
 permalink: /differences_from_other_orms/
 ---
 
-NoBrainer breaks a couple of established patterns to provide an API that is
-predictable and consistent:
+NoBrainer breaks a couple of established patterns to provide an consistent API
+with semantics as precise as possible.
 
 * When using `find()` and no document has been found, NoBrainer will not raise
   an exception, but return `nil`. To get the traditional `find()` ActiveRecord
@@ -28,10 +28,5 @@ predictable and consistent:
 * The latest `order_by()` wins when chaining queries.
 * Specifying types on fields introduces safe type casting and performs automatic
   validations.
-* `instance.reload` will also clear all the instance variable of an instance.
-* NoBrainer is small and simple to understand. Mongoid is ~12,000 LOC and
-  ActiveRecord is ~20,000 LOC. On the other hand, NoBrainer is less than 2,500 LOC.
-  Of course NoBrainer does not support the vast amount of features that these
-  two other frameworks support, but perhaps it's better that way. For example,
-  a feature like `accepts_nested_attributes_for` will never be implemented in
-  NoBrainer.
+* `instance.reload` will also clear all the instance variable of an instance and
+  call `initialize()` again.
