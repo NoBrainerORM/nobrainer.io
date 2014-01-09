@@ -140,4 +140,4 @@ Regarding date/time types, here is what you need to know:
 ---
 
 If this behavior does not match your expectations, please open an issue on
-Github.
+GitHub.

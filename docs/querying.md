@@ -208,7 +208,7 @@ Note that `find()` is only defined on the `Model` class, and not on criteria.
 * `criteria.inc_all(field)` is an alias for `criteria.inc_all(field, 1)`.
 * `criteria.dec_all` is an alias for `criteria.inc_all`.
 
-Are these increment methods useful? Perhaps not. Post an issue on Github to
+Are these increment methods useful? Perhaps not. Post an issue on GitHub to
 express yourself.
 
 ### Manipulating Criteria

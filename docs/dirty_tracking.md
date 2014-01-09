@@ -32,7 +32,7 @@ the in memory model instance.
 When a field was not previously set, and then set to `nil`, NoBrainer will
 report no change even though the value has technically changed.
 This is a bit sad, but there is no `undefined` value in Ruby like in
-javascript. If you'd like to make a suggestion, please open a Github issue :)
+javascript. If you'd like to make a suggestion, please open a GitHub issue :)
 
 NoBrainer uses dirty tracking to do efficient model updates. Only the
 attributes that changed are sent to the database. Read more about

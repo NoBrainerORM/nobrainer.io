@@ -59,7 +59,7 @@ The following methods are available on a model instance:
 Neither `update()`, `replace()`, `delete`, `destroy`, `save`, `save!` will raise.
 These methods will silently fail if the document is no longer in the database
 while it was supposed to be. If you have the need to detect such occurrences,
-please create an issue on Github.
+please create an issue on GitHub.
 
 NoBrainer never autosaves a model behind the scene. When working with a
 database that does not support transactions, you need to be in full control of

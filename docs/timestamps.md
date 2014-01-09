@@ -53,5 +53,5 @@ use `NoBrainer::DocumentWithTimestamps` instead of `NoBrainer::Document`.
 
 ---
 
-There is no `touch()` method implemented. Please make a request on Github
+There is no `touch()` method implemented. Please make a request on GitHub
 if you want it.

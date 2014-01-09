@@ -18,7 +18,7 @@ NoBrainer will automatically disconnect the connection on forks, so you do not h
 worry when using gems such as Unicorn or Resque. However, if you have some
 threads running some queries while you are forking in another thread, you may
 have issues since the connection is disconnected pre-fork.
-Please post an issue on Github if that's a problem for you.
+Please post an issue on GitHub if that's a problem for you.
 
 NoBrainer uses a single RethinkDB connection, which is thread safe
 and used efficiently in a multi threaded environment.
@@ -42,7 +42,7 @@ Similarly, NoBrainer allows access to tables with the following wrappers:
 
 If you need helpers to create all the tables of your models with some sort of
 rake command because you are not using the auto table create feature, please
-create an issue on Github.
+create an issue on GitHub.
 
 ## Cleaning Up
 

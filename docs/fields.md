@@ -84,7 +84,7 @@ calls `Model.new` and therefore performs default value assignments.
 
 A default value is only assigned when the corresponding attribute has not been
 set. For example, calling `Model.create(:created_at => nil)` will not trigger
-the default value assignment on `created_at`. Please create a Github issue
+the default value assignment on `created_at`. Please create a GitHub issue
 if this behavior is a problem for you.
 
 ## Primary Key

@@ -10,7 +10,7 @@ permalink: /faq/
 Hard to tell. We need courageous people to make it battle tested.
 
 * Is NoBrainer thread safe?  
-Yes. If you encounter an issue, please create an Github issue.
+Yes. If you encounter an issue, please create an GitHub issue.
 
 * Is NoBrainer going to be maintained in the future?  
 Yes.
