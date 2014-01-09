@@ -68,9 +68,9 @@ and all the writes need to be explicit.
 
 Database writes can also be performed on criteria with `update_all()`,
 `replace_all()`, `delete_all` and `destroy_all`.
-Learn more in the [querying section](/docs/querying).
+Learn more in the [Querying](/docs/querying) section.
 
-### Optimized Updates
+## Optimized Updates
 
 When using `save` on a model, NoBrainer uses the dirty tracking information to
 only update the fields that changed. When no attribute changed, the database

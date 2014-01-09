@@ -58,7 +58,7 @@ criteria.count
 The criteria will not use the defined options, because the RQL command is
 actually ran when calling `count`, which is outside the `NoBrainer.with()` block.
 It is a bad practice to return criteria from a `NoBrainer.with()`
-block. More information can be found in the multi-tenancy section.
+block. More information can be found in the [Multi Tenancy](/docs/multi_tenancy) section.
 
 `NoBrainer.with()` can be nested, and is thread safe.
 

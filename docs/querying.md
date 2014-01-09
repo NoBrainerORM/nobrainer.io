@@ -62,7 +62,7 @@ construct a query equivalent to `Model.where(:or => [:attr => value1,...,:attr =
 [`between()`](http://www.rethinkdb.com/api/ruby/#between) command, but this feature is not implemented yet.
 
 * `where()` will try to use one of your declared indexes for performance.
-Learn more about indexes in the [indexes section](/docs/indexes).
+Learn more about indexes in the [Indexes](/docs/indexes) section.
 
 * `Model.where(:attr => value1).where(:attr => value2)` will match no
 documents if `value1 != value2`, even when using a `default_scope`.
@@ -100,7 +100,7 @@ Below a couple of examples to show the usage of `order_by()`:
 NoBrainer always `order_by(:id => :asc)` by default.
 
 `order_by()` will try to use one of your declared indexes for performance when
-possible. Learn more about indexes in the [indexes section](/docs/indexes).
+possible. Learn more about indexes in the [Indexes](/docs/indexes) section.
 
 ### skip()/offset()/limit()
 
@@ -136,12 +136,12 @@ generation. If the index cannot be used, an exception is raised.
 * `criteria.without_cache` disable the use of the cache.
 * `criteria.reload` kills the cache.
 
-Read more about caches in the [caching section](/docs/caching).
+Read more about caches in the [Caching](/docs/caching) section.
 
 ### preload()
 
 * `criteria.preload(:some_association)` eager loads the association. Read more
-about eager loading in the [eager loading section](/docs/eager_loading).
+about eager loading in the [Eager Loading](/docs/eager_loading) section.
 
 ### after_find()
 

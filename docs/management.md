@@ -55,7 +55,7 @@ your test suite.
 
 ## Managing Indexes
 
-Explained in the [indexes section](/docs/indexes).
+Index management is explained in the [Indexes](/docs/indexes) section.
 
 ## Rake Tasks
 

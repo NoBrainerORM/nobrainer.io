@@ -24,7 +24,7 @@ may change the NoBrainer [configuration](/docs/configuration) with
 
 The default table name is `class.name.tableize.gsub('/', '__')`.
 You may change the table name as described in the
-[multi tenancy section](/docs/multi_tenancy).
+[Multi Tenancy](/docs/multi_tenancy) section.
 
 ## Polymorphic Models
 

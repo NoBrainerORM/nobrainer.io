@@ -18,7 +18,7 @@ with semantics as precise as possible.
 * `has_many` associations are read-only. Writable `has_many` associations are
   leaky abstractions and are thus not implemented to keep sane semantics.
   Therefore there is no `has_and_belongs_to_many` associations. Read the
-  [associations section](/docs/associations) on how to create your own join table.
+  [Associations](/docs/associations) section on how to create your own join table.
 * Upon `save()`, validations are performed after the `before_save` callbacks
   because it became a common pattern to use `before_save` callbacks to modify
   model data. Validations should thus be performed after such callbacks.

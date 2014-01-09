@@ -60,4 +60,5 @@ Model.without_cache.each { ... } # better
 
 NoBrainer caching logic is simple, and does not provide any other features than
 described making it predictable. You may look at the `has_many` example that
-shows the caching layer in action in the [associations section](/docs/associations).
+shows the caching layer in action in the [Associations](/docs/associations)
+section.

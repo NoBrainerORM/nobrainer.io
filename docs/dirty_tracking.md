@@ -36,5 +36,5 @@ javascript. If you'd like to make a suggestion, please open a GitHub issue :)
 
 NoBrainer uses dirty tracking to do efficient model updates. Only the
 attributes that changed are sent to the database. Read more about
-this behavior in the [Persistence section](/docs/persistence) and
+this behavior in the [Persistence](/docs/persistence) section and
 its quirks.

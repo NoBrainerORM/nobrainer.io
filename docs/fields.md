@@ -126,7 +126,7 @@ Field types can be declared as such:
 field :email, :type => String
 {% endhighlight %}
 
-Read the [types section](/docs/types) to learn more.
+Read the [Types](/docs/types) section to learn more.
 
 ## Validations
 
@@ -136,7 +136,7 @@ Validations can be declared directly on the field declaration:
 field :email, :validates => { :format => { :with => /@/ } }
 {% endhighlight %}
 
-Read the [validations section](/docs/validations) to learn more.
+Read the [Validations](docs/validations) section to learn more.
 
 ## Indexes
 
@@ -146,7 +146,7 @@ A index can be declared on a field as such:
 field :email, :index => true
 {% endhighlight %}
 
-Read the [indexes section](/docs/indexes) to learn more.
+Read the [indexes](/docs/indexes) section to learn more.
 
 ## Reflection
 

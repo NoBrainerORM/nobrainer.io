@@ -49,7 +49,7 @@ There are four ways to declare validations with NoBrainer:
 * Directly on the field declaration: `field :field_name, :validates => { :presence => true }`.
 * Using types: `field :field_name, :type => Integer`. This will validate that the
   given field is an integer. Read more about the type checking mechanism in the
-  [types section](/docs/types).
+  [Types](/docs/types) section.
 
 ## When are validations performed?
 
