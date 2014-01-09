@@ -28,7 +28,8 @@ You may change the table name as described in the
 
 ## Polymorphic Models
 
-To use polymorphic models, simply inherit your classes. Example:
+To use polymorphic models with single table inheritance, simply inherit your
+classes. Example:
 
 {% highlight ruby %}
 class Admin < User

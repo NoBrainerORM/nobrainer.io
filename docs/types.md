@@ -24,14 +24,14 @@ end
 
 Any class will be accepted as a type.
 
-## Behavior
+## Model Behavior
 
 The behavior is the following:
 
 * The default field type is `Object`, meaning that anything will do and values
   will be delivered to the database as is. Note that the `id` field has no enforced type.
 * Declaring a `Boolean` field adds an `attr?` getter for convenience.
-* When assigning an attribute to a _value_, NoBrainer will attempt to cast the given value
+* When assigning an attribute to a value, NoBrainer will attempt to cast the given value
   to the correct type in a safe manner if the value does not match the specified type
   as described below. If the casting operation fails, then NoBrainer leaves the
   value as is, meaning that reading the attribute back will return the uncasted
@@ -40,9 +40,27 @@ The behavior is the following:
 * When performing validations, NoBrainer will check that attribute values match
   the specified type. If some values do not match their types, validation errors
   will be added to prevent the model to be persisted.
+* `belongs_to` foreign key associations are not type checked.
 
 Note that the `nil` value is always valid and never casted. If you wish to
 prevent this, you may add a presence validation.
+
+## Query Behavior
+
+NoBrainer validates and cast values passed in `where()` queries. When a bad value is
+used, a `NoBrainer::Error::InvalidType` exception will be raised.  If left
+uncaught in a Rails controller, a 400 status code will be returned. For example:
+
+{% highlight ruby %}
+class User
+  include NoBrainer::Document
+  field :age, :type => Integer
+end
+
+User.create(:age => 30)
+User.where(:age => "30").first # returns the user
+User.where(:age => "30xx").first # raises an InvalidType error
+{% endhighlight %}
 
 ## Safe Casting
 

@@ -6,6 +6,12 @@ next_section: communication
 permalink: /3rd_party_integration/
 ---
 
+NoBrainer can be extended to support other functionnality and play nicely with
+other gems. The following describes such gems.
+
+If you'd like to create a gem, please use the naming convention to prefix
+your gem with `nobrainer-`.
+
 ## Devise
 
 [nobrainer-devise](https://github.com/nviennot/nobrainer-devise) is an adapter

@@ -61,7 +61,7 @@ These methods will silently fail if the document is no longer in the database
 while it was supposed to be. If you have the need to detect such occurrences,
 please create an issue on Github.
 
-NoBrainer will never autosave a model behind the scene. When working with a
+NoBrainer never autosaves a model behind the scene. When working with a
 database that does not support transactions, you need to be in full control of
 when database writes occur. There is therefore no autosave features in NoBrainer
 and all the writes need to be explicit.
@@ -69,3 +69,40 @@ and all the writes need to be explicit.
 Database writes can also be performed on criteria with `update_all()`,
 `replace_all()`, `delete_all` and `destroy_all`.
 Learn more in the [querying section](/docs/querying).
+
+### Optimized Updates
+
+When using `save` on a model, NoBrainer uses the dirty tracking information to
+only update the fields that changed. When no attribute changed, the database
+update query is skipped, but all the regular callbacks are still performed.
+
+NoBrainer will not track the change between a field that was undefined and then
+set to nil. This has some consequences. For example:
+
+{% highlight ruby %}
+Model.create(:field => nil)      # insert {'field' => nil}
+Model.where(:field => nil).count # returns 1
+Model.delete_all
+
+Model.create
+Model.first.update_attributes(:field => nil) # does not update the field
+Model.where(:field => nil).count             # returns 0
+{% endhighlight %}
+
+However, if an changed attribute is a hash, NoBrainer will not perform an
+`update`, but a `replace`. This is due to the behavior of RethinkDB that
+merges hashes when performing updates. Removing some keys from a hash would
+have no effect otherwise when using an `update` command. Since using `replace`
+replaces the entire document, NoBrainer does not perform optimized updates.
+All the attributes are sent to the database, which have this effect:
+
+{% highlight ruby %}
+Model.create
+Model.first.update_attributes(:field => nil) # does not save the field
+Model.where(:field => nil).count             # returns 0
+Model.first.update_attributes(:field => nil, :some_hash => {}) # replaces the document
+Model.where(:field => nil).count             # returns 1
+{% endhighlight %}
+
+This is quite unfortunate. Please open a GitHub issue if you'd like to discuss
+the issue.

@@ -143,6 +143,20 @@ Read more about caches in the [caching section](/docs/caching).
 * `criteria.preload(:some_association)` eager loads the association. Read more
 about eager loading in the [eager loading section](/docs/eager_loading).
 
+### after_find()
+
+* `criteria.after_find(->(doc) { puts "Loaded #{doc}" })` will the specified
+  callback on each retrieved document.
+
+Multiple callbacks can be passed by calling `after_find` multiple times.
+`after_find` accepts lambdas as arguments or blocks.
+Calling `reload` on an instance will not trigger these callbacks again.
+Remember that `Model.after_find().first` will actually declare a callback on the
+model. Instead, use `after_find()` on a criteria like `Model.all.after_find()`.
+
+This feature is used by the `has_many` association to set the corresponding
+reverse `belongs_to` association.
+
 ## Terminating a Criteria
 
 ### count
@@ -178,7 +192,8 @@ deletes the documents. Returns the array of destroyed instances.
 * `criteria.last!` returns the last matched document, raises if not found.
 
 The bang versions raise a `NoBrainer::Error::DocumentNotFound` exception if not found
-instead of returning `nil`.
+instead of returning `nil`.  If left uncaught in a Rails controller, a 404
+status code will be returned.
 
 ### find()
 

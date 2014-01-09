@@ -69,7 +69,8 @@ such thing in your actual code.
 
 The bang versions follow the same semantics of ActiveRecord which is to raise
 when validation fails. NoBrainer raises a `NoBrainer::Error::DocumentInvalid`
-exception when validation fails.
+exception when validation fails. If left uncaught in a Rails controller, a 422
+status code will be returned.
 The non bang versions populate the errors array attached to the instance.
 `save` and `update_attributes` return true or false depending if the validations
 failed, while `create` returns the instance with an non empty `errors`

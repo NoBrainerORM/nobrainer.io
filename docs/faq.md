@@ -14,3 +14,6 @@ Yes. If you encounter an issue, please create an Github issue.
 
 * Is NoBrainer going to be maintained in the future?  
 Yes.
+
+* How is NoBrainer licensed?  
+NoBrainer is licensed under the LGPLv3.

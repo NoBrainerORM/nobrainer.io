@@ -22,6 +22,13 @@ class User
 end
 {% endhighlight %}
 
+`field` accepts the following options:
+
+* `:index` to specify an index.
+* `:default` to specify a default value.
+* `:type` to enforce a type.
+* `:validates` to specify validations.
+
 ## Accessing Fields
 
 Defined fields can be accessed with the following methods:
@@ -86,7 +93,7 @@ NoBrainer does not allow you to change the primary key for the moment, and will
 assume `id` to be the primary key. This field is already declared with:
 
 {% highlight ruby %}
-field :id, :default => ->{ NoBrainer::Document::Id.generate }
+field :id, :type => String, :default => ->{ NoBrainer::Document::Id.generate }
 {% endhighlight %}
 
 NoBrainer generates ids following the

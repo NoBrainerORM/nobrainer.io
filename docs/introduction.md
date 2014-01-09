@@ -80,18 +80,12 @@ A Rails application example using NoBrainer can be found
 
 The roadmap is the following. Items at the beginning of the list are somewhat higher priority.
 
-* Use dirty tracking to do efficient updates.
-* Should we add configuration option to default field types to be strings by default?
+* Should we add configuration option to default field types to be strings by default?  
   Or perhaps raise if a field does not have an explicitly defined type?
 * Support queuable atomic operations.
-* `where()` queries should cast the value arguments to their given declared
-  types to allow queries like `User.where(:age.gt => '23')`.
-  We should throw an invalid type error if we cannot cast values to
-  their corresponding field types. This is a good thing to avoid query injection
-  vulnerabilities.
-* Support query keywords in nested documents to allow things like:
+* Support query keywords in nested documents to allow queries such as:  
   `User.where(:address => { :zipcode.not => 1024 })`.
-* Support for field aliases
+* Support for field aliases.
 * Support custom primary key names.
 * Support for read-only fields.
 * Support `pluck()`, `without()`.
@@ -100,13 +94,24 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 * Give some progress bars on the indexing, and also countdowns/confirmation before dropping indexes.
 * Support type definitions like `{String => Integer}`.
 * Support for instrumentation hooks such as New Relic.
-* Support generic "polymorphic" support for `belongs_to` associations.
+* Support generic "polymorphic" support for `belongs_to` associations as opposed to STI.
 * Support embedded documents. Embedding should be done by using the type system like regular fields.
 * Accept multiple database connections strings for failovers.
 * Rake tasks should explicitly create database/tables
 * Make NoBrainer really fast.
 
 ## Changelog
+
+### 0.12.0 -- Jan. 8th 2014
+
+* Timestamps are no longer enabled by default.
+* `where()` validates and casts all the values with respect to their declared
+  field types. This avoid potential query injections.
+* Saving a model will only update the attributes that have changed. No database
+  update will be performed in case nothing has changed.
+* `after_find()` callbacks are available on models, and also on criteria.
+* Removed `.to_xml`. This feature is still available by including a module.
+* License changed from MIT to LGPLv3.
 
 ### 0.11.0 -- Jan. 7th 2014
 

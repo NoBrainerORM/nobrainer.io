@@ -8,10 +8,10 @@ permalink: /serialization/
 
 ## ActiveModel Serialization
 
-NoBrainer reuses the ActiveModel serialization logic for JSON and XML.
+NoBrainer reuses the ActiveModel serialization logic.
 The documentation can be found
 [here](http://api.rubyonrails.org/classes/ActiveModel/Serialization.html).
-It provides the usual methods `serialiable_hash`, `as_json`, `to_json`, `to_xml`.
+It provides the usual methods `serialiable_hash`, `as_json`, `to_json`.
 
 NoBrainer does not include attributes that are not set. An attribute set to
 `nil` will be included.
@@ -25,3 +25,8 @@ class Model
   self.include_root_in_json = true
 end
 {% endhighlight %}
+
+## XML
+
+NoBrainer does not support XML by default. If you wish to use `to_xml`,
+feel free to `include ActiveModel::Serializers::Xml` in your model.

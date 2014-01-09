@@ -58,8 +58,7 @@ The following describes the order of callbacks:
   * document is (re-)initialized
   * `after_initialize`
 
-* When a document is created and persisted for the first time in the database the
-  following callbacks are run (create):
+* When a new document is persisted with save:
 
   * `before_save`
   * `before_create`
@@ -69,7 +68,7 @@ The following describes the order of callbacks:
   * `after_create`
   * `after_save`
 
-* When an existing document is updated with save (update):
+* When an existing document is updated with save:
 
   * `before_save`
   * `before_update`
@@ -84,5 +83,16 @@ The following describes the order of callbacks:
   * `before_destroy`
   * document is deleted
   * `after_destroy`
+
+* When a document is fetched from the database:
+
+  * `before_initialize`
+  * `after_initialize`
+  * `after_find`
+
+The `after_find` callback will not be triggered again when calling `reload` on a model.
+
+The `after_save` and `after_update` callbacks are called on `save` regardless if the
+database was updated or not, which may happen when no attribute changed.
 
 `around_*` callbacks are available as usual.

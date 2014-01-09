@@ -34,4 +34,7 @@ report no change even though the value has technically changed.
 This is a bit sad, but there is no `undefined` value in Ruby like in
 javascript. If you'd like to make a suggestion, please open a Github issue :)
 
-NoBrainer does not use dirty tracking to do efficient model updates yet.
+NoBrainer uses dirty tracking to do efficient model updates. Only the
+attributes that changed are sent to the database. Read more about
+this behavior in the [Persistence section](/docs/persistence) and
+its quirks.
