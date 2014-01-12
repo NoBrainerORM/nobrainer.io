@@ -29,7 +29,7 @@ Any class will be accepted as a type.
 The behavior is the following:
 
 * The default field type is `Object`, meaning that anything will do and values
-  will be delivered to the database as is. Note that the `id` field has no enforced type.
+  will be delivered to the database as is.
 * Declaring a `Boolean` field adds an `attr?` getter for convenience.
 * When assigning an attribute to a value, NoBrainer will attempt to cast the given value
   to the correct type in a safe manner if the value does not match the specified type
@@ -124,15 +124,16 @@ Other types are directly passed to the database driver.
 
 Regarding date/time types, here is what you need to know:
 
-* The RethinkDB driver only supports `Time` serialization/deserialization.
-  Note that in Ruby 1.9+, there is no longer the need to use the `DateTime` type
-  as the `Time` type no longer has restrictive bounds.
+* The RethinkDB driver only supports `Time` serialization/deserialization at
+  this moment. In Ruby 1.9+, there is no longer the need to use the `DateTime` type
+  as the `Time` type no longer has restrictive bounds. Nevertheless, the RethinkDB
+  database have some limitation and are described
+  [in their documentation](http://www.rethinkdb.com/docs/dates-and-times/).
+  You can start to worry when you are starting to deal with times which year is
+  outside of the range `[1400, 10000]`.
 * Times are serialized by the driver by passing to the database a special hash
   containing `time.to_f` and its timezone. The database takes this value and
   truncates it to get a precision of a millisecond.
-* Due to the loss of precision, it seems a bit scary to use `Times` to represent
-  `Dates` because the floating point precision is insufficient to prevent
-  jumps over days when working really far from 1970. We'll address this issue in the future.
 * When writing your application tests, you have to keep this loss of precision
   in mind when using `==` on times. Applying `to_i` before comparing times is a
   good workaround.

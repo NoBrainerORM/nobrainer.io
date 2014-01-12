@@ -15,38 +15,13 @@ typically operate, please read the following documentation:
 However, there are a some differences with the
 associated validator and the uniqueness validator, which are explained below.
 
-### Associated Validator
+There are six ways to declare validations with NoBrainer:
 
-The associated validator is not implemented yet.
-
-### Uniqueness Validator
-
-The uniqueness validator accepts a `scope` option, but no `case_sensitive`
-option. downcasing the attribute in a `before_save/validation` callback is probably best.
-
-The uniqueness validator is racy (like other ORMs), concurrent requests may both
-pass the validation, and both could persist successfully the same supposedly
-unique field.
-Uniqueness validators are useful in conjunction with a unique secondary index,
-but since RethinkDB is sharded, unique secondary indexes would be a performance
-problem, and so the RethinkDB team decided to not implement them.
-To really ensure uniqueness, you must either:
-
-1. Rely on the default primary key index, which is the only index that can give
-   a unique guarantee with RethinkDB. By assigning the `id` of your model with
-   the field that is supposed to be unique in question, the database will raise
-   an error if you try to use the same id twice.
-2. If you cannot use such primary key in your main model, you may create an
-   auxiliary table by using a dummy model.
-3. Use another system such as Redis or ZooKeeper to perform a distributed lock.
-
-## How to declare validations in a nutshell
-
-There are four ways to declare validations with NoBrainer:
-
-* Using the old way: `validate_presence_of :field_name`
-* The new way: `validates :field_name1, :field_name2, :presence => true`
-* Directly on the field declaration: `field :field_name, :validates => { :presence => true }`.
+* `validate_presence_of :field_name`
+* `validates :field_name1, :field_name2, :presence => true`
+* `validate { errors.add(:base, "too many friends") if too_many_friends? }`
+* `field :field_name, :validates => { :presence => true }`
+* `field :field_name, :required => true`. This is a shorthand for presence validations.
 * Using types: `field :field_name, :type => Integer`. This will validate that the
   given field is an integer. Read more about the type checking mechanism in the
   [Types](/docs/types) section.
@@ -78,13 +53,32 @@ attribute.
 
 ### Validations are *not* performed on:
 
-Validations are not performed when calling the following methods on an instance:
-* `update`
-* `replace`
+Validations are not performed when updating all documents matching a criteria,
+such as `Model.update_all()`.
 
-These methods accept a RQL lambda expression and permit advance usage such as:
-`instance.update { |doc| { :field1 => doc[:field1] * 2 } }` which makes it
-really hard to perform validations.
+## Differences with ActiveModel
 
-Further, validations are not performed when updating all documents matching a
-criteria, such as `Model.update_all()`.
+### Uniqueness Validator
+
+The uniqueness validator accepts a `scope` option, but no `case_sensitive`
+option. downcasing the attribute in a `before_save/validation` callback is probably best.
+
+The uniqueness validator is racy (like other ORMs), concurrent requests may both
+pass the validation, and both could persist successfully the same supposedly
+unique field.
+Uniqueness validators are useful in conjunction with a unique secondary index,
+but since RethinkDB is sharded, unique secondary indexes would be a performance
+problem, and so the RethinkDB team decided to not implement them.
+To really ensure uniqueness, you must either:
+
+1. Rely on the default primary key index, which is the only index that can give
+   a unique guarantee with RethinkDB. By assigning the `id` of your model with
+   the field that is supposed to be unique in question, the database will raise
+   an error if you try to use the same id twice.
+2. If you cannot use such primary key in your main model, you may create an
+   auxiliary table by using a dummy model.
+3. Use another system such as Redis or ZooKeeper to perform a distributed lock.
+
+### Associated Validator
+
+The associated validator is not implemented.

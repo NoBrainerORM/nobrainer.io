@@ -28,6 +28,8 @@ end
 * `:default` to specify a default value.
 * `:type` to enforce a type.
 * `:validates` to specify validations.
+* `:required` as a shorthand for the presence validation.
+* `:readonly` to specify if a field cannot be updated.
 
 ## Accessing Fields
 
@@ -59,9 +61,8 @@ For example, `self[attr]` calls `read_attribute(attr)` which calls `self.attr`.
 
 If you wish to override an attribute getter or setter, you may define
 the `attr` and `attr=` methods in your class. `super` can be used as usual.
-The setters are used when reading a document from the database. Keep
-this in mind when you see a `NoMethodError` when reading documents from
-your database. The use of dynamic attributes can be useful in this situation.
+The setters are _not_ used when reading a document from the database. Keep
+this in mind when your database does not match your schema.
 
 Note that there is no `attr_protected` method to control mass assignments.
 Sanitize your attributes the Rails4 way with
@@ -87,13 +88,19 @@ set. For example, calling `Model.create(:created_at => nil)` will not trigger
 the default value assignment on `created_at`. Please create a GitHub issue
 if this behavior is a problem for you.
 
+## Readonly Fields
+
+When declaring a field with `:readonly => true`, the field cannot be reassigned
+once persisted to the database.
+
 ## Primary Key
 
 NoBrainer does not allow you to change the primary key for the moment, and will
 assume `id` to be the primary key. This field is already declared with:
 
 {% highlight ruby %}
-field :id, :type => String, :default => ->{ NoBrainer::Document::Id.generate }
+field :id, :type => String, :readonly => true,
+           :default => ->{ NoBrainer::Document::Id.generate }
 {% endhighlight %}
 
 NoBrainer generates ids following the
@@ -102,10 +109,6 @@ This is interesting compared to UUIDs because BSON IDs are somewhat
 monotonically increasing with time. NoBrainer always sort by id by default to
 give predicable and repeatable results. For example, `Model.last` yields the
 latest created model, which can be quite handy in development mode.
-
-NoBrainer does not have read only fields yet, and thus does not prevent you from
-changing the id of a persisted document. Please don't do it.  Sanitize your
-arguments when doing mass assignments with strong parameters.
 
 When comparing two models with `==` or `eql?`, only the primary keys are
 compared, not the other attributes.

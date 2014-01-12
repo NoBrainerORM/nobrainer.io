@@ -37,14 +37,6 @@ The following methods are available on a model instance:
 * `save!` calls `save` and raises `NoBrainer::Error::DocumentInvalid` if `save` returned false.
 * `update_attributes()` calls `assign_attributes()` and `save`.
 * `update_attributes!()` calls `assign_attributes()` and `save!`.
-* `update(&block)` performs an update on the instance with a given RQL
-  lambda expression. This can be interesting to perform atomic operations.
-  Example: `instance.update { |doc| { :field1 => doc[:field1] * 1 } }`.  
-  The syntax can be found on the [RethinkDB docs](http://www.rethinkdb.com/api/ruby/update/).
-  You need to call `reload` on your model to be able to read the updated fields.
-* `replace(&block)` performs a replacement on the instance document. This is
-  different from `update()` as update works more like a merge.
-  Refer to the [RethinkDB docs](http://www.rethinkdb.com/api/ruby/replace/) for more information.
 * `delete` removes the document from the database without firing the destroy
   callbacks.
 * `destroy` fires the destroy callbacks and removes the document from the database.
@@ -56,10 +48,10 @@ The following methods are available on a model instance:
   A `NoBrainer::Error::DocumentNotFound` error will be raised if the document
   can no longer be found.
 
-Neither `update()`, `replace()`, `delete`, `destroy`, `save`, `save!` will raise.
-These methods will silently fail if the document is no longer in the database
-while it was supposed to be. If you have the need to detect such occurrences,
-please create an issue on GitHub.
+Note that `delete`, `destroy`, `save`, `save!` do not raise if the instance document
+no longer exists in the database when performing the operation.
+These methods will silently fail. If you have the need to detect such
+occurrences, please create an issue on GitHub.
 
 NoBrainer never autosaves a model behind the scene. When working with a
 database that does not support transactions, you need to be in full control of
@@ -72,37 +64,6 @@ Learn more in the [Querying](/docs/querying) section.
 
 ## Optimized Updates
 
-When using `save` on a model, NoBrainer uses the dirty tracking information to
-only update the fields that changed. When no attribute changed, the database
-update query is skipped, but all the regular callbacks are still performed.
-
-NoBrainer will not track the change between a field that was undefined and then
-set to nil. This has some consequences. For example:
-
-{% highlight ruby %}
-Model.create(:field => nil)      # insert {'field' => nil}
-Model.where(:field => nil).count # returns 1
-Model.delete_all
-
-Model.create
-Model.first.update_attributes(:field => nil) # does not update the field
-Model.where(:field => nil).count             # returns 0
-{% endhighlight %}
-
-However, if an changed attribute is a hash, NoBrainer will not perform an
-`update`, but a `replace`. This is due to the behavior of RethinkDB that
-merges hashes when performing updates. Removing some keys from a hash would
-have no effect otherwise when using an `update` command. Since using `replace`
-replaces the entire document, NoBrainer does not perform optimized updates.
-All the attributes are sent to the database, which have this effect:
-
-{% highlight ruby %}
-Model.create
-Model.first.update_attributes(:field => nil) # does not save the field
-Model.where(:field => nil).count             # returns 0
-Model.first.update_attributes(:field => nil, :some_hash => {}) # replaces the document
-Model.where(:field => nil).count             # returns 1
-{% endhighlight %}
-
-This is quite unfortunate. Please open a GitHub issue if you'd like to discuss
-the issue.
+When using `save` on a model, NoBrainer uses the [dirty tracking](/docs/dirty_tracking)
+information to only update the fields that changed. When no attribute changed,
+the database update query is skipped, but all callbacks are still executed.

@@ -35,22 +35,6 @@ since callbacks are always triggered even when no attributes changed.
 This means that the `updated_at` timestamp is only set when a database
 update query is performed.
 
-## Shorthand
-
-Because having two modules to include is hard, you may include the
-`DocumentWithTimestamps` module which includes both the `Document` and
-`Timestamps` modules as such:
-
-{% highlight ruby %}
-class User
-  include NoBrainer::DocumentWithTimestamps
-end
-{% endhighlight %}
-
-You never know when you will need timestamps in your application for
-auditing and debugging purposes, and so it is a good habit to always
-use `NoBrainer::DocumentWithTimestamps` instead of `NoBrainer::Document`.
-
 ---
 
 There is no `touch()` method implemented. Please make a request on GitHub

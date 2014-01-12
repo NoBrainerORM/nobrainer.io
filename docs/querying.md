@@ -168,14 +168,13 @@ is given, the method is sent to `to_a`.
 
 ### update_all/replace_all/delete_all/destroy_all
 
-* `criteria.update_all` update all documents matching the criteria. Returns the
-number of replaced documents (which can be different from the number of matched
-documents).
-* `criteria.replace_all` replaces all documents matching the criteria. Returns the
-number of replaced documents.
-* `criteria.delete_all` deletes all documents matching the criteria. Returns the
-number of deleted documents.
-* `criteria.destroy_all` instantiate the models, run the destroy callbacks and
+* `criteria.update_all` update all documents matching the criteria following the
+[`r.update()`](http://www.rethinkdb.com/api/ruby/#update) semantics.
+* `criteria.replace_all` replaces all documents matching the criteria following the
+[`r.replace()`](http://www.rethinkdb.com/api/ruby/#replace) semantics.
+* `criteria.delete_all` deletes all documents matching the criteria following the
+[`r.delete()`](http://www.rethinkdb.com/api/ruby/#delete) semantics.
+* `criteria.destroy_all` instantiates the models, run the destroy callbacks and
 deletes the documents. Returns the array of destroyed instances.
 
 ### each/to_a
@@ -201,15 +200,6 @@ status code will be returned.
 * `Model.find!(id)` is equivalent to `Model.unscoped.where(:id => id).first!`.
 
 Note that `find()` is only defined on the `Model` class, and not on criteria.
-
-### inc_all/dec_all
-
-* `criteria.inc_all(field, value)` increments all matched document field by value.
-* `criteria.inc_all(field)` is an alias for `criteria.inc_all(field, 1)`.
-* `criteria.dec_all` is an alias for `criteria.inc_all`.
-
-Are these increment methods useful? Perhaps not. Post an issue on GitHub to
-express yourself.
 
 ### Manipulating Criteria
 

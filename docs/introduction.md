@@ -22,7 +22,7 @@ NoBrainer depends on a couple of things:
 
 * The RethinkDB database.
 * NoBrainer runs on Ruby MRI 1.9.3+, Ruby MRI 2.x, JRuby in 1.9+ mode.
-* NoBrainer can be used without Rails, but plays nicely with Rails3 and Rails4.
+* NoBrainer does not depend on Rails, but plays nicely with Rails 4.
 * NoBrainer depends on the [`rethinkdb`](https://rubygems.org/gems/rethinkdb),
       [`activemodel`](https://github.com/rails/rails/tree/master/activemodel),
       [`activesupport`](https://github.com/rails/rails/tree/master/activesupport),
@@ -80,14 +80,11 @@ A Rails application example using NoBrainer can be found
 
 The roadmap is the following. Items at the beginning of the list are somewhat higher priority.
 
-* Should we add configuration option to default field types to be strings by default?  
-  Or perhaps raise if a field does not have an explicitly defined type?
 * Support queuable atomic operations.
 * Support query keywords in nested documents to allow queries such as:  
   `User.where(:address => { :zipcode.not => 1024 })`.
 * Support for field aliases.
 * Support custom primary key names.
-* Support for read-only fields.
 * Support `pluck()`, `without()`.
 * Support different way to store times (utc or timezoned).
 * Support joins.
@@ -101,6 +98,19 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 * Make NoBrainer really fast.
 
 ## Changelog
+
+### 0.13.0 -- Jan. 12th 2014
+
+* Removed `update()` and `replace()` for the model instance.
+* Removed `inc_all()` and `dec_all()` for criteria.
+* Reinstantiating a instance model from the database no longer goes through the
+  setters to keep things consistent with the rest of the API.
+* Dirty tracking tracks changes from an undefined field, to a field set to `nil`.
+* Hashes are updated with `r.literal()` to avoid the use of `replace`.
+* Added a `:required => true` options on fields as a shorthand for the presence validation.
+* Improved the reconnection mechanism.
+* Added support for readonly fields.
+* Removed Rails3 compatibility.
 
 ### 0.12.0 -- Jan. 8th 2014
 

@@ -31,14 +31,17 @@ wake up the appropriate thread waiting on its data.
 
 NoBrainer comes with a couple of helper methods to manage databases that simply
 wraps the RQL equivalents:
+
+* `NoBrainer.db_list` lists the databases.
 * `NoBrainer.db_create("db_name")` creates the database `db_name`.
 * `NoBrainer.db_drop("db_name")` drops the database `db_name`.
-* `NoBrainer.db_list` lists the databases.
+* `NoBrainer.drop!` drops the current database. Read also about `purge!` below.
 
 Similarly, NoBrainer allows access to tables with the following wrappers:
+
+* `NoBrainer.table_list` lists the tables.
 * `NoBrainer.table_create("table_name")` creates the table `table_name`.
 * `NoBrainer.table_drop("table_name")` drops the table `table_name`.
-* `NoBrainer.table_list` lists the tables.
 
 If you need helpers to create all the tables of your models with some sort of
 rake command because you are not using the auto table create feature, please

@@ -17,8 +17,10 @@ NoBrainer.configure do |config|
   # When left unspecified, NoBrainer picks a database connection by default.
   # The default is to use localhost, with a database name matching the
   # Rails application name and the Rails environment.
-  # NoBrainer will also look for environment variables such as RETHINKDB_URL,
-  # or a combination of RETHINKDB_HOST, RETHINKDB_PORT, and RETHINKDB_AUTH.
+  # NoBrainer will also look in priority for environment variables such as:
+  # * RETHINKDB_URL
+  # * RDB_HOST, RDB_PORT, RDB_DB, RDB_AUTH
+  # * RETHINKDB_PORT, RETHINKDB_DB, RETHINKDB_AUTH
   config.rethinkdb_url = "rethinkdb://localhost/#{Rails.app_name}_#{Rails.env}"
 
   # NoBrainer uses logger to emit debugging information.

@@ -36,8 +36,8 @@ attributes. If your intention is to halt the chain, you can always raise an
 exception, or add an error to the `instance.errors` array in the case of a
 `before_validation` callback.
 
-2. Validation is performed after the `before_save/create/update` callbacks.
-In other words, validation is performed right before the data is about
+2. Model validation is performed after the `before_save/create/update` callbacks.
+In other words, model validation is performed right before the data is about
 to be persisted to the database. This decision was made because it became
 a common pattern to use `before_save` callbacks to set attributes instead of
 `before_validation`. It does not make much sense to validate the model data

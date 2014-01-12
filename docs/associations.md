@@ -28,8 +28,9 @@ The following describes the different options `belongs_to` accepts:
 * `:class_name`: the target class name. Defaults to `Target`.
 * `:index`: when true, the foreign key field gets an index declared to speed to
   the corresponding `has_many` association. Defaults to `nil`.
-* `:validates`: Passes a validation to `target`, and not `target_id`. Useful
+* `:validates`: passes a validation to `target`, and not `target_id`. Useful
   to provide a presence validation.
+* `:required`: a shorthand for `:validates => { :presence => true }`.
 
 The following describes the behavior of `belongs_to` associations:
 
