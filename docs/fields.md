@@ -54,7 +54,6 @@ Reading all attributes:
 Mass assignment:
 
 * `self.assign_attributes(attrs_hash)`
-* `self.attributes = attrs_hash`
 
 Note that methods lower in the list calls the method directly above it.
 For example, `self[attr]` calls `read_attribute(attr)` which calls `self.attr`.

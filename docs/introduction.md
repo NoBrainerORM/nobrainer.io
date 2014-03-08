@@ -99,6 +99,15 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 
 ## Changelog
 
+### HEAD
+
+* Added support for distributed locks when performing uniqueness validations.
+* Removed the `document.attributes=` accessor.
+* Bug fix: document dirtiness is now properly cleaned after a database read.
+* `Symbol` typed fields are now read back from the database as symbols and not strings.
+* Bug fix: `before_validation` callbacks no longer stop the validation chain when returning `false`.
+* Added support for Rails 4.1.
+
 ### 0.13.0 -- Jan. 12th 2014
 
 * Removed `update()` and `replace()` for the model instance.

@@ -62,9 +62,11 @@ The following describes the order of callbacks:
 
   * `before_save`
   * `before_create`
+  * uniqueness validations locks are acquired
   * `before_validation`
   * `after_validation`
   * document is inserted
+  * uniqueness validations locks are released
   * `after_create`
   * `after_save`
 
@@ -72,9 +74,11 @@ The following describes the order of callbacks:
 
   * `before_save`
   * `before_update`
+  * uniqueness validations locks are acquired
   * `before_validation`
   * `after_validation`
   * document is updated
+  * uniqueness validations locks are released
   * `after_update`
   * `after_save`
 

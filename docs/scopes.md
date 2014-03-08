@@ -82,8 +82,10 @@ Model.unscoped.order_by(:id).scoped.each { } # ordered by ids, even though scope
 Unlike the ActiveRecord behavior, `where()` filters in default scopes are not overridable.
 For example, consider a Model with a default scope of `where(:active => true)`.
 With ActiveRecord, `Model.where(:active => false)` will yield all inactive
-models, while NoBrainer will return nothing. This is because NoBrainer will
-evaluate `Model.where(:active => true).where(:active => false)`.
+models, while NoBrainer will return nothing. This is because NoBrainer
+evaluates  
+`Model.where(:active => true).where(:active => false)`, which evaluates to  
+`Model.where(:and => [:active => true, :active => false])`.
 
 ## Default Scopes are sometimes ignored
 

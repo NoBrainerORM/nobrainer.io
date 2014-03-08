@@ -14,11 +14,10 @@ NoBrainer comes with helpers to manage the RethinkDB database.
 if no connection is established yet.
 `NoBrainer.disconnect` disconnects if connected.
 
-NoBrainer will automatically disconnect the connection on forks, so you do not have
-worry when using gems such as Unicorn or Resque. However, if you have some
-threads running some queries while you are forking in another thread, you may
-have issues since the connection is disconnected pre-fork.
-Please post an issue on GitHub if that's a problem for you.
+NoBrainer automatically disconnects the connection on forks, so you do not have
+worry when using gems such as Unicorn or Resque. However, if some threads
+are running queries during the fork, there will be issues since the connection
+is disconnected pre-fork.
 
 NoBrainer uses a single RethinkDB connection, which is thread safe
 and used efficiently in a multi threaded environment.
@@ -26,6 +25,17 @@ Threads send requests by writing directly on the socket, but never block the
 socket when waiting for data to be received. Instead, the RethinkDB gem
 spawns a listener thread on the connection, parses the responses, and
 wake up the appropriate thread waiting on its data.
+
+NoBrainer automatically reconnects to the database when the connection has been lost.
+Specifically, when the database connection is lost while running a query,
+NoBrainer tries to reconnect and re-issue the query every second until it succeed.
+NoBrainer gives up after 10 tries (configurable with the `max_reconnection_tries` setting).
+This behavior may be a concern for non idempotent write queries. If reconnections are
+potentially an issue, setting `max_reconnection_tries` to `0` will disable
+automatic reconnections.
+Losing the connection while iterating a cursor (e.g. with `each`) will not
+trigger a reconnection but raise a lost connection exception, except on the
+first iteration which acquires the cursor.
 
 ## Managing Databases
 
@@ -72,9 +82,10 @@ rake db:setup          # Equivalent to db:update_indexes + db:seed
 rake db:reset          # Equivalent to db:drop + db:setup
 {% endhighlight %}
 
-If you are using both ActiveRecord and NoBrainer, they will probably conflict on
-the rake tasks, so it might be better to not use them for now. In the future
-NoBrainer will be a little more considerate.
+If you are using both ActiveRecord and NoBrainer, the two ORMs will conflict on
+the rake tasks, so it might be better to not use both ORMs in the same application.
+You may configure NoBrainer with `warn_on_active_record` to `false` to shut down warnings
+related to such usage pattern.
 
 Note that NoBrainer relies on the configuration settings `auto_create_databases`
 and `auto_create_tables` to create the database and tables. In the future,

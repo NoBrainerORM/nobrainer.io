@@ -48,6 +48,9 @@ class Author
 
   # Arbitrary index
   index :full_name_lambda, ->(doc){ doc['field1'] + "_" + doc['field2'] }
+
+  # Arbitrary index, multi
+  index :field12, ->(doc){ [doc['field1'], doc['field2']] }, :multi => true
 end
 {% endhighlight %}
 

@@ -7,7 +7,8 @@ permalink: /types/
 ---
 
 NoBrainer uses a field type mechanism to automatically cast and validates field
-values.
+values. Using the type mechanism improves the integrity and security of your
+application.
 
 ## Specifying Field Types
 
@@ -22,7 +23,19 @@ class User
 end
 {% endhighlight %}
 
-Any class will be accepted as a type.
+The following types are currently supported:
+
+* `String`
+* `Integer`
+* `Float`
+* `Boolean`
+* `Symbols`
+* `Time` (not `Date` nor `DateTime`, read below for limitations)
+* `Hash`
+* `Array`
+
+In the future, user defined types will be supported, to allow features such as
+embedded documents.
 
 ## Model Behavior
 
@@ -41,6 +54,11 @@ The behavior is the following:
   the specified type. If some values do not match their types, validation errors
   will be added to prevent the model to be persisted.
 * `belongs_to` foreign key associations are not type checked.
+* When data is read back from the database, no type casting is performed.
+  For example, when reading back a field from the database with a
+  value of `"1"` (a string), the field value read from the model API will always be
+  `"1"` and not `1`, even if the field type is declared to be an `Integer`.
+  You must perform a database migration to convert all the strings into integers.
 
 Note that the `nil` value is always valid and never casted. If you wish to
 prevent this, you may add a presence validation.
@@ -127,16 +145,16 @@ Regarding date/time types, here is what you need to know:
 * The RethinkDB driver only supports `Time` serialization/deserialization at
   this moment. In Ruby 1.9+, there is no longer the need to use the `DateTime` type
   as the `Time` type no longer has restrictive bounds. Nevertheless, the RethinkDB
-  database have some limitation and are described
+  database have some limitations and are described
   [in their documentation](http://www.rethinkdb.com/docs/dates-and-times/).
-  You can start to worry when you are starting to deal with times which year is
-  outside of the range `[1400, 10000]`.
+  Essentially, you can start to worry when you start to deal with times which year is
+  outside of the range `[1400, 10000]`. See also [this post](https://gist.github.com/coffeemug/6168031).
 * Times are serialized by the driver by passing to the database a special hash
   containing `time.to_f` and its timezone. The database takes this value and
   truncates it to get a precision of a millisecond.
 * When writing your application tests, you have to keep this loss of precision
   in mind when using `==` on times. Applying `to_i` before comparing times is a
-  good workaround.
+  good workaround to millisecond rounding issues.
 
 ---
 

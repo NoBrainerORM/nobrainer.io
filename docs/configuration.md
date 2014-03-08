@@ -17,17 +17,18 @@ NoBrainer.configure do |config|
   # When left unspecified, NoBrainer picks a database connection by default.
   # The default is to use localhost, with a database name matching the
   # Rails application name and the Rails environment.
-  # NoBrainer will also look in priority for environment variables such as:
-  # * RETHINKDB_URL
+  # NoBrainer also reads environment variables when defined:
+  # * RETHINKDB_URL, RDB_URL
+  # * RETHINKDB_HOST, RETHINKDB_PORT, RETHINKDB_DB, RETHINKDB_AUTH
   # * RDB_HOST, RDB_PORT, RDB_DB, RDB_AUTH
-  # * RETHINKDB_PORT, RETHINKDB_DB, RETHINKDB_AUTH
-  config.rethinkdb_url = "rethinkdb://localhost/#{Rails.app_name}_#{Rails.env}"
+  config.rethinkdb_url = config.default_rethinkdb_url
 
   # NoBrainer uses logger to emit debugging information.
   # If the logger is set in debug mode with:
-  #  NoBrainer.logger.log_level = Logger::DEBUG
+  #   NoBrainer.logger.log_level = Logger::DEBUG
   # Then each database query will be emitted to the log file.
-  config.logger = Rails.logger || Logger.new(STDERR)
+  # The default is the Rails logger if run with Rails, otherwise STDERR.
+  config.logger = config.default_logger
 
   # NoBrainer will colorize the queries if colorize_logger is true.
   # Specifically, NoBrainer will colorize management RQL queries in yellow,
@@ -49,15 +50,20 @@ NoBrainer.configure do |config|
   # You still need to run `rake db:update_indexes` to create the indexes.
   config.auto_create_tables = true
 
-  # When the network connection is lost, NoBrainer will the query 10 times
-  # before giving up. Note that this can be a problem with non idempotent
-  # queries such as increments. Setting it to 0 disable reconnections.
+  # When the network connection is lost, NoBrainer will try running a given
+  # query 10 times before giving up. Note that this can be a problem with non
+  # idempotent write queries such as increments.
+  # Setting it to 0 disable reconnections.
   config.max_reconnection_tries = 10
 
   # Configures the durability for database writes.
-  # In test mode and development mode the durability is soft by default,
-  # otherwise hard.
-  config.durability = Rails.env.in? %w(test development) ? :soft : :hard
+  # The default durability is hard, unless when running with Rails in test or
+  # development mode, for which the durability mode is soft.
+  config.durability = config.default_durability
+
+  # Configures which mechanism to use in order to perform non-racy uniqueness
+  # validations. Read more about this behavior in the validation section.
+  config.distributed_lock_class = nil
 end
 {% endhighlight %}
 

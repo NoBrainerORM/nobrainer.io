@@ -8,11 +8,12 @@ permalink: /caching/
 
 NoBrainer caches data in three places:
 
-1. Criteria instances cache enumerated items. Whenever the list of documents is
-   retrieved on a criteria, it is remembered, and all subsequent calls to `first`,
-   `last`, `count`, `to_a`, `each`, will hit the cache instead of the database. However,
-   the cache is killed when using `reload`, `update_all`, `destroy_all` or
-   `delete_all` on the criteria instance.
+1. Criteria instances only cache data when enumerating items. Whenever a *list* of documents is
+   retrieved on a criteria (e.g. `each` or `map`), the list is stored in the criteria's cache, and all
+   subsequent calls to `first`, `last`, `count`, `to_a`, `each` hit the
+   cache instead of the database.
+   However, the cache is killed when using `reload`, `update_all`, `destroy_all`
+   or `delete_all` on the criteria instance.
 2. Associations are cached. Once the target of the association is retrieved, subsequent
    calls will return the same documents without hitting the database again. Note
    that a `has_many` association behaves like a criteria, and thus the rule #1
@@ -43,6 +44,9 @@ Chaining a criteria always returns a new instance. For example
 `criteria.limit(10000)` will return a new criteria instance with an empty cache.
 Nevertheless, chaining `preload()` will carry the cache over when present,
 and will eager load missing documents on top of the existing caches.
+
+Calling `first` or `count` repeatedly on the same criteria without having
+enumerated items beforehand will always trigger a database call.
 
 If you do not want to use the cache, you can chain `without_cache` in the
 criteria. This will ensure to never use the cache on that criteria. You may
