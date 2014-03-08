@@ -86,7 +86,7 @@ Uniqueness validators are useful in conjunction with unique secondary indexes.
 Since RethinkDB is a sharded database, implementing unique
 secondary indexes is a performance problem, and so the RethinkDB team rightfully
 decided not to implement them. To really ensure uniqueness, one must either
-leverage the primary key uniqueness property, or use a distributed lock.
+leverage the primary key uniqueness guarantee, or use a distributed lock.
 
 NoBrainer can be configured to use distributed locks to perform non-racy uniqueness
 validations. This mechanism is enabled by providing a *`Lock`* class through the

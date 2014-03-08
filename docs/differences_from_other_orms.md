@@ -30,3 +30,6 @@ with semantics as precise as possible.
   validations.
 * `instance.reload` will also clear all the instance variable of an instance and
   call `initialize()` again.
+* Uniqueness validators can leverage distributed locks to provide race-free
+  semantics. This feature is crucial when using sharded databases such as RethinkDB
+  as secondary indexes do not provide uniqueness guarantees.

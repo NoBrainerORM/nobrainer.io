@@ -70,8 +70,8 @@ When specifying criteria, nested preload can be used to further load association
 For example:
 
 {% highlight ruby %}
-Author.preload(:posts => Post.where(:body => /rethinkdb/).preload(
-                 :comments => Comment.order_by(:created_at)]).first
+Author.preload(:posts => Post.where(:body => /rethinkdb/)
+                             .preload(:comments => Comment.order_by(:created_at)))
 {% endhighlight %}
 
 Remember that NoBrainer will use the models default scopes on all association

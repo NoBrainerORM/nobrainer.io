@@ -24,10 +24,10 @@ NoBrainer.configure do |config|
   config.rethinkdb_url = config.default_rethinkdb_url
 
   # NoBrainer uses logger to emit debugging information.
-  # If the logger is set in debug mode with:
-  #   NoBrainer.logger.log_level = Logger::DEBUG
-  # Then each database query will be emitted to the log file.
-  # The default is the Rails logger if run with Rails, otherwise STDERR.
+  # The default logger is the Rails logger if run with Rails,
+  # otherwise Logger.new(STDERR) with a WARN level.
+  # If the logger is configured with a DEBUG level,
+  # then each database query is emitted.
   config.logger = config.default_logger
 
   # NoBrainer will colorize the queries if colorize_logger is true.
@@ -57,8 +57,8 @@ NoBrainer.configure do |config|
   config.max_reconnection_tries = 10
 
   # Configures the durability for database writes.
-  # The default durability is hard, unless when running with Rails in test or
-  # development mode, for which the durability mode is soft.
+  # The default durability is :hard, unless when running with Rails in test or
+  # development mode, for which the durability mode is :soft.
   config.durability = config.default_durability
 
   # Configures which mechanism to use in order to perform non-racy uniqueness
