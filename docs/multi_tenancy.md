@@ -2,7 +2,7 @@
 layout: docs
 title: Multi Tenancy
 prev_section: management
-next_section: 3rd_party_integration
+next_section: roadmap
 permalink: /multi_tenancy/
 ---
 
