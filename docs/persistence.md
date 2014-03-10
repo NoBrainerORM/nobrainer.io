@@ -42,7 +42,7 @@ The following methods are available on a model instance:
 * `destroy` fires the destroy callbacks and removes the document from the database.
 * `reload` removes any instance variables that the instance may have to nuke any
   sort of cache. `reload` then loads a fresh record from the database and
-  triggers the `initialize` callbacks while setting all the attributes back.
+  calls the `initialize()` method, which triggers the `initialize` callbacks.
   You may pass an option `:keep_ivars => true` to prevent `reload` from cleaning
   up the instance variables.  
   A `NoBrainer::Error::DocumentNotFound` error will be raised if the document
@@ -54,9 +54,9 @@ These methods will silently fail. If you have the need to detect such
 occurrences, please create an issue on GitHub.
 
 NoBrainer never autosaves a model behind the scene. When working with a
-database that does not support transactions, you need to be in full control of
-when database writes occur. There is therefore no autosave features in NoBrainer
-and all the writes need to be explicit.
+database that does not support transactions such as RethinkDB, you need to be in
+full control of when database writes occur. There is therefore no autosave
+features in NoBrainer and all the writes need to be explicit.
 
 Database writes can also be performed on criteria with `update_all()`,
 `replace_all()`, `delete_all` and `destroy_all`.

@@ -67,8 +67,8 @@ NoBrainer.configure do |config|
 end
 {% endhighlight %}
 
-Removing ActiveRecord
----------------------
+Removing ActiveRecord with Rails
+--------------------------------
 
 NoBrainer can coexist with ActiveRecord at runtime, but the two conflicts on the
 rake tasks. It's best to remove ActiveRecord unless you plan to use both SQL

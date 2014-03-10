@@ -77,6 +77,9 @@ class TeamMember
 end
 {% endhighlight %}
 
+It is highly recommended that you add a presence validator on the scoped fields,
+because RethinkDB considers `nil` and `undefined` to be two different things.
+
 ### Race Free Uniqueness Validations
 
 When working with traditional ORMs, the uniqueness validator is known to be
@@ -115,7 +118,7 @@ end
 
 The following shows an example of using [Redis](http://redis.io/) and the
 [robust-redis-lock](https://github.com/crowdtap/robust-redis-lock) gem
-to provide non racy uniqueness validations:
+to provide non-racy uniqueness validations:
 
 {% highlight ruby %}
 require 'robust-redis-lock'

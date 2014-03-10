@@ -30,9 +30,7 @@ the dirty tracking computes a diff from the content in the database with
 the in memory model instance.
 
 When a field was not previously set, and then set to `nil`, NoBrainer will
-report changes even though the value to be read has technically changed.
+report changes even though the value to be read has technically not changed.
 
 NoBrainer uses dirty tracking to do efficient model updates. Only the
-attributes that changed are sent to the database. Read more about
-this behavior in the [Persistence](/docs/persistence) section and
-its quirks.
+attributes that changed are sent to the database.

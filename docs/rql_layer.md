@@ -55,7 +55,7 @@ criteria = NoBrainer.with(:use_outdated => true) { User.all }
 criteria.count
 {% endhighlight %}
 
-The criteria will not use the defined options, because the RQL command is
+The criteria will not use the provided run options, because the RQL command is
 actually ran when calling `count`, which is outside the `NoBrainer.with()` block.
 It is a bad practice to return criteria from a `NoBrainer.with()`
 block. More information can be found in the [Multi Tenancy](/docs/multi_tenancy) section.
@@ -79,4 +79,5 @@ NoBrainer.run { User.where(:name => /john/).to_rql.count }
 
 When running raw RQL queries, you may get documents back in an attribute hash
 format. You may use `Model.new_from_db(attrs)` to instantiate a model with
-attributes coming from the database.
+attributes coming from the database. When using polymorphism, any class in
+the hierarchy will do.

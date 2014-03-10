@@ -175,8 +175,8 @@ The `has_one` association is a `has_many` with the following differences:
   Nevertheless, NoBrainer will emit warnings if your association has more than
   one element.
 
-Note that the `dependent` option will still behave like a `has_many`
-association. In other words, all the targets matching the foreign key of the
+Note that the `dependent` option behaves like the `has_many`
+association one. In other words, all the targets matching the foreign key of the
 owner will be subject to the `destroy` behavior, not just the first one.
 
 The `has_one through` association follow the same rules as the `has_many through`
@@ -185,7 +185,7 @@ association.
 ## accept_nested_attributes_for
 
 This will never be implemented since `has_many` associations are read only. This
-sort of features belongs in a separate gem anyway because it's a crazy feature.
+sort of feature belongs in a separate gem anyway because it's a crazy feature.
 
 ## Reflection
 

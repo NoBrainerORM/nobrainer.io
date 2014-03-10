@@ -87,7 +87,7 @@ NoBrainer performs safe casting for the following types:
 ### String
 
 * Symbols are accepted.
-* Any other values will be ignored.
+* Any other value is ignored, and a validation error is added.
 
 ### Integer
 
@@ -95,7 +95,8 @@ NoBrainer performs safe casting for the following types:
   converted back to the original stripped string. For example, `" -4  "`
   and `"+3"` are valid, but `"4f"` or `""` are not.
 * Floats are accepted when their values matches exactly an integer.
-* Any other values will be ignored.
+* Empty strings are converted to `nil`.
+* Any other value is ignored, and a validation error is added.
 
 ### Float
 
@@ -105,19 +106,22 @@ NoBrainer performs safe casting for the following types:
   `"."'`. No localization is performed, meaning that using `","` as a decimal
   separator will not work.
 * Integers are accepted.
-* Any other values will be ignored.
+* Empty strings are converted to `nil`.
+* Any other value is ignored, and a validation error is added.
 
 ### Boolean
 
 * Strings are accepted with the following rules: the lowercase stripped value
   must either be `true`, `yes`, `t`, `1` or `false`, `no`, `f`, `0`.
 * `1` and `0` integers are accepted.
-* Any other values will be ignored.
+* Empty strings are converted to `nil`.
+* Any other value is ignored, and a validation error is added.
 
 ### Symbols
 
 * Non empty strings are accepted. The cast operation is `value.strip.to_sym`.
-* Any other values will be ignored.
+* Empty strings are converted to `nil`.
+* Any other value is ignored, and a validation error is added.
 
 ---
 
