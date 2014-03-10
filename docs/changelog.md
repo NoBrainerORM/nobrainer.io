@@ -8,7 +8,6 @@ permalink: /changelog/
 
 ### HEAD
 
-* Empty strings are converted to nil when using Integer, Float, Boolean or Symbols.
 * Added support for distributed locks when performing uniqueness validations.
 * Removed the `document.attributes=` accessor.
 * Bug fix: document dirtiness is now properly cleaned after a database read.
