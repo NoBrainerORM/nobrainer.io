@@ -29,6 +29,7 @@ end
 * `:type` to enforce a type.
 * `:validates` to specify validations.
 * `:required` as a shorthand for the presence validation.
+* `:unique` as a shorthand for the uniqueness validation.
 * `:readonly` to specify if a field cannot be updated.
 
 ## Accessing Fields

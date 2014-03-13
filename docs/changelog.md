@@ -6,8 +6,12 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### HEAD
+### git HEAD
 
+* Added the `nin` operator for `where()` queries.
+* Renamed `AssociationNotSaved` to `AssociationNotPersisted`.
+* Added a `:unique => true` options on fields as a shorthand for the unique validation.
+* Added support for queries on belongs_to associations. e.g. `Comment.where(:post => Post.first)`.
 * Added support for distributed locks when performing uniqueness validations.
 * Removed the `document.attributes=` accessor.
 * Bug fix: document dirtiness is now properly cleaned after a database read.

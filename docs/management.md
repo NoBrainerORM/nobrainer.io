@@ -62,9 +62,12 @@ create an issue on GitHub.
 When running tests, it is important to have an easy way to cleanup the database.
 `NoBrainer.purge!` will truncate all the existing tables leaving the index
 declarations. This is much faster compared to the `NoBrainer.drop!` command, which
-drops the database entirely. When running tests, using `NoBrainer.purge!` before
-each tests is recommended. Do not forget to `NoBrainer.update_indexes` before
-your test suite.
+drops the database entirely.
+
+When running tests, it is recommanded to do the following:
+
+* Run `NoBrainer.update_indexes` before running all tests.
+* Run `NoBrainer.purge!` before each tests.
 
 ## Managing Indexes
 

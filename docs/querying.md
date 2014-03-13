@@ -50,6 +50,7 @@ The predicates are described below:
 * `:attr.le => value` evaluates to true when `attr` is less than or equal to `value`.
 * `:attr.lte => value` evaluates to `:attr.le => value`.
 * `:attr.in => [value1,...,valueN]` evaluates to true when `attr` is in the specified array.
+* `:attr.nin => values` evaluates to `:not => {:attr.in => values}`.
 * `lambda { |doc| rql_expression(doc) }` evaluates the RQL expression.
 
 A couple of notes:
@@ -70,6 +71,9 @@ available on `attr`.
 documents if `value1 != value2`, even when using a `default_scope`.
 
 * `where()` can also take a block to specify an additional RQL filter.
+
+* `where()` also accept belongs\_to associations. In which case, the foreign key is used.
+For example `Comment.where(:post => Post.first)` is valid. `Post.first.comments` is better though.
 
 * Nested hash queries with keywords are not yet supported. Use a RQL filter in this case.
 

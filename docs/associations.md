@@ -35,13 +35,16 @@ The following describes the different options `belongs_to` accepts:
 The following describes the behavior of `belongs_to` associations:
 
 * `owner.target` looks up the target instance by performing
-  `Target.find(owner.target_id)`. When the target is found, the result is cached.
+  `Target.find(owner.target_id)`. The result is cached regardless if the target is found or not.
 * `owner.target=(value)` sets `owner.target_id = value.id`, and cache the value.
 * `owner.target_id=(value)` sets the foreign key and kills the cache.
 
 NoBrainer will always insert an `after_validation` callback to check that if there
 is a target set, then it must be `persisted?`. If the target is not persisted,
-NoBrainer will raise a `NoBrainer::Error::AssociationNotSaved` exception.
+NoBrainer will raise a `NoBrainer::Error::AssociationNotPersisted` exception.
+
+You can read more about how presence validations are handled on belongs\_to
+associations in the [validations section](/docs/validations#presence_validations_on_belongs_to_associations).
 
 ## has\_many Association
 
