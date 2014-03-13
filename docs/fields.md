@@ -139,7 +139,7 @@ Validations can be declared directly on the field declaration:
 field :email, :validates => { :format => { :with => /@/ } }
 {% endhighlight %}
 
-Read the [Validations](docs/validations) section to learn more.
+Read the [Validations](/docs/validations) section to learn more.
 
 ## Indexes
 
