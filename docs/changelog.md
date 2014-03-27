@@ -8,6 +8,7 @@ permalink: /changelog/
 
 ### git HEAD
 
+* `update_indexes` waits for completion by default.
 * Added the `nin` operator for `where()` queries.
 * Renamed `AssociationNotSaved` to `AssociationNotPersisted`.
 * Added a `:unique => true` options on fields as a shorthand for the unique validation.

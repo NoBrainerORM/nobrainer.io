@@ -131,6 +131,8 @@ Model.perform_update_indexes # Update indexes on a specific model
 
 `update_indexes` will drop indexes that are no longer declared. This might be a
 bit dangerous, so we want to provide some sort of confirmations in the future.
+By default, NoBrainer waits for the index creation, you may pass `:wait => false`
+to `update_indexes` to skip the wait.
 
 ## Reflection
 
