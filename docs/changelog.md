@@ -6,7 +6,7 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.13.1 -- March 31, 2014
 
 * `update_indexes` waits for completion by default.
 * Added the `nin` operator for `where()` queries.
@@ -20,7 +20,7 @@ permalink: /changelog/
 * Bug fix: `before_validation` callbacks no longer stop the validation chain when returning `false`.
 * Added support for Rails 4.1.
 
-### 0.13.0 -- Jan. 12th 2014
+### 0.13.0 -- Jan. 12, 2014
 
 * Removed `update()` and `replace()` for the model instance.
 * Removed `inc_all()` and `dec_all()` for criteria.
@@ -33,7 +33,7 @@ permalink: /changelog/
 * Added support for readonly fields.
 * Removed Rails3 compatibility.
 
-### 0.12.0 -- Jan. 8th 2014
+### 0.12.0 -- Jan. 8,  2014
 
 * Timestamps are no longer enabled by default.
 * `where()` validates and casts all the values with respect to their declared
@@ -44,7 +44,7 @@ permalink: /changelog/
 * Removed `.to_xml`. This feature is still available by including a module.
 * License changed from MIT to LGPLv3.
 
-### 0.11.0 -- Jan. 7th 2014
+### 0.11.0 -- Jan. 7, 2014
 
 * Using indexes for `gt`, `gte`, `lt`, `lte` operators when possible.
 * Renamed `criteria.includes()` to `criteria.preload()`.
@@ -53,19 +53,19 @@ permalink: /changelog/
 * Added `initialize` callbacks.
 * Boolean types adds a `field_name?` method for convenience.
 
-### 0.10.0 -- Jan. 6th 2014
+### 0.10.0 -- Jan. 6, 2014
 
 * Fixed a `NameError` bug when trying to include the `DynamicAttributes` module.
 Issue: [#54](https://github.com/nviennot/nobrainer/issues/54).
 * Make the associations hackable.
 * Implementation of the type checking/casting mechanism.
 
-### 0.9.1 -- Jan. 5th 2014
+### 0.9.1 -- Jan. 5, 2014
 
 * Added Rails generators for models
 * Removed unecessary ActiveSupport requires.
 
-### 0.9.0 -- Jan. 5th 2014
+### 0.9.0 -- Jan. 5, 2014
 
 * Removed the `auto_include_timestamps` and `include_root_in_json` settings.
   Because The order in which the models are declared and NoBrainer configured affected
@@ -81,6 +81,6 @@ Issue: [#54](https://github.com/nviennot/nobrainer/issues/54).
 * Added the `has_one` association.
 * Renamed `with_options()` -> `with()`.
 
-### 0.8.0 -- Dec. 31st 2013
+### 0.8.0 -- Dec. 31, 2013
 
 * First documented release of NoBrainer.

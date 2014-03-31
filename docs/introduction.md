@@ -34,7 +34,7 @@ When running on Heroku, the RethinkDB database connection string is auto-detecte
 
 ## Roadmap & Changelog
 
-Latest gem version: **0.13.0 -- Jan. 12th 2014**.
+Latest gem version: **0.13.1 -- March 31, 2014**.
 
 Follow the [Roadmap](/docs/roadmap/) and read the [Changelog](/docs/changelog).
 
