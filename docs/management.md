@@ -10,9 +10,9 @@ NoBrainer comes with helpers to manage the RethinkDB database.
 
 ## Connection
 
-`NoBrainer.connection` retrieves a connected connection. NoBrainer will first connect
-if no connection is established yet.
-`NoBrainer.disconnect` disconnects if connected.
+NoBrainer manages a driver-level connection to RethinkDB.
+`NoBrainer.connection` retrieves the connection.
+`NoBrainer.disconnect` disconnects the connection if connected.
 
 NoBrainer automatically disconnects the connection on forks, so you do not have
 worry when using gems such as Unicorn or Resque. However, if some threads
