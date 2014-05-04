@@ -6,6 +6,14 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Persistence operations (such as `save`, or `destroy`) on a model instance
+  raise an `DocumentNotSaved` when they fail, including when the target document is gone missing.
+* Optimized certain queries.
+* Added some parallel testing (with `rake`)
+* Updated to the new RethinkDB driver and its new JSON transport mechanism.
+
 ### 0.13.1 -- March 31, 2014
 
 * `update_indexes` waits for completion by default.
