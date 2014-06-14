@@ -105,7 +105,7 @@ Below a couple of examples to show the usage of `order_by()`:
 * The latest specified `order_by()` wins. For example,
   `order_by(:field1).order_by(:field2)` is equivalent to `order_by(:field2)`.
 
-NoBrainer always `order_by(:id => :asc)` by default.
+NoBrainer always order by ascending primary keys by default.
 
 `order_by()` will try to use one of your declared indexes for performance when
 possible. Learn more about indexes in the [Indexes](/docs/indexes) section.
@@ -248,4 +248,4 @@ criteria1.merge!(criteria2)
 {% endhighlight %}
 
 To retrieve the selecting criteria of a model instance, you may use `instance.selector`.
-This selector is used internally and is equivalent to `Model.unscoped.where(:id => instance.id)`.
+This selector is used internally and is equivalent to `r.table('models').get(instance.id)`.

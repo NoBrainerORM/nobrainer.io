@@ -8,6 +8,7 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Added custom primary keys support.
 * Optimized certain queries.
 * Added some parallel testing (with `rake`)
 * Updated to the new RethinkDB driver and its new JSON transport mechanism.

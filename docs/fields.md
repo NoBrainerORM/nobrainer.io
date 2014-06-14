@@ -31,6 +31,7 @@ end
 * `:required` as a shorthand for the presence validation.
 * `:unique` as a shorthand for the uniqueness validation.
 * `:readonly` to specify if a field cannot be updated.
+* `:primary_key` to specify a custom primary key.
 
 ## Accessing Fields
 
@@ -95,23 +96,25 @@ once persisted to the database.
 
 ## Primary Key
 
-NoBrainer does not allow you to change the primary key for the moment, and will
-assume `id` to be the primary key. This field is already declared with:
+NoBrainer allows custom primary keys with the `:primary_key => true` option.
+The default primary key is `id` and is declared with:
 
 {% highlight ruby %}
-field :id, :type => String, :readonly => true,
-           :default => ->{ NoBrainer::Document::Id.generate }
+field :id, :type => String, :default => ->{ NoBrainer::Document::Id.generate }
 {% endhighlight %}
 
-NoBrainer generates ids following the
+`NoBrainer::Document::Id.generate` returns ids following the
 [BSON ID (MongoDB)](http://docs.mongodb.org/manual/reference/object-id/) format.
 This is interesting compared to UUIDs because BSON IDs are somewhat
-monotonically increasing with time. NoBrainer always sort by id by default to
-give predicable and repeatable results. For example, `Model.last` yields the
-latest created model, which can be quite handy in development mode.
+monotonically increasing with time. NoBrainer always sort by primary key by
+default to give predicable and repeatable results. For example, `Model.last`
+yields the latest created model, which can be quite handy in development mode.
 
 When comparing two models with `==` or `eql?`, only the primary keys are
 compared, not the other attributes.
+
+Specifying a custom primary key changes the default foreign key names in
+belongs\_to associations.
 
 ## Dynamic Attributes
 
@@ -157,5 +160,8 @@ You can access the field definitions with `Model.fields`.
 It returns a hash of the form `{:field_name => options}`.
 
 You can undefine a previously defined field with
-`Model.remove_field(field_name)`. This feature is needed
-when disabling timestamps for example.
+`Model.remove_field(field_name)`. This feature is needed when removing the
+default primary key `id` for example.
+
+You may access the name of the current primary key with `Model.pk_name`.
+You may access the primary key value of a document with `instance.pk_value`.

@@ -19,7 +19,7 @@ The following methods are available on the `Model` class:
 * `Model.insert_all([doc1, doc2, ..., docN])` is used for bulk inserts. This method
   receives a list of hashes, and will not instantiate any models. Instead it
   passes the document in bulk to the database to perform efficient writes.
-  If the documents `id`s are left unspecified, the database will assign
+  If the documents primary keys are left unspecified, the database will assign
   default UUIDs and `insert_all` will return the list of generated ids.
   You may use `NoBrainer::Document::Id.generate` to generate MongoDB style ids
   to match the format of model instances.

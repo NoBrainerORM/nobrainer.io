@@ -12,7 +12,6 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 * Support query keywords in nested documents to allow queries such as:  
   `User.where(:address => { :zipcode.not => 1024 })`.
 * Support for field aliases.
-* Support custom primary key names.
 * Support `pluck()`, `without()`.
 * Support different way to store times (utc or timezoned).
 * Support joins.
