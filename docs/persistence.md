@@ -48,9 +48,9 @@ The following methods are available on a model instance:
   A `NoBrainer::Error::DocumentNotFound` error will be raised if the document
   can no longer be found.
 
-A `NoBrainer::Error::DocumentNotPersisted` error is raised if an persisting operation fails.
-For example, `delete`, `destroy`, `save`, `save!` raise if the instance document
-no longer exists in the database when performing the operation.
+Note that `delete`, `destroy`, or `save`, `save!` during updates do not raise if
+the instance document no longer exists in the database when performing the operation.
+These methods will silently fail.
 
 NoBrainer never autosaves a model behind the scene. When working with a
 database that does not support transactions such as RethinkDB, you need to be in
