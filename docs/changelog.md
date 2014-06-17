@@ -6,7 +6,7 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.14.0 -- June 17, 2014
 
 * Added custom primary keys support.
 * Optimized certain queries.
