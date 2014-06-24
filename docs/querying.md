@@ -88,7 +88,7 @@ Model.where(:or => [->(doc) { doc[:field1] < doc[:field2] },
 
 ---
 
-### order_by()/reverse_order
+### order_by()/reverse_order/without_ordering
 
 `order_by()` allows to specify the ordering in which the documents are returned.
 Below a couple of examples to show the usage of `order_by()`:
@@ -101,7 +101,8 @@ Below a couple of examples to show the usage of `order_by()`:
   and field2 ascending.
 * `order_by(->(doc) { doc[:field1] + doc[:field2] } => :desc)` sorts by the sum
   of field1 and field2 descending.
-* criteria.reverse_order yields criteria with the opposite ordering.
+* `criteria.reverse_order` yields criteria with the opposite ordering.
+* `criteria.without_ordering` yields criteria with no ordering.
 * The latest specified `order_by()` wins. For example,
   `order_by(:field1).order_by(:field2)` is equivalent to `order_by(:field2)`.
 
