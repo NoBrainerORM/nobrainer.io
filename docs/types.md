@@ -16,10 +16,11 @@ The following example demonstrates how to specify field types:
 
 {% highlight ruby %}
 class User
-  field :name,     :type => String
-  field :verified, :type => Boolean
-  field :age,      :type => Integer
-  field :skills,   :type => Array
+  field :name,         :type => String
+  field :verified,     :type => Boolean
+  field :age,          :type => Integer
+  field :skills,       :type => Array
+  field :last_seen_at, :type => Time
 end
 {% endhighlight %}
 
@@ -30,7 +31,7 @@ The following types are currently supported:
 * `Float`
 * `Boolean`
 * `Symbols`
-* `Time` (not `Date` nor `DateTime`, read below for limitations)
+* `Time` (not `Date` for the moment)
 * `Hash`
 * `Array`
 
@@ -86,19 +87,38 @@ NoBrainer performs safe casting for the following types:
 
 ### String
 
+* Strings are accepted.
 * Symbols are accepted.
 * Any other value is ignored, and a validation error is added.
 
 ### Integer
 
+* Integers are accepted.
 * Strings are converted to integers only when the resulting integer can be
   converted back to the original stripped string. For example, `" -4  "`
   and `"+3"` are valid, but `"4f"` or `""` are not.
 * Floats are accepted when their values matches exactly an integer.
 * Any other value is ignored, and a validation error is added.
 
+### Time
+
+* Times are accepted.
+* Dates are not accepted.
+* Strings in the ISO 8601 combined date and time format are accepted.
+  For example `"2007-04-05T14:30Z"` or `"2007-04-05T12:30-02:00"`.
+* Any other value is ignored, and a validation error is added.
+
+### Date
+
+* Not supported at the moment by RethinkDB. Read more below.
+
+### DateTime
+
+* Use the `Time` type instead. Read more below.
+
 ### Float
 
+* Floats are accepted.
 * Strings are converted to floats only when the resulting integer can be
   converted back to the original stripped string, excluding leading `0`'s.
   Be aware that the current mechanism assume that the decimal separator is
@@ -109,6 +129,7 @@ NoBrainer performs safe casting for the following types:
 
 ### Boolean
 
+* Booleans are accepted.
 * Strings are accepted with the following rules: the lowercase stripped value
   must either be `true`, `yes`, `t`, `1` or `false`, `no`, `f`, `0`.
 * `1` and `0` integers are accepted.
@@ -116,6 +137,7 @@ NoBrainer performs safe casting for the following types:
 
 ### Symbols
 
+* Symbols are accepted.
 * Non empty strings are accepted. The cast operation is `value.strip.to_sym`.
 * Any other value is ignored, and a validation error is added.
 
@@ -140,6 +162,8 @@ end
 
 Other types are directly passed to the database driver.
 
+## Date/Time Notes
+
 Regarding date/time types, here is what you need to know:
 
 * The RethinkDB driver only supports `Time` serialization/deserialization at
@@ -147,6 +171,7 @@ Regarding date/time types, here is what you need to know:
   as the `Time` type no longer has restrictive bounds. Nevertheless, the RethinkDB
   database have some limitations and are described
   [in their documentation](http://www.rethinkdb.com/docs/dates-and-times/).
+  If you really need to use a `Date` type, let me know on Github.
   Essentially, you can start to worry when you start to deal with times which year is
   outside of the range `[1400, 10000]`. See also [this post](https://gist.github.com/coffeemug/6168031).
 * Times are serialized by the driver by passing to the database a special hash

@@ -8,8 +8,9 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Added ISO8601 Time casting, and warnings for Date and DateTime.
 * Added a `defined` symbol modifier to test for undefined fields.
-* Addded a `sample` method to pick a random document.
+* Added a `sample` method to pick a random document.
 
 ### 0.14.0 -- June 17, 2014
 
