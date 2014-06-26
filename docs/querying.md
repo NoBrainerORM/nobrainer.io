@@ -51,6 +51,8 @@ The predicates are described below:
 * `:attr.lte => value` evaluates to `:attr.le => value`.
 * `:attr.in => [value1,...,valueN]` evaluates to true when `attr` is in the specified array.
 * `:attr.nin => values` evaluates to `:not => {:attr.in => values}`.
+* `:attr.defined => true` evaluates to true when `attr` is defined.
+* `:attr.defined => false` evaluates to true when `attr` is undefined.
 * `lambda { |doc| rql_expression(doc) }` evaluates the RQL expression.
 
 A couple of notes:
@@ -219,12 +221,14 @@ deletes the documents. Returns the array of destroyed instances.
 
 ---
 
-### first, first!, last, last!
+### first, first!, last, last!, sample
 
 * `criteria.first` returns the first matched document.
 * `criteria.last` returns the last matched document.
 * `criteria.first!` returns the first matched document, raises if not found.
 * `criteria.last!` returns the last matched document, raises if not found.
+* `criteria.sample` returns a document picked at random from a uniform distribution.
+* `criteria.sample(n)` returns an array of `n` documents picked at random from a uniform distribution.
 
 The bang flavors raise a `NoBrainer::Error::DocumentNotFound` exception if not found
 instead of returning `nil`.  If left uncaught in a Rails controller, a 404

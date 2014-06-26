@@ -6,6 +6,11 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Added a `defined` symbol modifier to test for undefined fields.
+* Addded a `sample` method to pick a random document.
+
 ### 0.14.0 -- June 17, 2014
 
 * Added custom primary keys support.
