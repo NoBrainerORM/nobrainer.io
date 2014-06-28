@@ -19,7 +19,6 @@ class User
   field :name,         :type => String
   field :verified,     :type => Boolean
   field :age,          :type => Integer
-  field :skills,       :type => Array
   field :last_seen_at, :type => Time
 end
 {% endhighlight %}
@@ -33,8 +32,6 @@ The following types are currently supported:
 * `Symbols`
 * `Time`
 * `Date`
-* `Hash`
-* `Array`
 
 In the future, user defined types will be supported, to allow features such as
 embedded documents.

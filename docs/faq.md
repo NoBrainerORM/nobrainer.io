@@ -33,3 +33,7 @@ dirty tracking and remember the value as explained on issue
 
 ### **How do I enable RQL query logging?**
 Configure NoBrainer's logger with a level of `Logger::DEBUG`.
+
+### **How do I query on Array/Hashes?**
+Don't declare a type on these complex types. These are not supported yet.
+Related issue: [#69](https://github.com/nviennot/nobrainer/issues/69).
