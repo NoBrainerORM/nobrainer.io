@@ -213,6 +213,14 @@ class Time
 end
 {% endhighlight %}
 
+Note that calling `super()` is important as it will take care of the timezone
+converstion if needed.
+
+You can also subclass the `Time` class, add the casting method, and call it
+`ChronicTime`.  The chronic time casting will only be performed if you use the
+`ChronicTime` type instead of the `Time` type.
+
+
 ---
 
 ## Date/Time Notes
