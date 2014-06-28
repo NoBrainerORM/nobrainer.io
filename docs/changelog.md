@@ -8,9 +8,14 @@ permalink: /changelog/
 
 ### git HEAD
 
-* Added ISO8601 Time casting, and warnings for Date and DateTime.
+* Allow custom types serialization and cast methods.
+* Added local/utc timezone translation for `Time` typed attributes,
+  configurable with `user_timezone` and `db_timezone`.
+* Added ISO8601 `Time` casting.
+* Added `Date` casting. They are stored as UTC times in the DB.
 * Added a `defined` symbol modifier to test for undefined fields.
 * Added a `sample` method to pick a random document.
+* Added a `:in` field definition shorthand for inclusion validation.
 
 ### 0.14.0 -- June 17, 2014
 

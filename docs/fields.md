@@ -30,6 +30,7 @@ end
 * `:validates` to specify validations.
 * `:required` as a shorthand for the presence validation.
 * `:unique` as a shorthand for the uniqueness validation.
+* `:in` as a shorthand for the inclusion validation.
 * `:readonly` to specify if a field cannot be updated.
 * `:primary_key` to specify a custom primary key.
 

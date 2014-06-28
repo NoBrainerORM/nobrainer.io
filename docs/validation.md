@@ -56,6 +56,20 @@ class Model
 end
 {% endhighlight %}
 
+### in
+
+You may use the `in` shorthand to specify a inclusion validator:
+
+{% highlight ruby %}
+class Model
+  field :state, :in => %w(start finish)
+end
+# Equivalent to:
+class Model
+  field :name, :validates => { :inclusion => { :in => %w(start finish) } }
+end
+{% endhighlight %}
+
 ## When are validations performed?
 
 ### Validations are performed on:

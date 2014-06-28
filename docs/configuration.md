@@ -61,6 +61,16 @@ NoBrainer.configure do |config|
   # development mode, for which the durability mode is :soft.
   config.durability = config.default_durability
 
+  # user_timezone can be configured with :utc, :local, or :unchanged.
+  # When reading an attribute from a model which type is Time, the timezone
+  # of that time is translated according to this setting.
+  # config.user_timezone = :local # only on git HEAD
+
+  # db_timezone can be configured with :utc, :local, or :unchanged.
+  # When writting to the database, the timezone of Time attributes are
+  # translated according to this setting.
+  # config.db_timezone = :utc # only on git HEAD
+
   # Configures which mechanism to use in order to perform non-racy uniqueness
   # validations. Read more about this behavior in the validation section.
   config.distributed_lock_class = nil

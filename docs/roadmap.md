@@ -13,7 +13,6 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
   `User.where(:address => { :zipcode.not => 1024 })`.
 * Support for field aliases.
 * Support `pluck()`, `without()`.
-* Support different way to store times (utc or timezoned).
 * Support joins.
 * Give some progress bars on the indexing, and also countdowns/confirmation before dropping indexes.
 * Support type definitions like `{String => Integer}`.

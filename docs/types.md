@@ -31,7 +31,8 @@ The following types are currently supported:
 * `Float`
 * `Boolean`
 * `Symbols`
-* `Time` (not `Date` for the moment)
+* `Time`
+* `Date`
 * `Hash`
 * `Array`
 
@@ -108,9 +109,19 @@ NoBrainer performs safe casting for the following types:
   For example `"2007-04-05T14:30Z"` or `"2007-04-05T12:30-02:00"`.
 * Any other value is ignored, and a validation error is added.
 
+Note that NoBrainer can be configured with `user_timezone` and `db_timezone` to
+specify how timezones should be handled. Read more in the
+[Configuration](/docs/configuration) section to learn more.
+
 ### Date
 
-* Not supported at the moment by RethinkDB. Read more below.
+* Dates are accepted.
+* Times are not accepted.
+* Strings in the ISO 8601 date format are accepted. For example `"2007-04-05"`.
+* Any other value is ignored, and a validation error is added.
+
+Note that Dates are persisted in the database as UTC times. This is an important
+consideration when querying dates due to time millisecond precision.
 
 ### DateTime
 
@@ -141,11 +152,46 @@ NoBrainer performs safe casting for the following types:
 * Non empty strings are accepted. The cast operation is `value.strip.to_sym`.
 * Any other value is ignored, and a validation error is added.
 
----
+Other types are directly passed to the database driver unless custom behavior is provided.
 
-If you want to override some of the above behavior, for example, to cast
-integers in an unsafe manner, you may use override the attribute setter. For
-example:
+## Custom Types
+
+NoBrainer supports custom types. The following shows an example to define a `Point` type.
+
+{% highlight ruby %}
+class Point < Struct.new(:x, :y)
+  # This class method imports a user facing values into the model.
+  # For example, calling an attribute setter will call this method.
+  # If the given value cannot be casted safely, a
+  # NoBrainer::Error::InvalidType error must be raised.
+  # Otherwise, the method returns the converted value.
+  def self.nobrainer_cast_user_to_model(value)
+    case value
+    when Point then value
+    when Hash  then new(value[:x] || value['x'], value[:y] || value['y'])
+    else raise NoBrainer::Error::InvalidType
+    end
+  end
+
+  # This class method translates the given value to a compatible RethinkDB type value.
+  # It is used when writing to the database, for example saving a model.
+  def self.nobrainer_cast_model_to_db(value)
+    {'x' => value.x, 'y' => value.y}
+  end
+
+  # This class method translates a value from the database to the proper type.
+  # It is used when reading from the database.
+  def self.nobrainer_cast_db_to_model(value)
+    Point.new(value['x'], value['y'])
+  end
+end
+{% endhighlight %}
+
+## Overriding Default Behavior
+
+If you wish to override some of the default behavior of an existing type, for
+example, to cast integers in an unsafe manner, you may use override the
+attribute setter. For example:
 
 {% highlight ruby %}
 class User
@@ -155,12 +201,22 @@ class User
     super(value.to_i)
   end
 end
+{% endhighlight %}
 
+Another way to override a type behavior is to define custom casting behavior
+similarly to custom types. For example, to parse all times with
+[chronic](https://github.com/mojombo/chronic), the following code will do:
+
+{% highlight ruby %}
+class Time
+  def self.nobrainer_cast_user_to_model(value)
+    value = Chronic.parse(value) rescue value if value.is_a?(String)
+    super(value)
+  end
+end
 {% endhighlight %}
 
 ---
-
-Other types are directly passed to the database driver.
 
 ## Date/Time Notes
 
@@ -171,7 +227,6 @@ Regarding date/time types, here is what you need to know:
   as the `Time` type no longer has restrictive bounds. Nevertheless, the RethinkDB
   database have some limitations and are described
   [in their documentation](http://www.rethinkdb.com/docs/dates-and-times/).
-  If you really need to use a `Date` type, let me know on Github.
   Essentially, you can start to worry when you start to deal with times which year is
   outside of the range `[1400, 10000]`. See also [this post](https://gist.github.com/coffeemug/6168031).
 * Times are serialized by the driver by passing to the database a special hash
