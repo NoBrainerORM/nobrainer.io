@@ -6,7 +6,7 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.15.0 -- July 27, 2014
 
 * Allow custom types serialization and cast methods.
 * Added local/utc timezone translation for `Time` typed attributes,
@@ -16,6 +16,7 @@ permalink: /changelog/
 * Added a `defined` symbol modifier to test for undefined fields.
 * Added a `sample` method to pick a random document.
 * Added a `:in` field definition shorthand for inclusion validation.
+* Support types and indexes when using Rails scaffolding by Josh Kuhn for [http://rethinkdb.com/docs/rails/](http://rethinkdb.com/docs/rails/)
 
 ### 0.14.0 -- June 17, 2014
 
