@@ -236,12 +236,38 @@ status code is returned.
 
 ---
 
+### min, max, sum, avg
+
+* `criteria.min(:field)` returns a document which has the minimum value of `field`.
+* `criteria.max(:field)` returns a document which has the maximum value of `field`.
+* `criteria.avg(:field)` returns the sum of `field` values.
+* `criteria.sum(:field)` returns the average of `field` values.
+
+Note that you may also pass a lambda expression instead of a field. For example,
+`criteria.min { |doc| doc['field1'] + doc['field2'] }` returns a document
+for which `field1 + field2` is minimum
+
+---
+
 ### find()
 
 * `Model.find(id)` is equivalent to `Model.unscoped.where(:id => id).first`.
 * `Model.find!(id)` is equivalent to `Model.unscoped.where(:id => id).first!`.
 
 Note that `find()` is only defined on the `Model` class, and not on criteria.
+
+---
+
+### min, max, sum, avg
+
+* `criteria.min(:field)` returns a document which has the minimum value of `field`.
+* `criteria.max(:field)` returns a document which has the maximum value of `field`.
+* `criteria.avg(:field)` returns the sum of `field` values.
+* `criteria.sum(:field)` returns the average of `field` values.
+
+Note that you may also pass a lambda expression instead of a field. For example,
+`criteria.min { |doc| doc['field1'] + doc['field2'] }` returns a document
+for which `field1 + field2` is minimum
 
 ## Manipulating Criteria
 

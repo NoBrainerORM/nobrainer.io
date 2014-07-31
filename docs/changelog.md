@@ -6,6 +6,10 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Added aggregate functions on criteria (min/max/avg/sum).
+
 ### 0.15.0 -- July 27, 2014
 
 * Allow custom types serialization and cast methods.
