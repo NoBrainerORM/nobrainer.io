@@ -145,6 +145,8 @@ defined. This behavior is the default.
 
 * `criteria.with_index(index_name)` forces the use of index_name during the where() RQL
 generation. If the index cannot be used, an exception is raised.
+* `criteria.with_index` forces the use of an index to prevent slow queries.
+If an index cannot be used, an exception is raised.
 * `criteria.without_index` disables the use of indexes.
 * `criteria.used_index` shows the index name used if any.
 * `criteria.indexed?` returns `true` when an index is in use.

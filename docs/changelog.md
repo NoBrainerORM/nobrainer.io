@@ -8,6 +8,7 @@ permalink: /changelog/
 
 ### git HEAD
 
+* `with_index()` can take no argument to force the use of an index.
 * Bug fix with the Rails reloader: [#78](https://github.com/nviennot/nobrainer/issues/78).
 * Added aggregate functions on criteria (min/max/avg/sum).
 
