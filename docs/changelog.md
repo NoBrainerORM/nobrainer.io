@@ -8,6 +8,7 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Bug fix with the Rails reloader: [#78](https://github.com/nviennot/nobrainer/issues/78).
 * Added aggregate functions on criteria (min/max/avg/sum).
 
 ### 0.15.0 -- July 27, 2014
