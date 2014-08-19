@@ -80,7 +80,7 @@ end
 Removing ActiveRecord with Rails
 --------------------------------
 
-NoBrainer can coexist with ActiveRecord at runtime, but the two conflicts on the
+NoBrainer can coexist with ActiveRecord at runtime, but the two conflict on
 rake tasks. It's best to remove ActiveRecord unless you plan to use both SQL
 and RethinkDB in your application.
 
