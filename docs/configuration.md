@@ -110,3 +110,14 @@ require 'rails/test_unit/railtie'
 contains `active_record`.
 
 3) Remove `config/database.yml`, and anything in `db/` except `db/seeds.rb`.
+
+ActiveRecord with NoBrainer
+---------------------------
+
+As mentioned before, if ActiveRecord is present with NoBrainer there will be a
+conflict with the built in rake tasks and Rails generators. To get around this,
+prefix the `active_record` namespace before the generator name:
+
+{% highlight bash %}
+rails g active_record:migration migration_name
+{% endhighlight %}
