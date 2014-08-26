@@ -93,24 +93,29 @@ Because of the implicit/explicit usage of indexes, NoBrainer does not allow a
 compound or arbitrary index to have the same name as a regular field.
 Otherwise, the query would be ambiguous: would we be filtering on the field or the index?
 
-When NoBrainer has the choice to use different indexes, and because RethinkDB
-supports the use of only one index, NoBrainer has to pick one. The rule is to
-pick the index that was declared the earliest during the application load.
-To manually sepecify which index to use, chaining criteria with
-`with_index(index_name)` forces NoBrainer to use the given index.
-An error `NoBrainer::Error::CannotUseIndex` will be raised if the index cannot be used.
-You may also chain `without_index` to disable the usage of indexes.
+`criteria.order_by()` will also try to use an index for efficiency. NoBrainer
+will try to use an index only on the first ordering clause.
+
+When compiling a query, NoBrainer may have multiple possibilities to pick which
+index to use. When not sure, NoBrainer will pick the first declared index in the model.
+You may manually sepecify which index to use by criteria with `with_index(index_name)`.
+This forces NoBrainer to use the given index when compiling the query.
+An error `NoBrainer::Error::CannotUseIndex` will be raised if the provided index
+cannot be used. You may also chain `without_index` to disable the usage of
+indexes all together.
+
+You may also use `with_index()` without arguments. In this case, an exception
+is raised if NoBrainer cannot find an index to use when compiling the query.
+
+The latest `with_index()` in the query wins.
+
+## Testing Indexes
 
 To test your code and do some profiling, you may use `criteria.used_index` to get the
 name of the index that will be used for the query. You may also use
-`criteria.indexed?` to test if an index will be used. Note that both of these
-methods applies the default scope before returning an answer.
-
-`criteria.order_by()` will also try to use an index for efficiency. NoBrainer
-will try to use an index only on the first ordering clause and only supports
-explicit index usage. Indexes will not be used if `without_index` has been
-applied on the criteria, but `order_by` does not interfere with `with_index()`,
-`used_index`, and `indexed?`.
+`criteria.where_indexed?` or `criteria.order_by_indexed?`
+to test if an index is used. Note that these methods applies the default scope
+before returning an answer.
 
 ## Creating Indexes
 
@@ -133,6 +138,20 @@ Model.perform_update_indexes # Update indexes on a specific model
 bit dangerous, so we want to provide some sort of confirmations in the future.
 By default, NoBrainer waits for the index creation, you may pass `:wait => false`
 to `update_indexes` to skip the wait.
+
+## Aliases
+
+An alias can be specified on a given index as such:
+
+{% highlight ruby %}
+index :email, :as => :e
+{% endhighlight %}
+
+NoBrainer will translate all the references to that index when compiling queries
+and reading models back from the database.
+
+The only place you need to be careful is when using RQL, including passing RQL lambda.
+NoBrainer does not translate aliases with user provided RQL code.
 
 ## Reflection
 

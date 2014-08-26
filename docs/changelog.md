@@ -8,6 +8,11 @@ permalink: /changelog/
 
 ### git HEAD
 
+* The logger shows non indexed queries.
+* Added support for `pluck()` and `without()`: [#86](https://github.com/nviennot/nobrainer/issues/86).
+* `:or` queries are optimized to leverage indexes: [#85](https://github.com/nviennot/nobrainer/issues/86).
+* Added aliases support with `:as`: [#84](https://github.com/nviennot/nobrainer/issues/84).
+* `with_index()` influences `order_by()`: [#82](https://github.com/nviennot/nobrainer/issues/82).
 * Added a connection lock for thread safety: [#80](https://github.com/nviennot/nobrainer/issues/80).
 * `with_index()` can take no argument to force the use of an index.
 * Bug fix with the Rails reloader: [#78](https://github.com/nviennot/nobrainer/issues/78).

@@ -141,6 +141,29 @@ defined. This behavior is the default.
 
 ---
 
+### pluck()/without()
+
+* `criteria.pluck(fields)` retreives only the specified fields from the
+documents.
+* `criteria.without(fields)` retreives all but the specified fields from
+the documents.
+
+These methods have an API similar to the RQL one. However, they differ in
+different ways:
+
+* When using both `pluck()` and `without()` in a query, all `without()`
+declarations are ignored, `pluck()` wins.
+* The primary key or the `_type` field for polymorphic
+classes cannot be removed from the documents, unless you use `.raw` to skip the
+model instantiation.
+* Missing attributes from models will not be readable. An error
+`NoBrainer::Error::MissingAttribute` will be raised if accessed.
+* You can undo a `pluck()` or a `without()` by passing a hash with false values.
+For example: `without(:field1, :field2).without(:field1 => false)` is equivalent
+to `without(:field2)`.
+
+---
+
 ### with_index/without_index/used_index/indexed?
 
 * `criteria.with_index(index_name)` forces the use of index_name during the where() RQL

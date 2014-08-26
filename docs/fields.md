@@ -33,6 +33,7 @@ end
 * `:in` as a shorthand for the inclusion validation.
 * `:readonly` to specify if a field cannot be updated.
 * `:primary_key` to specify a custom primary key.
+* `:as` to specify an alias in the database.
 
 ## Accessing Fields
 
@@ -154,6 +155,23 @@ field :email, :index => true
 {% endhighlight %}
 
 Read the [indexes](/docs/indexes) section to learn more.
+
+## Aliases
+
+An alias can be specified on a given field as such:
+
+{% highlight ruby %}
+field :email, :as => :e
+{% endhighlight %}
+
+NoBrainer will translate all the references to that field when compiling queries
+and reading models back from the database.
+
+The only place you need to be careful is when using RQL, including passing RQL lambda.
+NoBrainer does not translate aliases with user provided RQL code.
+
+A simple index declared on an aliased field carries the name of alias in the database,
+unless specified otherwise by an `:as` option on the index.
 
 ## Reflection
 

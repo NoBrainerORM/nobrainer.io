@@ -11,14 +11,12 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 * Support queuable atomic operations.
 * Support query keywords in nested documents to allow queries such as:  
   `User.where(:address => { :zipcode.not => 1024 })`.
-* Support for field aliases.
-* Support `pluck()`, `without()`.
 * Support joins.
 * Give some progress bars on the indexing, and also countdowns/confirmation before dropping indexes.
-* Support type definitions like `{String => Integer}`.
+* Support type definitions like `[Integer]` or `{String => Integer}`.
 * Support for instrumentation hooks such as New Relic.
 * Support generic "polymorphic" support for `belongs_to` associations as opposed to STI.
 * Support embedded documents. Embedding should be done by using the type system like regular fields.
-* Accept multiple database connections strings for failovers.
+* Accept multiple database connections strings for failovers, connection pool.
 * Rake tasks should explicitly create database/tables
 * Make NoBrainer really fast.

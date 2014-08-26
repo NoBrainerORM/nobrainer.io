@@ -26,6 +26,7 @@ The `belongs_to` syntax is the following: `belongs_to :target, options`
 The following describes the different options `belongs_to` accepts:
 * `:primary_key`: the primary key to use on the target. Defaults to its primary key.
 * `:foreign_key`: the foreign key to use. Defaults to `:target_id`.
+* `:foreign_key_as`: the alias for the foreign key. Defaults to `nil`.
 * `:class_name`: the target class name. Defaults to `Target`.
 * `:index`: when true, the foreign key field gets an index declared to speed to
   the corresponding `has_many` association. Defaults to `nil`.
