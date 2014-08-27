@@ -7,11 +7,11 @@ permalink: /querying/
 ---
 
 NoBrainer supports a rich query language that supports a wide range of features.
-This section is organized in two parts. The first one describes the methods
-can be chained to build a criteria, the second one describes the methods that
-terminates a criteria by evaluating it.
+This section is organized in two parts. The first one describes methods used
+to construct criteria, and the second one describes the methods that evaluate
+criteria.
 
-## Building a Criteria
+## Constructing Criteria
 
 ### all
 
