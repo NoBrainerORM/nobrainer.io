@@ -6,8 +6,10 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.16.0 -- Aug, 27, 2014
 
+* Added support for lazy fetching on given fields.
+* Added support for Binary types.
 * The logger shows non indexed queries.
 * Added support for `pluck()` and `without()`: [#86](https://github.com/nviennot/nobrainer/issues/86).
 * `:or` queries are optimized to leverage indexes: [#85](https://github.com/nviennot/nobrainer/issues/86).

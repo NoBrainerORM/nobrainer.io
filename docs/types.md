@@ -32,6 +32,7 @@ The following types are currently supported:
 * `Symbols`
 * `Time`
 * `Date`
+* `Binary`
 
 In the future, user defined types will be supported, to allow features such as
 embedded documents.

@@ -34,6 +34,7 @@ end
 * `:readonly` to specify if a field cannot be updated.
 * `:primary_key` to specify a custom primary key.
 * `:as` to specify an alias in the database.
+* `:lazy_fetch` to specify whether this field should be fetched on demand.
 
 ## Accessing Fields
 
@@ -172,6 +173,24 @@ NoBrainer does not translate aliases with user provided RQL code.
 
 A simple index declared on an aliased field carries the name of alias in the database,
 unless specified otherwise by an `:as` option on the index.
+
+## Lazy Fetching
+
+Some fields can have large content size, for example binary fields.
+It might be undesirable to fetch them all the time.
+NoBrainer can fetch certain fields on demand by declaring a field to be lazy
+fetched. For example:
+
+{% highlight ruby %}
+class User
+  field :email,  :type => String
+  field :avatar, :type => Binary, :lazy_fetch => true
+end
+
+user = User.first
+user.email  # In memory access.
+user.avatar # Performs an extra query to fetch the data.
+{% endhighlight %}
 
 ## Reflection
 

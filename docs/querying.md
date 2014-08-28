@@ -141,23 +141,28 @@ defined. This behavior is the default.
 
 ---
 
-### pluck()/without()
+### pluck()/without()/lazy_load()
 
 * `criteria.pluck(fields)` retreives only the specified fields from the
 documents.
 * `criteria.without(fields)` retreives all but the specified fields from
 the documents.
+* `criteria.lazy_load(fields)` retreives all but the specified fields from
+the documents, but allow lazy fetching.
 
 These methods have an API similar to the RQL one. However, they differ in
 different ways:
 
+* Missing attributes from models will not be readable. An error
+`NoBrainer::Error::MissingAttribute` will be raised if accessed.
+* `lazy_load()` is the same thing as `without()`, except that accessing a
+missing attribute does not raise an exception, but provides the attribute value
+by running an extra query.
 * When using both `pluck()` and `without()` in a query, all `without()`
 declarations are ignored, `pluck()` wins.
 * The primary key or the `_type` field for polymorphic
 classes cannot be removed from the documents, unless you use `.raw` to skip the
 model instantiation.
-* Missing attributes from models will not be readable. An error
-`NoBrainer::Error::MissingAttribute` will be raised if accessed.
 * You can undo a `pluck()` or a `without()` by passing a hash with false values.
 For example: `without(:field1, :field2).without(:field1 => false)` is equivalent
 to `without(:field2)`.
