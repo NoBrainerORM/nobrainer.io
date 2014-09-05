@@ -11,7 +11,7 @@ permalink: /serialization/
 NoBrainer reuses the ActiveModel serialization logic.
 The documentation can be found
 [here](http://api.rubyonrails.org/classes/ActiveModel/Serialization.html).
-It provides the usual methods `serialiable_hash`, `as_json`, `to_json`.
+It provides the usual methods `serializable_hash`, `as_json`, `to_json`.
 
 NoBrainer does not include attributes that are not set. An attribute set to
 `nil` will be included.
