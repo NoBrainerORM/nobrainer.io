@@ -80,7 +80,7 @@ end
 Removing ActiveRecord with Rails
 --------------------------------
 
-NoBrainer can coexist with ActiveRecord at runtime, but the two conflicts on the
+NoBrainer can coexist with ActiveRecord at runtime, but the two conflict on
 rake tasks. It's best to remove ActiveRecord unless you plan to use both SQL
 and RethinkDB in your application.
 
@@ -110,3 +110,14 @@ require 'rails/test_unit/railtie'
 contains `active_record`.
 
 3) Remove `config/database.yml`, and anything in `db/` except `db/seeds.rb`.
+
+ActiveRecord with NoBrainer
+---------------------------
+
+As mentioned before, if ActiveRecord is present with NoBrainer there will be a
+conflict with the built in rake tasks and Rails generators. To get around this,
+prefix the `active_record` namespace before the generator name:
+
+{% highlight bash %}
+rails g active_record:migration migration_name
+{% endhighlight %}
