@@ -6,6 +6,12 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### 0.17.0 -- Sep, 25, 2014
+
+* Implementation of atomic operations.
+* `save()` is now `save?()` and `save!()` is now `save()`. Same for `update_attributes()`.
+* Added a `per_thread_connection` configuration flag (until we have a real connection pool from the driver).
+
 ### 0.16.0 -- Aug, 27, 2014
 
 * Added support for lazy fetching on given fields.

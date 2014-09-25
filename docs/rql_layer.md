@@ -2,7 +2,7 @@
 layout: docs
 title: RQL Layer
 prev_section: caching
-next_section: indexes
+next_section: atomic_ops
 permalink: /rql_layer/
 ---
 

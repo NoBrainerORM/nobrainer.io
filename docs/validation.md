@@ -75,12 +75,11 @@ end
 ### Validations are performed on:
 
 Validations are performed when calling the following methods on an instance:
+* `save?`
 * `save`
-* `save!`
 * `create`
-* `create!`
+* `update_attributes?`
 * `update_attributes`
-* `update_attributes!`
 
 If you want to bypass validations, you may pass the `:validate => false` option
 to these methods, which can be quite handy in a development console. Do not use

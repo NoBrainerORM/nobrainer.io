@@ -15,7 +15,6 @@ The following methods are available on the `Model` class:
 * `Model.new(attrs)` instantiate a new Model instance. Default values are set
   and `attrs` is passed to `assign_attributes`.
 * `Model.create(attrs)` calls `Model.new(attrs)` and then `save`.
-* `Model.create!(attrs)` calls `Model.new(attrs)` and then `save!`.
 * `Model.insert_all([doc1, doc2, ..., docN])` is used for bulk inserts. This method
   receives a list of hashes, and will not instantiate any models. Instead it
   passes the document in bulk to the database to perform efficient writes.
@@ -33,10 +32,10 @@ The following predicates are available on a model instance:
 
 The following methods are available on a model instance:
 
-* `save` returns true if the instance was valid and saved, otherwise false.
-* `save!` calls `save` and raises `NoBrainer::Error::DocumentInvalid` if `save` returned false.
+* `save?` returns true if the instance was valid and saved, otherwise false.
+* `save` calls `save?` and raises `NoBrainer::Error::DocumentInvalid` if `save?` returned false.
+* `update_attributes?()` calls `assign_attributes()` and `save?`.
 * `update_attributes()` calls `assign_attributes()` and `save`.
-* `update_attributes!()` calls `assign_attributes()` and `save!`.
 * `delete` removes the document from the database without firing the destroy
   callbacks.
 * `destroy` fires the destroy callbacks and removes the document from the database.
@@ -48,7 +47,7 @@ The following methods are available on a model instance:
   A `NoBrainer::Error::DocumentNotFound` error will be raised if the document
   can no longer be found.
 
-Note that `delete`, `destroy`, or `save`, `save!` during updates do not raise if
+Note that `delete`, `destroy`, or `save?`, `save` during updates do not raise if
 the instance document no longer exists in the database when performing the operation.
 These methods will silently fail.
 

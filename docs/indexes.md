@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Indexes
-prev_section: rql_layer
+prev_section: atomic_ops
 next_section: management
 permalink: /indexes/
 ---
