@@ -60,17 +60,33 @@ Mass assignment:
 
 * `self.assign_attributes(attrs_hash)`
 
-Note that methods lower in the list calls the method directly above it.
+Methods lower in the list calls the method directly above it.
 For example, `self[attr]` calls `read_attribute(attr)` which calls `self.attr`.
-
-If you wish to override an attribute getter or setter, you may define
-the `attr` and `attr=` methods in your class. `super` can be used as usual.
-The setters are _not_ used when reading a document from the database. Keep
-this in mind when your database does not match your schema.
 
 Note that there is no `attr_protected` method to control mass assignments.
 Sanitize your attributes the Rails4 way with
 [strong parameters](https://github.com/rails/strong_parameters).
+
+## Overriding attributes
+
+If you wish to override an attribute getter or setter, you may define
+the `attr` and `attr=` methods in your class. `super` can be used as usual.
+The following shows an example that uses `super` in the setter:
+
+{% highlight ruby %}
+class User
+  include NoBrainer::Document
+
+  field :email
+
+  def email=(value)
+    super(value.strip.downcase)
+  end
+end
+{% endhighlight %}
+
+Note that the setters are _not_ used when reading a document from the database.
+Keep this in mind when your database does not match your schema.
 
 ## Default Values
 
