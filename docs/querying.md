@@ -35,7 +35,8 @@ The predicates are described below:
 
 * `[p1,...,pN]` evaluates to `:and => [p1,...,pN]`.
 * `:and => [p1,...,pN]`: evaluates to true when all the predicates are true.
-* `:or => [p1,...,pN]`: evaluates to true when at least one of the predicates is true.
+* `:or => [p1,...,pN]`: evaluates to true when at least one of the predicates is true.  
+Be aware that `[:a => 1, :b => 2]` is the same as `[{:a => 1, :b => 2}]`, which is not the same as `[{:a => 1}, {:b => 2}]`.
 * `:not => p`: evaluates to true when `p` is false.
 * `:attr => value` evaluates to `:attr.eq => value`
 * `:attr.eq => /regexp/` evaluates to true when `attr` matches the regular expression.
