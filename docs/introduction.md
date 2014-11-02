@@ -30,8 +30,6 @@ NoBrainer depends on a couple of things:
       These dependencies are automatically pulled in when you install the
       `nobrainer` gem.
 
-When running on Heroku, the RethinkDB database connection string is auto-detected.
-
 ## Roadmap & Changelog
 
 Latest gem version: **0.17.0 -- Sep. 25, 2014**.
