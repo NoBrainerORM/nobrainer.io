@@ -124,7 +124,7 @@ Once declared, indexes need to be created before being usable.
 When using Rails, you may use the rake task:
 
 {% highlight bash %}
-rake db:update_indexes
+rake nobrainer:update_indexes (previously rake db:update_indexes)
 {% endhighlight %}
 
 You can also update indexes programmatically:
