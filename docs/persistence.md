@@ -34,8 +34,10 @@ The following methods are available on a model instance:
 
 * `save?` returns true if the instance was valid and saved, otherwise false.
 * `save` calls `save?` and raises `NoBrainer::Error::DocumentInvalid` if `save?` returned false.
-* `update_attributes?()` calls `assign_attributes()` and `save?`.
-* `update_attributes()` calls `assign_attributes()` and `save`.
+* `update?()` calls `assign_attributes()` and `save?`.
+* `update()` calls `assign_attributes()` and `save`.
+* `update_attributes?()` is an alias of `update?()`.
+* `update_attributes()` is an alias of `update()`.
 * `delete` removes the document from the database without firing the destroy
   callbacks.
 * `destroy` fires the destroy callbacks and removes the document from the database.

@@ -220,6 +220,11 @@ The [Callbacks](/docs/callbacks) section describes the order in which the
 The `after_find` feature is used internally by the `has_many` association to set the
 corresponding reverse `belongs_to` association.
 
+### extend()
+
+* `criteria.extend(module, ...)` extends the current criteria and any chained
+criteria with the given modules. Note that a block may also be given to `extend()`.
+
 ## Evaluating a Criteria
 
 ### count

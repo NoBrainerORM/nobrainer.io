@@ -6,13 +6,32 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### 0.17.0 -- Sep, 25, 2014
+### 0.18.1 -- Nov. 8, 2014
+
+* Added `config.app_name` and `config.environment` for non Rails apps.
+* `config.max_reconnection_tries` is now `max_retries_on_connection_failure`.
+* Added `criteria.extend()` to add chainable extend behavior.
+* Bug fix: more atomic operations can now be performed after `save()`.
+* Added an `:external` option to indexes.
+* Renamed index synchronization rake task to `nobrainer:sync_indexes`.
+* Indexes are kept synchronized through an auxilary table.
+* Index deletions are no longer confirmed.
+* Added a `:uniq` validation shorthand (alias of `:unique`).
+* Added a `:format` validation shorthand on field definitions.
+* `update` is now an alias of `update_attributes`.
+* Renamed rake namespace from `db:` to `nobrainer:`.
+* `config.reconnection_tries` defaults to 1 in development mode, or 15 otherwise.
+* `criteria` is available in the middleware stack, useful for monitoring tools.
+* `order_by` accepts Arrays as arguments as well.
+* `min`/`avg`/`max` return `nil` by default.
+
+### 0.17.0 -- Sep. 25, 2014
 
 * Implementation of atomic operations.
 * `save()` is now `save?()` and `save!()` is now `save()`. Same for `update_attributes()`.
 * Added a `per_thread_connection` configuration flag (until we have a real connection pool from the driver).
 
-### 0.16.0 -- Aug, 27, 2014
+### 0.16.0 -- Aug. 27, 2014
 
 * Added support for lazy fetching on given fields.
 * Added support for Binary types.

@@ -29,7 +29,8 @@ end
 * `:type` to enforce a type.
 * `:validates` to specify validations.
 * `:required` as a shorthand for the presence validation.
-* `:unique` as a shorthand for the uniqueness validation.
+* `:uniq` (or `:unique`) as a shorthand for the uniqueness validation.
+* `:format` as a shorthand for the format validation.
 * `:in` as a shorthand for the inclusion validation.
 * `:readonly` to specify if a field cannot be updated.
 * `:primary_key` to specify a custom primary key.

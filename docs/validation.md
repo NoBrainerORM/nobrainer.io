@@ -42,13 +42,13 @@ class Model
 end
 {% endhighlight %}
 
-### unique
+### uniq/unique
 
-You may use the `unique` shorthand to specify a uniqueness validator:
+You may use the `uniq` (or `unique`) shorthand to specify a uniqueness validator:
 
 {% highlight ruby %}
 class Model
-  field :name, :unique => true
+  field :name, :uniq => true
 end
 # Equivalent to:
 class Model
@@ -66,7 +66,21 @@ class Model
 end
 # Equivalent to:
 class Model
-  field :name, :validates => { :inclusion => { :in => %w(start finish) } }
+  field :state, :validates => { :inclusion => { :in => %w(start finish) } }
+end
+{% endhighlight %}
+
+### format
+
+You may use the `format` shorthand to specify a format validator:
+
+{% highlight ruby %}
+class Model
+  field :name, :format => { /\A[a-z]+\z/ }
+end
+# Equivalent to:
+class Model
+  field :name, :validates => { :format => { :with => /\A[a-z]+\z/ } }
 end
 {% endhighlight %}
 
@@ -75,11 +89,11 @@ end
 ### Validations are performed on:
 
 Validations are performed when calling the following methods on an instance:
+* `create`
 * `save?`
 * `save`
-* `create`
-* `update_attributes?`
-* `update_attributes`
+* `update?`
+* `update`
 
 If you want to bypass validations, you may pass the `:validate => false` option
 to these methods, which can be quite handy in a development console. Do not use
@@ -90,7 +104,7 @@ when validation fails. NoBrainer raises a `NoBrainer::Error::DocumentInvalid`
 exception when validation fails. If left uncaught in a Rails controller, a 422
 status code will be returned.
 The non bang versions populate the errors array attached to the instance.
-`save` and `update_attributes` return true or false depending if the validations
+`save()` and `update()` return true or false depending if the validations
 failed, while `create` returns the instance with an non empty `errors`
 attribute.
 

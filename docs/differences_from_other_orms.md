@@ -10,7 +10,7 @@ NoBrainer breaks a couple of established patterns to provide an consistent API
 with semantics as precise as possible.
 
 * ActiveRecord's `save()` is `save?()` and ActiveRecord's `save!()` is `save()`.
-  Same goes for `update_attributes`.
+  Same goes for `update_attributes()`/`update()`.
 * When using `find()` and no document has been found, NoBrainer will not raise
   an exception, but return `nil`. To get the traditional `find()` ActiveRecord
   behavior, one must use `find!()` which raises when the target is not found.

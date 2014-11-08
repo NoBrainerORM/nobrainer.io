@@ -124,20 +124,21 @@ Once declared, indexes need to be created before being usable.
 When using Rails, you may use the rake task:
 
 {% highlight bash %}
-rake db:update_indexes
+rake nobrainer:sync_indexes
 {% endhighlight %}
 
 You can also update indexes programmatically:
 
 {% highlight ruby %}
-NoBrainer.update_indexes # Update indexes on all models
-Model.perform_update_indexes # Update indexes on a specific model
+NoBrainer.sync_indexes # Synchronize index definitions.
 {% endhighlight %}
 
-`update_indexes` will drop indexes that are no longer declared. This might be a
-bit dangerous, so we want to provide some sort of confirmations in the future.
-By default, NoBrainer waits for the index creation, you may pass `:wait => false`
-to `update_indexes` to skip the wait.
+NoBrainer maintains a list of index metadata in a table named `nobrainer_index_meta`.
+This way, NoBrainer can keep track of the indexes state on the database, and update
+indexes which definition have changed.
+
+NoBrainer waits for the index creation by default.
+You may pass `:wait => false` to `sync_indexes` to skip the wait.
 
 ## Aliases
 
@@ -153,10 +154,20 @@ and reading models back from the database.
 The only place you need to be careful is when using RQL, including passing RQL lambda.
 NoBrainer does not translate aliases with user provided RQL code.
 
+## External Indexes
+
+If you prefer to manage certain indexes yourself, you may declare them as external as such:
+
+{% highlight ruby %}
+index :email, :external => true
+{% endhighlight %}
+
+NoBrainer does not touch external indexes when synchronizing indexes.
+
 ## Reflection
 
 You may go through the list of declared indexes on a model by looking up the
-hash `Model.indexes` of the form `{:index_name => {:kind => kind, :what => what, :options => options}`.
-`kind` is the kind of index which can be `:single`, `:compound`, or `:proc`.
-`what` is the indexed value which is the field name, field names, or proc depending if the index kind is a single, compound, or proc, respectively.
+hash `Model.indexes` of the form `{:index_name => index}`.
+`index.kind` is the kind of index which can be `:single`, `:compound`, or `:proc`.
+`index.what` is the indexed value which is the field name, field names, or proc depending if the index kind is a single, compound, or proc, respectively.
 `options` are the passed in options, which can contain `:multi` to specify whether a single index should be a inverted index.

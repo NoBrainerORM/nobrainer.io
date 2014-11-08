@@ -13,10 +13,18 @@ The settings are shown with their default values:
 
 {% highlight ruby %}
 NoBrainer.configure do |config|
+  # app_name is the name of your application in lowercase.
+  # When using Rails, the application name is automatically inferred.
+  # config.app_name = config.default_app_name
+
+  # environment defaults to Rails.env for Rails apps or to the environment
+  # variables RUBY_ENV, RAILS_ENV, RACK_ENV, or :production.
+  # config.environment = config.default_environment
+
   # The rethinkdb_url specifies the RethinkDB database connection url.
   # When left unspecified, NoBrainer picks a database connection by default.
   # The default is to use localhost, with a database name matching the
-  # Rails application name and the Rails environment.
+  # application name and the environment.
   # NoBrainer also reads environment variables when defined:
   # * RETHINKDB_URL, RDB_URL
   # * RETHINKDB_HOST, RETHINKDB_PORT, RETHINKDB_DB, RETHINKDB_AUTH
@@ -47,18 +55,19 @@ NoBrainer.configure do |config|
   # auto_create_tables allows NoBrainer to create tables on demand.
   # This behavior is similar to MongoDB.
   # Note that this will not auto create indexes for you.
-  # You still need to run `rake db:update_indexes` to create the indexes.
+  # You still need to run `rake nobrainer:sync_indexes` to create the indexes.
   # config.auto_create_tables = true
 
-  # When the network connection is lost, NoBrainer will try running a given
-  # query 10 times before giving up. Note that this can be a problem with non
-  # idempotent write queries such as increments.
-  # Setting it to 0 disable reconnections.
-  # config.max_reconnection_tries = 10
+  # When the network connection is lost, NoBrainer can retry running a given
+  # query a few times before giving up. Note that this can be a problem with
+  # non idempotent write queries such as increments.
+  # Setting it to 0 disable retries during reconnections.
+  # The default is 1 for development or test environment, otherwise 15.
+  # config.max_retries_on_connection_failure = \
+  #   config.default_max_retries_on_connection_failure
 
   # Configures the durability for database writes.
-  # The default durability is :hard, unless when running with Rails in test or
-  # development mode, for which the durability mode is :soft.
+  # The default is :soft for development or test environment, otherwise :hard.
   # config.durability = config.default_durability
 
   # user_timezone can be configured with :utc, :local, or :unchanged.
@@ -80,7 +89,7 @@ NoBrainer.configure do |config|
   # useful for multi-threading usage such as Sidekiq.
   # Call NoBrainer.disconnect before a thread exits, otherwise you will have
   # a resource leak, and you will run out of connections.
-  # Note that this is solution is temporary, until we get a real connection pool.
+  # Note that this is solution is temporary, until we get a connection pool.
   # config.per_thread_connection = false
 end
 {% endhighlight %}
@@ -88,9 +97,9 @@ end
 Removing ActiveRecord with Rails
 --------------------------------
 
-NoBrainer can coexist with ActiveRecord at runtime, but the two conflict on
-rake tasks. It's best to remove ActiveRecord unless you plan to use both SQL
-and RethinkDB in your application.
+NoBrainer can coexist with ActiveRecord at runtime. However, It is best to
+remove ActiveRecord unless you plan to use both SQL and RethinkDB in your
+application.
 
 ### With a fresh Rails app
 
@@ -122,9 +131,9 @@ contains `active_record`.
 ActiveRecord with NoBrainer
 ---------------------------
 
-As mentioned before, if ActiveRecord is present with NoBrainer there will be a
-conflict with the built in rake tasks and Rails generators. To get around this,
-prefix the `active_record` namespace before the generator name:
+If ActiveRecord is present with NoBrainer there will be a conflict with the
+built in rake tasks and Rails generators. To get around this, prefix the
+`active_record` namespace before the generator name:
 
 {% highlight bash %}
 rails g active_record:migration migration_name
