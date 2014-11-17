@@ -19,7 +19,7 @@ generating queries as RethinkDB does not use indexes automatically.
 
 {% highlight ruby %}
 class Post
-  include Nobrainer::Document
+  include NoBrainer::Document
 
   # Indexes can be declared on belongs_to and fields declarations
   belongs_to :author, :index => true  # Simple index
@@ -27,7 +27,7 @@ class Post
 end
 
 class Author
-  include Nobrainer::Document
+  include NoBrainer::Document
 
   field :tags
   field :first_name

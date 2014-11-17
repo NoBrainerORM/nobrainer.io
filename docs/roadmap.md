@@ -8,6 +8,7 @@ permalink: /roadmap/
 
 The roadmap is the following. Items at the beginning of the list are somewhat higher priority.
 
+* Provide Geo support.
 * Provide some `first_or_create()` primitive.
 * Support query keywords in nested documents to allow queries such as:  
   `User.where(:address => { :zipcode.not => 1024 })`.

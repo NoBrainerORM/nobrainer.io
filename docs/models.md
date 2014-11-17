@@ -43,3 +43,4 @@ and instantiate the proper classes.
 
 Sometimes it's useful to go through all the models to do something fancy.
 The list of models can be retrieved with `NoBrainer::Document.all`.
+When using polymorphism, note that subclasses are not returned, only root classes.
