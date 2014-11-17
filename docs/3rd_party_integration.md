@@ -9,19 +9,16 @@ permalink: /3rd_party_integration/
 NoBrainer can be extended to support other functionnality and play nicely with
 other gems. The following describes such gems.
 
-If you'd like to create a gem, please use the naming convention to prefix
-your gem with `nobrainer-`.
-
 ## Devise
 
-[nobrainer-devise](https://github.com/nviennot/nobrainer-devise) is an adapter
+[devise-nobrainer](https://github.com/nviennot/devise-nobrainer) is an adapter
 to make [Devise](https://github.com/plataformatec/devise/) work nicely with
 NoBrainer.
 
 Include in your Gemfile:
 
 {% highlight ruby %}
-gem 'nobrainer-devise'
+gem 'devise-nobrainer'
 {% endhighlight %}
 
 Use devise as usual.

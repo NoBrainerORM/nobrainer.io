@@ -74,6 +74,9 @@ Post.where(:author_id.in => [1,2,3]).each { }
 # Uses the created_at index with a between query
 Author.where(:created_at.gt => 1.year.ago)
 
+# Use a multi index
+Author.where(:tags.any => 'programmer')
+
 # Use the full_name_compound index
 Author.where(:first_name => 'John', :last_name => 'Saucisse')
 
@@ -145,7 +148,7 @@ You may pass `:wait => false` to `sync_indexes` to skip the wait.
 An alias can be specified on a given index as such:
 
 {% highlight ruby %}
-index :email, :as => :e
+index :email, :store_as => :e
 {% endhighlight %}
 
 NoBrainer will translate all the references to that index when compiling queries
@@ -170,4 +173,5 @@ You may go through the list of declared indexes on a model by looking up the
 hash `Model.indexes` of the form `{:index_name => index}`.
 `index.kind` is the kind of index which can be `:single`, `:compound`, or `:proc`.
 `index.what` is the indexed value which is the field name, field names, or proc depending if the index kind is a single, compound, or proc, respectively.
-`options` are the passed in options, which can contain `:multi` to specify whether a single index should be a inverted index.
+`index.multi` is a boolean indicating whether the index is a multi index.
+`index.geo` is a boolean indicating whether the index is a geo index.

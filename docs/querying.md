@@ -54,6 +54,10 @@ Be aware that `[:a => 1, :b => 2]` is the same as `[{:a => 1, :b => 2}]`, which 
 * `:attr.nin => values` evaluates to `:not => {:attr.in => values}`.
 * `:attr.defined => true` evaluates to true when `attr` is defined.
 * `:attr.defined => false` evaluates to true when `attr` is undefined.
+* `:attr.any => value` evalues to true when any of the `attr` values are equal to `value`.
+* `:attr.all => value` evalues to true when all of the `attr` values are equal to `value`.
+* `:attr.any.op => value` evalues to true when any of the `attr` values match `value` with `op`.
+* `:attr.all.op => value` evalues to true when all of the `attr` values match `value` with `op`.
 * `lambda { |doc| rql_expression(doc) }` evaluates the RQL expression.
 
 A couple of notes:
@@ -69,6 +73,7 @@ construct a query equivalent to `Model.where(:or => [:attr => value1,...,:attr =
 When using comparison operators, NoBrainer leverage the RQL
 [`between()`](http://www.rethinkdb.com/api/ruby/#between) command if an index is
 available on `attr`.
+When using the `any` keyword, NoBrainer tries to use a `multi` index if available.
 
 * `Model.where(:attr => value1).where(:attr => value2)` will match no
 documents if `value1 != value2`, even when using a `default_scope`.
@@ -85,7 +90,7 @@ As an example, one can construct such query:
 {% highlight ruby %}
 Model.where(:or => [->(doc) { doc[:field1] < doc[:field2] },
                     :field3.in ['hello', 'world'])
-     .where(:field4 => /ohai/, :field5.gt 4)
+     .where(:field4 => /ohai/, :field5.any.gt(4))
 
 {% endhighlight %}
 

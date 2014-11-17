@@ -6,6 +6,19 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### 0.19.0 -- Nov. 17, 2014
+
+* `:as` is now `:store_as`.
+* To access a `multi` index, `any` must be used. e.g. `Post.where(:tags.any => 'tag')`.
+* Introducing `all` and `any` modifiers in `where()` queries.
+* Bug fix: Table creation should use the aliased primary key: [#80](https://github.com/nviennot/nobrainer/issues/80).
+* `where()` only allow queries on known fields, unless the model uses dynamic attributes.
+* `created_at` and `updated_at` can be updated.
+* Extracted the symbol decoration logic into a separate [gem](https://github.com/nviennot/symbol_decoration).
+* Alias `create!` to `create` to provide backward compatibility with gems.
+* Bug fix: indexed `:or` queries should return distinct elements.
+* Atomic operations seems now ready for prime time.
+
 ### 0.18.1 -- Nov. 8, 2014
 
 * Added `config.app_name` and `config.environment` for non Rails apps.

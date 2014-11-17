@@ -32,7 +32,7 @@ NoBrainer depends on a couple of things:
 
 ## Roadmap & Changelog
 
-Latest gem version: **0.18.1 -- Nov. 8, 2014**.
+Latest gem version: **0.19.0 -- Nov. 17, 2014**.
 
 Follow the [Roadmap](/docs/roadmap/) and read the [Changelog](/docs/changelog).
 
