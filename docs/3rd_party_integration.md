@@ -15,18 +15,17 @@ other gems. The following describes such gems.
 to make [Devise](https://github.com/plataformatec/devise/) work nicely with
 NoBrainer.
 
-Include in your Gemfile:
-
-{% highlight ruby %}
-gem 'devise-nobrainer'
-{% endhighlight %}
-
-Use devise as usual.
-
 If devise does not work, make sure that your `config/initializers/devise.rb` file
 contains `require 'devise/orm/nobrainer'`.
 
 ## Awesome Print
 
 [awesome_print](https://github.com/michaeldv/awesome_print) pretty prints objects.
-NoBrainer support is built in.
+NoBrainer is supported natively.
+
+## Searchkick
+
+[Searchkick](https://github.com/ankane/searchkick)  learns what your users are
+looking for. As more people search, it gets smarter and the results get better.
+It’s friendly for developers - and magical for your users.
+NoBrainer is supported natively. This gem relies on ElasticSearch.
