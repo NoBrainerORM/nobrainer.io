@@ -21,7 +21,7 @@ NoBrainer is written and maintained by <a href="https://twitter.com/nviennot">Ni
 NoBrainer depends on a couple of things:
 
 * The RethinkDB database.
-* NoBrainer runs on Ruby MRI 1.9.3+, Ruby MRI 2.x, JRuby in 1.9+ mode.
+* NoBrainer runs on Ruby MRI 2.x.
 * NoBrainer does not depend on Rails, but plays nicely with Rails 4.
 * NoBrainer depends on the [`rethinkdb`](https://rubygems.org/gems/rethinkdb),
       [`activemodel`](https://github.com/rails/rails/tree/master/activemodel),
@@ -33,6 +33,8 @@ NoBrainer depends on a couple of things:
 ## Roadmap & Changelog
 
 Latest gem version: **0.19.0 -- Nov. 17, 2014**.
+
+master branch: [![Build Status](https://travis-ci.org/nviennot/nobrainer.svg?branch=master)](https://travis-ci.org/nviennot/nobrainer)
 
 Follow the [Roadmap](/docs/roadmap/) and read the [Changelog](/docs/changelog).
 
