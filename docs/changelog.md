@@ -6,6 +6,10 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Changed the generated ID from the BSON ID format to something matching `[A-Za-z0-9_\-]{14}`.
+
 ### 0.19.0 -- Nov. 17, 2014
 
 * `:as` is now `:store_as`.
