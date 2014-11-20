@@ -8,7 +8,7 @@ permalink: /changelog/
 
 ### git HEAD
 
-* Changed the generated ID from the BSON ID format to something matching `[A-Za-z0-9_\-]{14}`.
+* Generated primary keys are now in the `[A-Za-z0-9]{14}` format.
 
 ### 0.19.0 -- Nov. 17, 2014
 
