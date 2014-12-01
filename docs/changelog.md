@@ -8,7 +8,7 @@ permalink: /changelog/
 
 ### git HEAD
 
-* Renamed `first!` to `first` and `first` to `first?` on criteria. Same with `last`.
+* Renamed `find!` to `find`. Sticking with ORMs established API to be safer overall.
 * Geo support. Introduced the `Geo::Point` type and others. Querying with
   `where(:field.near => {})` and `where(:field.intersects => geo_object)`.
 * Generated primary keys use a `[A-Za-z0-9]{14}` format.
