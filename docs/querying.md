@@ -277,8 +277,8 @@ status code is returned.
 
 ### find()
 
-* `Model.find(id)` is equivalent to `Model.unscoped.where(:id => id).first`.
-* `Model.find!(id)` is equivalent to `Model.unscoped.where(:id => id).first!`.
+* `Model.find(id)` is equivalent to `Model.unscoped.where(:id => id).first!`.
+* `Model.find?(id)` is equivalent to `Model.unscoped.where(:id => id).first`.
 
 Note that `find()` is only defined on the `Model` class, and not on criteria.
 

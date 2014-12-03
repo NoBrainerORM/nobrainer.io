@@ -96,5 +96,5 @@ NoBrainer will not use the default scopes in the following cases:
    For example, upon destroy, NoBrainer will perform a `Stuff.unscoped.destroy_all`.
 2. When using `validates_uniqueness_of :some_field`, NoBrainer will not use the
    default scope to find any duplicates of `some_field`.
-3. When using `find()` or `find!()`.
+3. When using `find()` or `find?()`.
 4. When using `belongs_to` associations.

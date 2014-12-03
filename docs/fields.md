@@ -117,15 +117,8 @@ once persisted to the database.
 ## Primary Key
 
 NoBrainer allows custom primary keys with the `:primary_key => true` option.
-The default primary key is `id` and is declared with:
-
-{% highlight ruby %}
-field :id, :type => String, :default => ->{ NoBrainer::Document::Id.generate }
-{% endhighlight %}
-
-`NoBrainer::Document::Id.generate` returns ids following the
-[BSON ID (MongoDB)](http://docs.mongodb.org/manual/reference/object-id/) format.
-This is interesting compared to UUIDs because BSON IDs are somewhat
+The default primary key is `id` and has a format that matches `[A-Za-z0-9]{14}`.
+It has interesting property compared to UUIDs because these IDs are
 monotonically increasing with time. NoBrainer always sort by primary key by
 default to give predicable and repeatable results. For example, `Model.last`
 yields the latest created model, which can be quite handy in development mode.

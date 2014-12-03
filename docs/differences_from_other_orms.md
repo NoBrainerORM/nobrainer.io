@@ -11,10 +11,6 @@ with semantics as precise as possible.
 
 * ActiveRecord's `save()` is NoBrainer's `save?()` and ActiveRecord's `save!()`
   is NoBrainer's `save()`. Same goes for `update_attributes()`/`update()`.
-* When using `find()` and no document has been found, NoBrainer will not raise
-  an exception, but return `nil`. To get the traditional `find()` ActiveRecord
-  behavior, one must use `find!()` which raises when the target is not found.
-  This behavior matches the semantics of `first` and `first!`.
 * RethinkDB does not support transactions, so you need to be in control of when
   a database write happens. NoBrainer never autosaves a model behind the scenes.
 * `has_many` associations are read-only. Writable `has_many` associations are

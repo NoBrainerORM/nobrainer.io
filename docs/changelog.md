@@ -6,7 +6,7 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.20.0 -- Dec. 3, 2014
 
 * Renamed `find!` to `find`. Sticking with ORMs established API to be safer overall.
 * Geo support. Introduced the `Geo::Point` type and others. Querying with
