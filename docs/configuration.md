@@ -118,9 +118,11 @@ To remove ActiveRecord from an existing Rails application, three steps must be d
 {% highlight ruby %}
 # require 'active_record/railtie'
 require 'action_controller/railtie'
+require 'action_view/railtie'
 require 'action_mailer/railtie'
-require 'sprockets/railtie'
+require 'active_job/railtie'
 require 'rails/test_unit/railtie'
+require 'sprockets/railtie'
 {% endhighlight %}
 
 2) Comment all the configuration options in `config/environments/*.rb` that
