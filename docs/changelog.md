@@ -6,6 +6,10 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Bug fix: `where(:field.defined => value)` properly cast `value` to a boolean.
+
 ### 0.20.0 -- Dec. 3, 2014
 
 * Renamed `find!` to `find`. Sticking with ORMs established API to be safer overall.
