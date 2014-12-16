@@ -25,7 +25,13 @@ NoBrainer is supported natively.
 
 ## Searchkick
 
-[Searchkick](https://github.com/ankane/searchkick)  learns what your users are
+[Searchkick](https://github.com/ankane/searchkick) learns what your users are
 looking for. As more people search, it gets smarter and the results get better.
 It’s friendly for developers - and magical for your users.
 NoBrainer is supported natively. This gem relies on ElasticSearch.
+
+## Kaminari
+
+[Kaminari](https://github.com/amatsuda/kaminari) is a paginator.
+NoBrainer is supported through the
+[kaminari-nobrainer](https://github.com/nviennot/kaminari-nobrainer) adaptor.
