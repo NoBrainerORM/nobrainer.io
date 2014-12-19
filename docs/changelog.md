@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Bug fix: Allow `delete_all/update_all/replace_all` to operate on multi indexes.
+* Introduced `criteria.without_distinct` keyword to ommit `distinct` on multi indexes.
 * Bug fix: `where(:field.defined => value)` properly cast `value` to a boolean.
 
 ### 0.20.0 -- Dec. 3, 2014
