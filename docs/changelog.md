@@ -8,6 +8,11 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Added a `:length` validation shorthand on field definitions.
+* `required => true` validation shorthand uses the not null validation, and no
+  longer the presence validation: [#110](https://github.com/nviennot/nobrainer/issues/110).
+* Added the not null validator. `validates_not_null :field` or `validates :field, :not_null`
+  can be used to validates non null values.
 * Bug fix: Allow `delete_all/update_all/replace_all` to operate on multi indexes.
 * Introduced `criteria.without_distinct` keyword to ommit `distinct` on multi indexes.
 * Bug fix: `where(:field.defined => value)` properly cast `value` to a boolean.
