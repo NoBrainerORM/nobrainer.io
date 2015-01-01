@@ -35,3 +35,11 @@ NoBrainer is supported natively. This gem relies on ElasticSearch.
 [Kaminari](https://github.com/amatsuda/kaminari) is a paginator.
 NoBrainer is supported through the
 [kaminari-nobrainer](https://github.com/nviennot/kaminari-nobrainer) adaptor.
+
+## NoBrainer::Tree
+
+[nobrainer-tree](https://github.com/eksoverzero/nobrainer-tree) implements a tree
+structure for NoBrainer documents using the materialized path pattern.
+
+Note: The data structures used may lead to data inconsistencies in the face of
+network partitions as this implementation would need transactions or 2pcs.
