@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* `has_many_through` associations have a `target_model` method to access the underlying model:
+  [#114](https://github.com/nviennot/nobrainer/issues/114).
 * Allow `default_scope` to be defined multiple times on models and their subclasses.
   They all get to be applied: [#113](https://github.com/nviennot/nobrainer/issues/113).
 * Validations are only run against changed fields.
