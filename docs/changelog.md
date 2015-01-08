@@ -8,6 +8,10 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Validations are only run against changed fields.
+* Atomic operations use sane default values.
+* Allow atomic values to be read, it's easier for debugging and callbacks handlers.
+* Detect potential miseuses with `:or` arguments (`[{...},{...}]` vs `[...,...]`).
 * Added a `:length` validation shorthand on field definitions.
 * `required => true` validation shorthand uses the not null validation, and no
   longer the presence validation: [#110](https://github.com/nviennot/nobrainer/issues/110).
