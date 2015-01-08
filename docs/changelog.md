@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Allow `default_scope` to be defined multiple times on models and their subclasses.
+  They all get to be applied: [#113](https://github.com/nviennot/nobrainer/issues/113).
 * Validations are only run against changed fields.
 * Atomic operations use sane default values.
 * Allow atomic values to be read, it's easier for debugging and callbacks handlers.
