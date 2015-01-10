@@ -8,6 +8,19 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Implementation of a distributed lock `NoBrainer::Lock`, which is used by the
+  uniqueness validator.
+* Drop criteria cache when it has too many elements to avoid out of memory
+  issues (configurable with `config.criteria_cache_max_entries`, defaults to `10,000`).
+* Raise errors when using attributes from controller params without sanitizing
+  them with strong params. The check is performed during attribute assignement
+  and in `where()` queries.
+* `preload()` is now `eager_load()`.
+* default value procs are now executed in the context of the document. This is
+  useful to set values depending on other values.
+* Added a `:scope` option for `has_many` and `has_many_through` associations.
+  The provided scope is run in the context of the target model, which is useful
+  to reuse named scoped: [#115](https://github.com/nviennot/nobrainer/issues/115).
 * `has_many_through` associations have a `target_model` method to access the underlying model:
   [#114](https://github.com/nviennot/nobrainer/issues/114).
 * Allow `default_scope` to be defined multiple times on models and their subclasses.
