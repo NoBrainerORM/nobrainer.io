@@ -35,7 +35,7 @@ Model.all.first      # Calls the database, this is a new criteria instance.
 Model.delete_all     # Everything is gone.
 criteria.first       # Does not call the database, and returns the
                      # same document as before.
-criteria.reload      # Just kills the cache, does not perform a database query.
+criteria.reload      # Kills the cache, does not perform a database query.
 criteria.first       # Calls the database and returns nothing.
 criteria.first       # Calls the database again and returns nothing.
 {% endhighlight %}
