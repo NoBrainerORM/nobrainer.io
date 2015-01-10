@@ -8,6 +8,14 @@ permalink: /changelog/
 
 ### git HEAD
 
+* `auto_create_databases` and `auto_create_tables` are no longer configurable.
+  Automatic database/table creation is always on.
+* Added the validation shorthands `min_length` and `max_length`.
+* Added a new type `Text` meant to be used for long strings. Regular `String`
+  types are now limited to `255` characters. This limit is configurable with
+  `config.max_string_length`.
+* `ActiveModel::ForbiddenAttributesError` is raised if Rails controller params
+  are passed directly to NoBrainer without using strong parameters.
 * Implementation of a distributed lock `NoBrainer::Lock`, which is used by the
   uniqueness validator.
 * Drop criteria cache when it has too many elements to avoid out of memory
