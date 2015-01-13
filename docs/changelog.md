@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Bug fix: the uniqueness validator would raise an exception when dealing with
+  invalid types: [#117](https://github.com/nviennot/nobrainer/issues/117).
 * `auto_create_databases` and `auto_create_tables` are no longer configurable.
   Automatic database/table creation is always on.
 * Added the validation shorthands `min_length` and `max_length`.
