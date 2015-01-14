@@ -9,8 +9,12 @@ permalink: /changelog/
 ### git HEAD
 
 * `required => true` validation shorthand uses the presence validator except for
-  `Boolean` which uses the non null validator: [#110](https://github.com/nviennot/nobrainer/issues/110), 
+  `Boolean` which uses the non null validator:
+  [#109](https://github.com/nviennot/nobrainer/issues/109),
+  [#110](https://github.com/nviennot/nobrainer/issues/110),
   [#118](https://github.com/nviennot/nobrainer/issues/118).
+* Bug fix: the uniqueness validator would raise an exception when dealing with
+  invalid types: [#117](https://github.com/nviennot/nobrainer/issues/117).
 * `auto_create_databases` and `auto_create_tables` are no longer configurable.
   Automatic database/table creation is always on.
 * Added the validation shorthands `min_length` and `max_length`.
