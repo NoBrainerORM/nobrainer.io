@@ -17,7 +17,6 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 * Support query keywords in nested documents to allow queries such as:  
   `User.where(:address => { :zipcode.not => 1024 })`.
 * Support for instrumentation hooks such as New Relic.
-* Support generic "polymorphic" support for `belongs_to` associations as opposed to STI.
 * Support embedded documents. Embedding should be done by using the type system like regular fields.
 * Support joins.
 * Rake tasks should explicitly create database/tables if database/table on demand is turned off.
