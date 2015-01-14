@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Regexp matches now support `/i` and `/m` properly:
+  [#120](https://github.com/nviennot/nobrainer/issues/120).
 * `required => true` validation shorthand uses the presence validator except for
   `Boolean` which uses the non null validator:
   [#109](https://github.com/nviennot/nobrainer/issues/109),
