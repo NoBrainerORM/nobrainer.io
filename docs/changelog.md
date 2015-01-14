@@ -8,6 +8,9 @@ permalink: /changelog/
 
 ### git HEAD
 
+* `required => true` validation shorthand uses the presence validator except for
+  `Boolean` which uses the non null validator: [#110](https://github.com/nviennot/nobrainer/issues/110), 
+  [#118](https://github.com/nviennot/nobrainer/issues/118).
 * `auto_create_databases` and `auto_create_tables` are no longer configurable.
   Automatic database/table creation is always on.
 * Added the validation shorthands `min_length` and `max_length`.
@@ -38,8 +41,6 @@ permalink: /changelog/
 * Allow atomic values to be read, it's easier for debugging and callbacks handlers.
 * Detect potential miseuses with `:or` arguments (`[{...},{...}]` vs `[...,...]`).
 * Added a `:length` validation shorthand on field definitions.
-* `required => true` validation shorthand uses the not null validation, and no
-  longer the presence validation: [#110](https://github.com/nviennot/nobrainer/issues/110).
 * Added the not null validator. `validates_not_null :field` or `validates :field, :not_null`
   can be used to validates non null values.
 * Bug fix: Allow `delete_all/update_all/replace_all` to operate on multi indexes.
