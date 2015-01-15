@@ -8,6 +8,7 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Added `raw_attributes` for debugging purposes.
 * Regexp matches now support `/i` and `/m` properly:
   [#120](https://github.com/nviennot/nobrainer/issues/120).
 * `required => true` validation shorthand uses the presence validator except for
