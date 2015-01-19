@@ -19,7 +19,7 @@ class User
   field :name,         :type => String
   field :biography,    :type => Text
   field :verified,     :type => Boolean
-  field :age,          :type => Integer
+  field :num_friends,  :type => Integer
   field :last_seen_at, :type => Time
 end
 {% endhighlight %}
@@ -63,7 +63,7 @@ The behavior is the following:
   You must perform a database migration to convert all the strings into integers.
 
 Note that the `nil` value is always valid and never casted. If you wish to
-prevent this, you may add a presence validation.
+prevent this, you may add a `not_null` or `presence` validation.
 
 ## Query Behavior
 
@@ -74,12 +74,12 @@ uncaught in a Rails controller, a 400 status code will be returned. For example:
 {% highlight ruby %}
 class User
   include NoBrainer::Document
-  field :age, :type => Integer
+  field :num_friends, :type => Integer
 end
 
-User.create(:age => 30)
-User.where(:age => "30").first # returns the user
-User.where(:age => "30xx").first # raises an InvalidType error
+User.create(:num_friends => 30)
+User.where(:num_friends.gt => "10").first # returns the user
+User.where(:num_friends.gt => "10xx").first # raises an InvalidType error
 {% endhighlight %}
 
 ## Types
@@ -214,9 +214,9 @@ attribute setter. For example:
 
 {% highlight ruby %}
 class User
-  field :age, :type => Integer
+  field :num_friends, :type => Integer
 
-  def age=(value)
+  def num_friends=(value)
     super(value.to_i)
   end
 end
