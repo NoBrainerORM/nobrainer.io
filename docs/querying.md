@@ -36,7 +36,9 @@ The predicates are described below:
 * `[p1,...,pN]` evaluates to `:and => [p1,...,pN]`.
 * `:and => [p1,...,pN]`: evaluates to true when all the predicates are true.
 * `:or => [p1,...,pN]`: evaluates to true when at least one of the predicates is true.  
-Be aware that `[:a => 1, :b => 2]` is the same as `[{:a => 1, :b => 2}]`, which is not the same as `[{:a => 1}, {:b => 2}]`.
+Be aware that `[:a => 1, :b => 2]` is the same as `[{:a => 1, :b => 2}]`, which
+is not the same as `[{:a => 1}, {:b => 2}]`. NoBrainer prevents the former usage
+to avoid programming mistakes. If you knwo what you are doing, you may use `:_or`.
 * `:not => p`: evaluates to true when `p` is false.
 * `:attr => value` evaluates to `:attr.eq => value`
 * `:attr.eq => /regexp/` evaluates to true when `attr` matches the regular expression.
@@ -54,6 +56,8 @@ Be aware that `[:a => 1, :b => 2]` is the same as `[{:a => 1, :b => 2}]`, which 
 * `:attr.nin => values` evaluates to `:not => {:attr.in => values}`.
 * `:attr.defined => true` evaluates to true when `attr` is defined.
 * `:attr.defined => false` evaluates to true when `attr` is undefined.
+* `:attr.near => geo_value` evaluates to true when `attr` is near `geo_value`.
+* `:attr.intersects => geo_value` evaluates to true when `attr` intersects `geo_value`.
 * `:attr.any => value` evalues to true when any of the `attr` values are equal to `value`.
 * `:attr.all => value` evalues to true when all of the `attr` values are equal to `value`.
 * `:attr.any.op => value` evalues to true when any of the `attr` values match `value` with `op`.
@@ -197,9 +201,17 @@ Read more about caches in the [Caching](/docs/caching) section.
 
 ---
 
-### preload()
+### without_distinct
 
-* `criteria.preload(:some_association)` eager loads the association. Read more
+* `criteria.without_distinct`: When constructing RQL queries operating on multi
+  indexes, do not use the [`r.distinct`](http://rethinkdb.com/api/ruby/#distinct)
+  operator.
+
+---
+
+### eager_load()
+
+* `criteria.eager_load(:some_association)` eager loads the association. Read more
 about eager loading in the [Eager Loading](/docs/eager_loading) section.
 
 ---

@@ -27,15 +27,22 @@ end
 * `:index` to specify an index.
 * `:default` to specify a default value.
 * `:type` to enforce a type.
-* `:validates` to specify validations.
-* `:required` as a shorthand for the presence validation.
-* `:uniq` (or `:unique`) as a shorthand for the uniqueness validation.
-* `:format` as a shorthand for the format validation.
-* `:in` as a shorthand for the inclusion validation.
 * `:readonly` to specify if a field cannot be updated.
 * `:primary_key` to specify a custom primary key.
 * `:store_as` to specify an alias in the database.
 * `:lazy_fetch` to specify whether this field should be fetched on demand.
+
+`field` also accepts the following validation options:
+
+* `:validates` to specify validations.
+* `:required` as a shorthand for the presence validation (except with Boolean
+  types, for which the not_null validation is used).
+* `:uniq` (or `:unique`) as a shorthand for the uniqueness validation.
+* `:format` as a shorthand for the format validation.
+* `:in` as a shorthand for the inclusion validation.
+* `:length` as a shorthand for the length validation.
+* `:min_length` as a shorthand for the minimum length validation.
+* `:max_length` as a shorthand for the maximum length validation.
 
 ## Accessing Fields
 
@@ -55,7 +62,10 @@ Writing an attribute `attr`:
 
 Reading all attributes:
 
-* `self.attributes`
+* `self.attributes`: returns attributes. `read_attribute()` is used to compute
+  the values.
+* `self.inspectable_attributes`: returns internal attributes used for debugging
+  purposes.
 
 Mass assignment:
 
@@ -65,7 +75,9 @@ Methods lower in the list calls the method directly above it.
 For example, `self[attr]` calls `read_attribute(attr)` which calls `self.attr`.
 
 Note that there is no `attr_protected` method to control mass assignments.
-Sanitize your attributes the Rails4 way with
+When passing raw `params` from Rails controller to NoBrainer, an
+`ActiveModel::ForbiddenAttributesError` is raised.
+`params` must be sanitized with
 [strong parameters](https://github.com/rails/strong_parameters).
 
 ## Overriding attributes
@@ -93,7 +105,8 @@ Keep this in mind when your database does not match your schema.
 
 To assign a default value to a field, you may pass a `default` option.
 You can pass a value or a lambda. The latter will be evaluated at the time of
-the assignment.
+the assignment in the context of the document, which is useful to set
+values depending on other already set attributes.
 
 {% highlight ruby %}
 field :num_friends, :default => 0

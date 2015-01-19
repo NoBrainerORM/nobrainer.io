@@ -38,7 +38,7 @@ The following describes the behavior of `belongs_to` associations:
 
 * `owner.target` looks up the target instance by performing
   `Target.find(owner.target_id)`. The result is cached regardless if the target is found or not.
-* `owner.target=(value)` sets `owner.target_id = value.id`, and cache the value.
+* `owner.target=(value)` sets `owner.target_id = value.id`, and caches the value.
 * `owner.target_id=(value)` sets the foreign key and kills the cache.
 
 NoBrainer will always insert an `after_validation` callback to check that if there
@@ -62,6 +62,9 @@ The following describes the different options `has_many` accepts:
 * `:dependent`: configure the destroy behavior further explained below. Defaults
   to `nil`.
 * `:through`: See the `has_many through` association below.
+* `:scope`: A lambda that evaluates to a criteria which gets applied to the query.
+  This lambda is evaluated in the context of the `Target` class, which means
+  that using named scoped defined on `Target` is possible.
 
 The dependent option tells what to do when destroying an owner that has many
 targets with a `before_destroy` callback. The different dependent values are:
@@ -89,8 +92,8 @@ The following describes the behavior of `has_many` associations:
   which is cached. This means that you will always get the same instance of
   criteria on a given instance, which will cache enumerated documents.
 
-The presence the cache has some significant implications, illustrated with the
-following example. You can read more about the caching behavior in the [caching
+`has_many` associations leverage the cache, illustrated with the following
+example. You can read more about the caching behavior in the [caching
 section](/docs/caching).
 
 {% highlight ruby %}

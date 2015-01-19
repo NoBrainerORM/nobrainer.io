@@ -17,6 +17,7 @@ The following example demonstrates how to specify field types:
 {% highlight ruby %}
 class User
   field :name,         :type => String
+  field :biography,    :type => Text
   field :verified,     :type => Boolean
   field :age,          :type => Integer
   field :last_seen_at, :type => Time
@@ -26,6 +27,7 @@ end
 The following types are currently supported:
 
 * `String`
+* `Text`
 * `Integer`
 * `Float`
 * `Boolean`
@@ -33,9 +35,9 @@ The following types are currently supported:
 * `Time`
 * `Date`
 * `Binary`
-
-In the future, user defined types will be supported, to allow features such as
-embedded documents.
+* `Geo::Point`
+* `Array`
+* `Hash`
 
 ## Model Behavior
 
@@ -80,15 +82,17 @@ User.where(:age => "30").first # returns the user
 User.where(:age => "30xx").first # raises an InvalidType error
 {% endhighlight %}
 
-## Safe Casting
-
-NoBrainer performs safe casting for the following types:
+## Types
 
 ### String
 
-* Strings are accepted.
+* Strings with less than 255 characters are accepted. This length limit is
+  configurable with `config.max_string_length`.
 * Symbols are accepted.
-* Any other value is ignored, and a validation error is added.
+
+### Text
+
+* Strings are accepted.
 
 ### Integer
 
@@ -97,7 +101,28 @@ NoBrainer performs safe casting for the following types:
   converted back to the original stripped string. For example, `" -4  "`
   and `"+3"` are valid, but `"4f"` or `""` are not.
 * Floats are accepted when their values matches exactly an integer.
-* Any other value is ignored, and a validation error is added.
+
+### Float
+
+* Floats are accepted.
+* Integers are accepted.
+* Strings are converted to floats only when the resulting integer can be
+  converted back to the original stripped string, excluding leading `0`'s.
+  Be aware that the current mechanism assume that the decimal separator is
+  `"."'`. No localization is performed, meaning that using `","` as a decimal
+  separator will not work.
+
+### Boolean
+
+* `true` and `false` are accepted.
+* Strings are accepted with the following rules: the lowercase stripped value
+  must either be `true`, `yes`, `t`, `1` or `false`, `no`, `f`, `0`.
+* `1` and `0` integers are accepted.
+
+### Symbols
+
+* Symbols are accepted.
+* Non empty strings are accepted. The cast operation is `value.strip.to_sym`.
 
 ### Time
 
@@ -105,11 +130,12 @@ NoBrainer performs safe casting for the following types:
 * Dates are not accepted.
 * Strings in the ISO 8601 combined date and time format are accepted.
   For example `"2007-04-05T14:30Z"` or `"2007-04-05T12:30-02:00"`.
-* Any other value is ignored, and a validation error is added.
 
 Note that NoBrainer can be configured with `user_timezone` and `db_timezone` to
 specify how timezones should be handled. Read more in the
 [Configuration](/docs/configuration) section to learn more.
+
+Read more about `Time` at the bottom of this page.
 
 ### Date
 
@@ -121,36 +147,30 @@ specify how timezones should be handled. Read more in the
 Note that Dates are persisted in the database as UTC times. This is an important
 consideration when querying dates due to time millisecond precision.
 
+Read more about `Date` at the bottom of this page.
+
+### Binary
+
+* Binaries are accepted.
+* Strings are accepted.
+
+### Geo::Point
+
+* Geo::Point are accepted.
+* Pairs of floats: `[longitude, latitude]`.
+* Hashes `{:longitude => long, :latitude => lat}` or `{:long => long, :lat => lat}`.
+
+### Array
+
+* Arrays containing any types are accepted.
+
+### Hash
+
+* Hashes containing any types are accepted.
+
 ### DateTime
 
 * Use the `Time` type instead. Read more below.
-
-### Float
-
-* Floats are accepted.
-* Strings are converted to floats only when the resulting integer can be
-  converted back to the original stripped string, excluding leading `0`'s.
-  Be aware that the current mechanism assume that the decimal separator is
-  `"."'`. No localization is performed, meaning that using `","` as a decimal
-  separator will not work.
-* Integers are accepted.
-* Any other value is ignored, and a validation error is added.
-
-### Boolean
-
-* Booleans are accepted.
-* Strings are accepted with the following rules: the lowercase stripped value
-  must either be `true`, `yes`, `t`, `1` or `false`, `no`, `f`, `0`.
-* `1` and `0` integers are accepted.
-* Any other value is ignored, and a validation error is added.
-
-### Symbols
-
-* Symbols are accepted.
-* Non empty strings are accepted. The cast operation is `value.strip.to_sym`.
-* Any other value is ignored, and a validation error is added.
-
-Other types are directly passed to the database driver unless custom behavior is provided.
 
 ## Custom Types
 
@@ -171,7 +191,8 @@ class Point < Struct.new(:x, :y)
     end
   end
 
-  # This class method translates the given value to a compatible RethinkDB type value.
+  # This class method translates the given value to a compatible
+  # RethinkDB type value.
   # It is used when writing to the database, for example saving a model.
   def self.nobrainer_cast_model_to_db(value)
     {'x' => value.x, 'y' => value.y}
@@ -220,9 +241,6 @@ converstion if needed.
 You can also subclass the `Time` class, add the casting method, and call it
 `ChronicTime`.  The chronic time casting will only be performed if you use the
 `ChronicTime` type instead of the `Time` type.
-
-
----
 
 ## Date/Time Notes
 

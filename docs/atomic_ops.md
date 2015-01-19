@@ -2,7 +2,7 @@
 layout: docs
 title: Atomic Operations
 prev_section: rql_layer
-next_section: indexes
+next_section: distributed_locks
 permalink: /atomic_ops/
 ---
 

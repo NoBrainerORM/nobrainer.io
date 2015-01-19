@@ -67,6 +67,10 @@ Model.unscoped.count # returns all models
 Model.unscoped.scoped.count # returns active models
 {% endhighlight %}
 
+Note that many default scopes can be declared. All of them are applied, in the
+order of declaration. This can come in handy when using polymorphic models with
+different default scopes declared in parents and subclasses.
+
 Default scopes are applied at the beginning of the chain when building a query.
 The following example illustrates this fact:
 

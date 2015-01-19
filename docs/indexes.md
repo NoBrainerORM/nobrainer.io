@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Indexes
-prev_section: atomic_ops
+prev_section: distributed_locks
 next_section: management
 permalink: /indexes/
 ---
@@ -66,7 +66,7 @@ leverage indexes to compile efficient queries implicitly. For example:
 author.posts.each { }
 
 # Also use the author_id index with a get_all query
-Author.preload(:posts).first
+Author.eager_load(:posts).first
 
 # Also use the author_id index with a get_all query
 Post.where(:author_id.in => [1,2,3]).each { }

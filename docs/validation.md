@@ -30,15 +30,18 @@ There are six ways to declare validations with NoBrainer:
 
 ### required
 
-You may use the `required` shorthand to specify a presence validator:
+You may use the `required` shorthand to specify a presence validator, except
+with `Boolean` types for which a `not_null` validator is used instead.
 
 {% highlight ruby %}
 class Model
   field :name, :required => true
+  field :admin, :type => Boolean, :required => true
 end
 # Equivalent to:
 class Model
   field :name, :validates => { :presence => true }
+  field :admin, :type => Boolean, :validates => { :not_null => true }
 end
 {% endhighlight %}
 
@@ -84,6 +87,24 @@ class Model
 end
 {% endhighlight %}
 
+### length/min_lenght/max_length
+
+You may use the `format` shorthand to specify a format validator:
+
+{% highlight ruby %}
+class Model
+  field :field1, :length => (3..5)
+  field :field2, :min_length => 4
+  field :field3, :max_length => 10
+end
+# Equivalent to:
+class Model
+  field :field1, :validates => { :lenght => (3..5) }
+  field :field2, :validates => { :lenght => { :minimum => 4 } }
+  field :field3, :validates => { :lenght => { :maximum => 10 } }
+end
+{% endhighlight %}
+
 ## When are validations performed?
 
 ### Validations are performed on:
@@ -99,19 +120,19 @@ If you want to bypass validations, you may pass the `:validate => false` option
 to these methods, which can be quite handy in a development console. Do not use
 such thing in your actual code.
 
-The bang versions follow the same semantics of ActiveRecord which is to raise
-when validation fails. NoBrainer raises a `NoBrainer::Error::DocumentInvalid`
+The non `?` version of these methods raise a `NoBrainer::Error::DocumentInvalid`
 exception when validation fails. If left uncaught in a Rails controller, a 422
 status code will be returned.
-The non bang versions populate the errors array attached to the instance.
-`save()` and `update()` return true or false depending if the validations
-failed, while `create` returns the instance with an non empty `errors`
-attribute.
+The `?` versions populate the errors array attached to the instance.
+`save?()` and `update?()` return true or false depending if the validations
+failed.
 
 ### Validations are *not* performed on:
 
-Validations are not performed when updating all documents matching a criteria,
-such as `Model.update_all()`.
+* Validations are not performed when updating all documents matching a criteria,
+  such as `Model.update_all()`.
+* Attribute validations are not run when their corresponding attribute have
+  not changed (through [dirty tracking](/docs/dirty_tracking)).
 
 ## Presence Validations on belongs\_to Associations
 
@@ -154,6 +175,9 @@ table wide.
 For performance reasons, NoBrainer only performs uniqueness validations when the involved
 fields change.
 
+The uniqueness validator uses distributed locks to ensure race-free semantics.
+Read more about this in the [Distributed Lock](/docs/types) section.
+
 ### Using scopes
 
 The uniqueness validator accept a `:scope` option which can be a field, or an
@@ -170,60 +194,6 @@ end
 It is highly recommended that you add a presence validator on the scoped fields,
 because RethinkDB considers `nil` and `undefined` to be two different things.
 
-### Race Free Uniqueness Validations
-
-When working with traditional ORMs, the uniqueness validator is known to be
-racy: two concurrent requests may both pass the validation, and both could
-persist successfully the same supposedly unique field.
-Uniqueness validators are useful in conjunction with unique secondary indexes.
-Since RethinkDB is a sharded database, implementing unique
-secondary indexes is a performance problem, and so the RethinkDB team rightfully
-decided not to implement them. To really ensure uniqueness, one must either
-leverage the primary key uniqueness guarantee, or use a distributed lock.
-
-NoBrainer can be configured to use distributed locks to perform non-racy uniqueness
-validations. This mechanism is enabled by providing a *`Lock`* class through the
-`distributed_lock_class` setting when configuring NoBrainer.
-You may use any lock service such as Redis or ZooKeeper by providing a `Lock`
-class that complies to the following API:
-
-{% highlight ruby %}
-class Lock
-  # The initializer must accept a key argument as a String.
-  # The key follow the following format:
-  #   "nobrainer:database_name:table_name:field_name:field_value"
-  # Example: "nobrainer:production:users:username:nico"
-  def initialize(key)
-  end
-
-  # Acquires a lock on @key. Returns nothing. May raise exceptions.
-  def lock
-  end
-
-  # Releases the lock on @key. Returns nothing. May raise exceptions.
-  def unlock
-  end
-end
-{% endhighlight %}
-
-The following shows an example of using [Redis](http://redis.io/) and the
-[robust-redis-lock](https://github.com/crowdtap/robust-redis-lock) gem
-to provide non-racy uniqueness validations:
-
-{% highlight ruby %}
-require 'robust-redis-lock'
-Redis::Lock.redis = Redis.new(:url => 'redis://localhost')
-
-NoBrainer.configure do |config|
-  config.distributed_lock_class = Redis::Lock
-end
-{% endhighlight %}
-
-The locks are acquired after the `before_create/update` callbacks, and before
-the `after_create/update` callbacks.
-NoBrainer alpha sorts the keys to be acquired to avoid deadlock issues when
-performing multiple uniqueness validations on the same document.
-
 ## Differences with ActiveModel
 
 ### Associated Validator
@@ -234,3 +204,8 @@ The associated validator is not implemented.
 
 The uniqueness validator does not accept the `:case_sensitive` option.
 Downcasing the attribute in a `before_save/validation` callback is a better idea.
+
+### NotNull Validator
+
+NoBrainer supports an additional validator `not_null`. It rejects undefined and
+nil values.

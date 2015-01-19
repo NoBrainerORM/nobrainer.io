@@ -48,16 +48,6 @@ NoBrainer.configure do |config|
   # You can turn off the warning if you want to use both.
   # config.warn_on_active_record = true
 
-  # auto_create_databases allows NoBrainer to create databases on demand.
-  # This behavior is similar to MongoDB.
-  # config.auto_create_databases = true
-
-  # auto_create_tables allows NoBrainer to create tables on demand.
-  # This behavior is similar to MongoDB.
-  # Note that this will not auto create indexes for you.
-  # You still need to run `rake nobrainer:sync_indexes` to create the indexes.
-  # config.auto_create_tables = true
-
   # When the network connection is lost, NoBrainer can retry running a given
   # query a few times before giving up. Note that this can be a problem with
   # non idempotent write queries such as increments.
@@ -70,6 +60,10 @@ NoBrainer.configure do |config|
   # The default is :soft for development or test environment, otherwise :hard.
   # config.durability = config.default_durability
 
+  # Persisted Strings have a configurable maximum length. To get rid of the
+  # length validation, you may use the Text type instead.
+  # config.max_string_length = 255
+
   # user_timezone can be configured with :utc, :local, or :unchanged.
   # When reading an attribute from a model which type is Time, the timezone
   # of that time is translated according to this setting.
@@ -80,9 +74,15 @@ NoBrainer.configure do |config|
   # translated according to this setting.
   # config.db_timezone = :utc
 
+  # Default options used when compiling geo queries.
+  # config.geo_options => { :geo_system => 'WGS84', :unit => 'm' }
+
   # Configures which mechanism to use in order to perform non-racy uniqueness
-  # validations. Read more about this behavior in the validation section.
-  # config.distributed_lock_class = nil
+  # validations. More about this behavior in the Distributed Locks section.
+  # config.distributed_lock_class = NoBrainer::Lock
+
+  # Configures the default timing lock options.
+  # config.lock_options = { :expire => 60, :timeout => 10 }
 
   # Instead of using a single connection to the database, You can tell
   # NoBrainer to spin up a new connection for each thread. This is
@@ -91,6 +91,18 @@ NoBrainer.configure do |config|
   # a resource leak, and you will run out of connections.
   # Note that this is solution is temporary, until we get a connection pool.
   # config.per_thread_connection = false
+
+  # The machine id is used to generate primary keys. The default one is seeded
+  # with the machine IP with Socket.gethostname.
+  # The env variable MACHINE_ID can also be used to set the machine id.
+  # When using distinct machine_id, then primary keys are guaranteed to be
+  # generated without conflicts.
+  # config.machine_id = config.default_machine_id
+
+  # Criteria cache elements. For example, the result of a has_many association
+  # is cached. The per criteria cache is disabled if it grows too big to avoid
+  # out of memory issues.
+  # config.criteria_cache_max_entries = 10_000
 end
 {% endhighlight %}
 

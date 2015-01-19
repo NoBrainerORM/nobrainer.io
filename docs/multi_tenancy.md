@@ -35,7 +35,7 @@ criteria = NoBrainer.with_database('client1') { Project.all }
 criteria.first # Will not read the client1 projects.
 {% endhighlight %}
 
-The `with_database()` takes effect only when a RQL query is executed.
+The `with_database()` clause takes effect only when a RQL query is executed.
 Criteria are not aware of such multi tenancy features, and will behave
 as expected with respect to caching. For example:
 

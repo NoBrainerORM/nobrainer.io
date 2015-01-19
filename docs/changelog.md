@@ -6,9 +6,8 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.21.0 -- Jan. 19, 2015
 
-* Added `raw_attributes` for debugging purposes.
 * Regexp matches now support `/i` and `/m` properly:
   [#120](https://github.com/nviennot/nobrainer/issues/120).
 * `required => true` validation shorthand uses the presence validator except for
@@ -47,6 +46,7 @@ permalink: /changelog/
 * Atomic operations use sane default values.
 * Allow atomic values to be read, it's easier for debugging and callbacks handlers.
 * Detect potential miseuses with `:or` arguments (`[{...},{...}]` vs `[...,...]`).
+  Using `:_or` does not check these misuses.
 * Added a `:length` validation shorthand on field definitions.
 * Added the not null validator. `validates_not_null :field` or `validates :field, :not_null`
   can be used to validates non null values.

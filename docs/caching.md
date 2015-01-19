@@ -42,7 +42,7 @@ criteria.first       # Calls the database again and returns nothing.
 
 Chaining a criteria always returns a new instance. For example
 `criteria.limit(10000)` will return a new criteria instance with an empty cache.
-Nevertheless, chaining `preload()` will carry the cache over when present,
+Nevertheless, chaining `eager_load()` will carry the cache over when present,
 and will eager load missing documents on top of the existing caches.
 
 Calling `first` or `count` repeatedly on the same criteria without having
@@ -52,17 +52,8 @@ If you do not want to use the cache, you can chain `without_cache` in the
 criteria. This will ensure to never use the cache on that criteria. You may
 chain `with_cache` to turn it back on.
 
-An important consideration to keep in mind is to turn off caching when iterating
-very large tables as each document would get stashed in the cache.  Your program
-will start consuming all the memory and die. Example:
-
-{% highlight ruby %}
-1_000_000_000.times { Model.create }
-Model.each { ... } # bad
-Model.without_cache.each { ... } # better
-{% endhighlight %}
-
-NoBrainer caching logic is simple, and does not provide any other features than
-described making it predictable. You may look at the `has_many` example that
-shows the caching layer in action in the [Associations](/docs/associations)
-section.
+When iterating a criteria, its cache can be automatically turned off when it
+grows too big, which may happen when iterating very large tables.
+When a cache reaches 10,000 elements (configurable with
+`config.criteria_cache_max_entries`), the cache is flushed and disabled to
+prevent out of memory issues.
