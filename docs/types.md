@@ -37,6 +37,7 @@ The following types are currently supported:
 * `Binary`
 * `Geo::Point`
 * `Array`
+* `Set`
 * `Hash`
 
 ## Model Behavior
@@ -163,6 +164,10 @@ Read more about `Date` at the bottom of this page.
 ### Array
 
 * Arrays containing any types are accepted.
+
+### Set
+
+* Sets and Arrays containing any types are accepted.
 
 ### Hash
 

@@ -91,6 +91,9 @@ The following describes the behavior of `has_many` associations:
 * `instance.targets` returns the criteria `Target.where(foreign_key => owner.id)`,
   which is cached. This means that you will always get the same instance of
   criteria on a given instance, which will cache enumerated documents.
+  When a custom `:scope` is defined, the custom scope is evaluated in the
+  context of `Target` and added to the criteria. Note that using `unscoped` has
+  no effect on the custom scope.
 
 `has_many` associations leverage the cache, illustrated with the following
 example. You can read more about the caching behavior in the [caching

@@ -83,6 +83,8 @@ Model.each { } # ordered by created_at
 Model.unscoped.order_by(:id).scoped.each { } # ordered by ids, even though scoped is called after
 {% endhighlight %}
 
+The `unscoped` keyword has no effect on `has_many` associations have a custom `:scope` defined.
+
 Unlike the ActiveRecord behavior, `where()` filters in default scopes are not overridable.
 For example, consider a Model with a default scope of `where(:active => true)`.
 With ActiveRecord, `Model.where(:active => false)` will yield all inactive
