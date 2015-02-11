@@ -58,7 +58,6 @@ class NoBrainer::Lock
 end
 {% endhighlight %}
 
-The uniqueness validator needs to use a V
 This mechanism is used internally by the uniqueness validator to prevent races.
 
 ## Usage example
