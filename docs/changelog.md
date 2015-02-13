@@ -6,6 +6,11 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* `find_by()` introduced [#127](https://github.com/nviennot/nobrainer/issues/127).
+* `find()` no longer applies `unscoped`.
+
 ### 0.21.0 -- Jan. 19, 2015
 
 * Regexp matches now support `/i` and `/m` properly:
