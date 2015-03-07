@@ -69,7 +69,18 @@ Model.unscoped.scoped.count # returns active models
 
 Note that many default scopes can be declared. All of them are applied, in the
 order of declaration. This can come in handy when using polymorphic models with
-different default scopes declared in parents and subclasses.
+different default scopes declared in parents and subclasses. Example:
+
+{% highlight ruby %}
+class Parent
+  default_scope { order_by(:created_at) }
+  default_scope { where(:active => true) }
+end
+
+class Child < Parent
+  default_scope { where(:created_by => :admin) }
+end
+{% endhighlight %}
 
 Default scopes are applied at the beginning of the chain when building a query.
 The following example illustrates this fact:
@@ -102,5 +113,4 @@ NoBrainer will not use the default scopes in the following cases:
    For example, upon destroy, NoBrainer will perform a `Stuff.unscoped.destroy_all`.
 2. When using `validates_uniqueness_of :some_field`, NoBrainer will not use the
    default scope to find any duplicates of `some_field`.
-3. When using `find()` or `find?()`.
 4. When using `belongs_to` associations.

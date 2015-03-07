@@ -287,12 +287,14 @@ The bang flavors raise a `NoBrainer::Error::DocumentNotFound` exception if not f
 instead of returning `nil`.  If left uncaught in a Rails controller, a 404
 status code is returned.
 
-### find()
+### find(), find_by()
 
-* `Model.find(id)` is equivalent to `Model.unscoped.where(:id => id).first!`.
-* `Model.find?(id)` is equivalent to `Model.unscoped.where(:id => id).first`.
+* `Model.find(id)` is equivalent to `Model.where(:id => id).first!`.
+* `Model.find?(id)` is equivalent to `Model.where(:id => id).first`.
+* `Model.find_by(p)` is equivalent to `Model.where(p).first!`.
+* `Model.find_by?(p)` is equivalent to `Model.where(p).first`.
 
-Note that `find()` is only defined on the `Model` class, and not on criteria.
+Note that default scopes still apply.
 
 ---
 

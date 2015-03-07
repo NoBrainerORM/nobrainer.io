@@ -6,10 +6,12 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.22.0 -- Mar. 7, 2015
 
 * `find_by()` introduced [#127](https://github.com/nviennot/nobrainer/issues/127).
 * `find()` no longer applies `unscoped`.
+* `store_in` accepts symbols.
+* Bug fix: NoBrainer considered all validated attributes to be DB fields.
 
 ### 0.21.0 -- Jan. 19, 2015
 
