@@ -6,6 +6,11 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Bug fix: Associations properly support custom primary keys
+  [#132](https://github.com/nviennot/nobrainer/issues/132).
+
 ### 0.22.0 -- Mar. 7, 2015
 
 * `find_by()` introduced [#127](https://github.com/nviennot/nobrainer/issues/127).

@@ -24,8 +24,8 @@ and the target refers to the other side of the association.
 The `belongs_to` syntax is the following: `belongs_to :target, options`
 
 The following describes the different options `belongs_to` accepts:
-* `:primary_key`: the primary key to use on the target. Defaults to its primary key.
-* `:foreign_key`: the foreign key to use. Defaults to `:target_id`.
+* `:primary_key`: the primary key to use on the target. Defaults to the target's primary key.
+* `:foreign_key`: the foreign key to use. Defaults to `#{target_name}_#{primary_key}`.
 * `:foreign_key_as`: the alias for the foreign key. Defaults to `nil`.
 * `:class_name`: the target class name. Defaults to `Target`.
 * `:index`: when true, the foreign key field gets an index declared to speed to
@@ -37,9 +37,9 @@ The following describes the different options `belongs_to` accepts:
 The following describes the behavior of `belongs_to` associations:
 
 * `owner.target` looks up the target instance by performing
-  `Target.find(owner.target_id)`. The result is cached regardless if the target is found or not.
-* `owner.target=(value)` sets `owner.target_id = value.id`, and caches the value.
-* `owner.target_id=(value)` sets the foreign key and kills the cache.
+  `Target.find(owner.foreign_key)`. The result is cached regardless if the target is found or not.
+* `owner.target=(value)` sets `owner.foreign_key = value.primary_key`, and caches the value.
+* `owner.foreign_key=(value)` sets the foreign key and kills the target cache.
 
 NoBrainer will always insert an `after_validation` callback to check that if there
 is a target set, then it must be `persisted?`. If the target is not persisted,
@@ -56,8 +56,8 @@ associations in the [validations section](/docs/validations#presence_validations
 The `has_many` syntax is the following: `has_many :targets, options`
 
 The following describes the different options `has_many` accepts:
-* `:primary_key`: the primary key to use. Defaults to the primary key.
-* `:foreign_key`: the foreign key that the targets use. Defaults to `owner_id`.
+* `:primary_key`: the primary key to use. Defaults to the owner's primary key.
+* `:foreign_key`: the foreign key that the targets use. Defaults to `#{owner_name}_#{primary_key}`.
 * `:class_name`: the targets class name. Defaults to `Target`.
 * `:dependent`: configure the destroy behavior further explained below. Defaults
   to `nil`.
@@ -88,7 +88,7 @@ The following describes the behavior of `has_many` associations:
   matching `belongs_to` associations to `instance`, with or without eager
   loading.
 
-* `instance.targets` returns the criteria `Target.where(foreign_key => owner.id)`,
+* `instance.targets` returns the criteria `Target.where(foreign_key => owner.primary_key)`,
   which is cached. This means that you will always get the same instance of
   criteria on a given instance, which will cache enumerated documents.
   When a custom `:scope` is defined, the custom scope is evaluated in the
