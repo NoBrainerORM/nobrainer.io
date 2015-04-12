@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Added a modular profiler, which feeds the logger and the rails controller runtime instrumentation.
+* Validation of foreign keys in `belongs_to` associations are always validated: [#133](https://github.com/nviennot/nobrainer/issues/133).
 * Bug fix: Associations properly support custom primary keys
   [#132](https://github.com/nviennot/nobrainer/issues/132).
 
