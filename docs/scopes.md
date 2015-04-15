@@ -25,7 +25,7 @@ whatever you pass as a block. Example:
 
 {% highlight ruby %}
 class Model
-  scope :active { where(:active => true }
+  scope(:active) { where(:active => true }
 end
 {% endhighlight %}
 
