@@ -8,8 +8,12 @@ permalink: /changelog/
 
 ### git HEAD
 
-* Added a modular profiler, which feeds the logger and the rails controller runtime instrumentation.
-* Validation of foreign keys in `belongs_to` associations are always validated: [#133](https://github.com/nviennot/nobrainer/issues/133).
+* Upgraded to RethinkDB 2.0.
+* Bug fix: `criteria.to_json` was triggering a stack overflow [#134](https://github.com/nviennot/nobrainer/issues/134).
+* Added a modular profiler, which feeds the logger and the rails controller runtime instrumentation
+  [#130](https://github.com/nviennot/nobrainer/issues/130).
+* Validation of foreign keys in `belongs_to` associations are always validated
+  [#133](https://github.com/nviennot/nobrainer/issues/133).
 * Bug fix: Associations properly support custom primary keys
   [#132](https://github.com/nviennot/nobrainer/issues/132).
 
