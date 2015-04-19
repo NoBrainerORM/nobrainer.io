@@ -6,7 +6,7 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.23.0 -- Apr. 18, 2015
 
 * Upgraded to RethinkDB 2.0.
 * Bug fix: `criteria.to_json` was triggering a stack overflow [#134](https://github.com/nviennot/nobrainer/issues/134).
