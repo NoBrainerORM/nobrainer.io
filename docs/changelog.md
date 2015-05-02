@@ -6,6 +6,14 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Forbid a belongs_to's foreign_key to conflict with another belongs_to's foreign_key.
+* Allow to find associations with classes within same module
+  [#136](https://github.com/nviennot/nobrainer/issues/136).
+* Make `criteria.run` private
+  [#139](https://github.com/nviennot/nobrainer/issues/139).
+
 ### 0.23.0 -- Apr. 18, 2015
 
 * Upgraded to RethinkDB 2.0.

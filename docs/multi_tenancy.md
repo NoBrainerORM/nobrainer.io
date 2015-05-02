@@ -109,12 +109,11 @@ the RQL query as explained earlier.
 ## Managing Databases
 
 NoBrainer does not automatically create indexes when auto creating a database
-or table. Therefore, it might be useful to disable this feature by setting
-`config.auto_create_databases` and `config.auto_create_tables` to `false`
-and managing your databases yourself.
-
-To create the indexes on a custom database, you may use the following:
+or table. To create the indexes on a custom database, you may use the following:
 
 {% highlight ruby %}
-NoBrainer.with_database('db_name') { NoBrainer.update_indexes }
+NoBrainer.with_database('db_name') { NoBrainer.sync_indexes }
 {% endhighlight %}
+
+Make sure all your models are loaded before calling `sync_indexes` if you are
+not using Rails.
