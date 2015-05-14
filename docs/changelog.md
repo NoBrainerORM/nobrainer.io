@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Allow `Model.where(:field.in => [])` to return an empty array
+  [#144](https://github.com/nviennot/nobrainer/issues/144).
 * Forbid a belongs_to's foreign_key to conflict with another belongs_to's foreign_key.
 * Allow to find associations with classes within same module
   [#136](https://github.com/nviennot/nobrainer/issues/136).
