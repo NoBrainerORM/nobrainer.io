@@ -44,8 +44,6 @@ to avoid programming mistakes. If you knwo what you are doing, you may use `:_or
 * `:attr.eq => /regexp/` evaluates to true when `attr` matches the regular expression.
 * `:attr.eq => (min..max)` evaluates to true when `attr` is between the range.
 * `:attr.eq => value` evaluates to true when `attr` is equal to `value`.
-* `:attr.not => value` evaluates to `:attr.ne => value`.
-* `:attr.ne => value` evaluates to `:not => {:attr.eq => value}`.
 * `:attr.gt => value` evaluates to true when `attr` is greater than `value`.
 * `:attr.ge => value` evaluates to true when `attr` is greater than or equal to `value`.
 * `:attr.gte => value` evaluates to `:attr.ge => value`
@@ -57,12 +55,12 @@ to avoid programming mistakes. If you knwo what you are doing, you may use `:_or
 * `:attr.defined => false` evaluates to true when `attr` is undefined.
 * `:attr.near => value` evaluates to true when `attr` is near `value`.
 * `:attr.intersects => value` evaluates to true when `attr` intersects `value`.
-* `:attr.any => value` evalues to true when any of the `attr` values are equal to `value`.
-* `:attr.all => value` evalues to true when all of the `attr` values are equal to `value`.
-* `:attr.not => value` evalues to true when the `attr` value is not equal to `value`.
 * `:attr.any.op => value` evalues to true when any of the `attr` values match `value` with `op`.
 * `:attr.all.op => value` evalues to true when all of the `attr` values match `value` with `op`.
 * `:attr.not.op => value` evalues to true when the `attr` value does not match `value` with `op`.
+* `:attr.any => value` evalues to `:attr.any.eq => value`.
+* `:attr.all => value` evalues to `:attr.all.eq => value`.
+* `:attr.not => value` evalues to `:attr.not.eq => value`.
 * `lambda { |doc| rql_expression(doc) }` evaluates the RQL expression.
 
 A couple of notes:

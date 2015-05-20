@@ -9,10 +9,10 @@ permalink: /changelog/
 ### 0.24.0 -- May. 20, 2015
 
 * `save`/`update`/`create` no longer raises on failed validations.
-  We are back the original ActiveRecord behavior.
+  We are back to the original ActiveRecord behavior
   [#141](https://github.com/nviennot/nobrainer/issues/141).
 * Validations are now performed before calling the `before_save` callbacks.
-  We are back the original ActiveRecord behavior
+  We are back to the original ActiveRecord behavior
   [#142](https://github.com/nviennot/nobrainer/issues/142).
 * Allow circles to be used in `where(:field.near => circle)` queries.
 * Enforce valid fields in `order_by()`.
