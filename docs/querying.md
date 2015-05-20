@@ -53,15 +53,16 @@ to avoid programming mistakes. If you knwo what you are doing, you may use `:_or
 * `:attr.le => value` evaluates to true when `attr` is less than or equal to `value`.
 * `:attr.lte => value` evaluates to `:attr.le => value`.
 * `:attr.in => [value1,...,valueN]` evaluates to true when `attr` is in the specified array.
-* `:attr.nin => values` evaluates to `:not => {:attr.in => values}`.
 * `:attr.defined => true` evaluates to true when `attr` is defined.
 * `:attr.defined => false` evaluates to true when `attr` is undefined.
-* `:attr.near => geo_value` evaluates to true when `attr` is near `geo_value`.
-* `:attr.intersects => geo_value` evaluates to true when `attr` intersects `geo_value`.
+* `:attr.near => value` evaluates to true when `attr` is near `value`.
+* `:attr.intersects => value` evaluates to true when `attr` intersects `value`.
 * `:attr.any => value` evalues to true when any of the `attr` values are equal to `value`.
 * `:attr.all => value` evalues to true when all of the `attr` values are equal to `value`.
+* `:attr.not => value` evalues to true when the `attr` value is not equal to `value`.
 * `:attr.any.op => value` evalues to true when any of the `attr` values match `value` with `op`.
 * `:attr.all.op => value` evalues to true when all of the `attr` values match `value` with `op`.
+* `:attr.not.op => value` evalues to true when the `attr` value does not match `value` with `op`.
 * `lambda { |doc| rql_expression(doc) }` evaluates the RQL expression.
 
 A couple of notes:
@@ -97,6 +98,20 @@ Model.where(:or => [->(doc) { doc[:field1] < doc[:field2] },
      .where(:field4 => /ohai/, :field5.any.gt(4))
 
 {% endhighlight %}
+
+---
+
+### Geo queries
+
+* `where(:field.near => circle)` returns documents which `field` is within
+  `circle`.  The `circle` must be coercible to a `NoBrainer::Geo::Circle`
+  (c.f. [types](http://nobrainer.io/docs/types/#geocircle)).
+  You may pass an additional option `:max_results` when leveraging indexes with
+  [`r.get_nearest`](http://www.rethinkdb.com/api/ruby/get_nearest/).
+
+* `where(:field.intersects => shape)` returns documents which `field` intersects
+  `shape`. The `shape` can be a or `NoBrainer::Geo::Circle`, `NoBrainer::Geo::Polygon`.
+
 
 ---
 

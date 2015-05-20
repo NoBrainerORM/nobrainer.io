@@ -197,6 +197,9 @@ NoBrainer does not translate aliases with user provided RQL code.
 A simple index declared on an aliased field carries the name of alias in the database,
 unless specified otherwise by an `:store_as` option on the index.
 
+Warning: aliases are not applied when passing raw RQL to NoBrainer, for example
+in lambda expressions.
+
 ## Lazy Fetching
 
 Some fields can have large content size, for example binary fields.

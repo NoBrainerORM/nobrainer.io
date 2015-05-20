@@ -35,10 +35,13 @@ The following types are currently supported:
 * `Time`
 * `Date`
 * `Binary`
-* `Geo::Point`
 * `Array`
 * `Set`
 * `Hash`
+* `Geo::Point`
+* `Geo::Circle`
+* `Geo::Polygon`
+* `Geo::LineString`
 
 ## Model Behavior
 
@@ -155,12 +158,6 @@ Read more about `Date` at the bottom of this page.
 * Binaries are accepted.
 * Strings are accepted.
 
-### Geo::Point
-
-* Geo::Point are accepted.
-* Pairs of floats: `[longitude, latitude]`.
-* Hashes `{:longitude => long, :latitude => lat}` or `{:long => long, :lat => lat}`.
-
 ### Array
 
 * Arrays containing any types are accepted.
@@ -172,6 +169,32 @@ Read more about `Date` at the bottom of this page.
 ### Hash
 
 * Hashes containing any types are accepted.
+
+### Geo::Point
+
+* Geo::Point are accepted.
+* Pairs of floats: `[longitude, latitude]`.
+* Hashes `{:longitude => long, :latitude => lat}` or `{:long => long, :lat => lat}`.
+
+### Geo::Circle
+
+* Geo::Circle are accepted.
+* Pairs of `[center, radius]` where `center` can coerce to a `Geo::Point` and
+  `radius` to a Float.
+* Hash `{:center => center, :radius => radius}`.
+
+Additionally, you may pass options as specified in the
+[`r.circle`](http://www.rethinkdb.com/api/ruby/circle/) documentation.
+
+### Geo::Polygon
+
+* Geo::Polygon are accepted
+* Accepts an array of values coercible to a `Geo::Point`.
+
+### Geo::LineString
+
+* Geo::LineString are accepted
+* Accepts an array of values coercible to a `Geo::Point`.
 
 ### DateTime
 

@@ -18,6 +18,12 @@ NoBrainer.
 If devise does not work, make sure that your `config/initializers/devise.rb` file
 contains `require 'devise/orm/nobrainer'`.
 
+## CarrierWave
+
+[carrierwave-nobrainer](https://github.com/nviennot/carrierwave-nobrainer) is an
+adapter for [CarrierWave](https://github.com/carrierwaveuploader/carrierwave/).
+CarrierWave associate uploaded files to models.
+
 ## Awesome Print
 
 [awesome_print](https://github.com/michaeldv/awesome_print) pretty prints objects.

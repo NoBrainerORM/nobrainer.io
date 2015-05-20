@@ -43,12 +43,14 @@ Scopes can accept arguments. Example:
 
 {% highlight ruby %}
 class Model
+  scope(:in_category) { |category| where(:category => category) }
+
   def self.created_before(time)
     where(:created_at.lt => time)
   end
 end
 
-Model.created_before(1.week.ago).count
+Model.in_category('games').created_before(1.week.ago).count
 {% endhighlight %}
 
 ## Default Scopes

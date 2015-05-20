@@ -15,9 +15,10 @@ The following methods are available on the `Model` class:
 * `Model.new(attrs)` instantiate a new Model instance. Default values are set
   and `attrs` is passed to `assign_attributes`.
 * `Model.create(attrs)` calls `Model.new(attrs)` and then `save`.
+* `Model.create!(attrs)` calls `Model.new(attrs)` and then `save!`.
 * `Model.insert_all([doc1, doc2, ..., docN])` is used for bulk inserts. This method
   receives a list of hashes, and will not instantiate any models. Instead it
-  passes the document in bulk to the database to perform efficient writes.
+  passes the documents in bulk to the database to perform efficient writes.
   If the documents primary keys are left unspecified, the database will assign
   default UUIDs and `insert_all` will return the list of generated ids.
   You may use `NoBrainer::Document::Id.generate` to generate MongoDB style ids
@@ -32,12 +33,12 @@ The following predicates are available on a model instance:
 
 The following methods are available on a model instance:
 
-* `save?` returns true if the instance was valid and saved, otherwise false.
-* `save` calls `save?` and raises `NoBrainer::Error::DocumentInvalid` if `save?` returned false.
-* `update?()` calls `assign_attributes()` and `save?`.
+* `save` returns true if the instance was valid and saved, otherwise false.
+* `save?` is an alias for `save`.
+* `save!` calls `save` and raises `NoBrainer::Error::DocumentInvalid` if `save` returned false.
 * `update()` calls `assign_attributes()` and `save`.
-* `update_attributes?()` is an alias of `update?()`.
-* `update_attributes()` is an alias of `update()`.
+* `update?()` is an alias for `update()`.
+* `update!` calls `update` and raises `NoBrainer::Error::DocumentInvalid` if `update` returned false.
 * `delete` removes the document from the database without firing the destroy
   callbacks.
 * `destroy` fires the destroy callbacks and removes the document from the database.
@@ -49,9 +50,9 @@ The following methods are available on a model instance:
   A `NoBrainer::Error::DocumentNotFound` error will be raised if the document
   can no longer be found.
 
-Note that `delete`, `destroy`, or `save?`, `save` during updates do not raise if
-the instance document no longer exists in the database when performing the operation.
-These methods will silently fail.
+Note that `delete`, `destroy`, or `save` during updates do not raise if the
+instance document no longer exists in the database when performing the
+operation.  These methods will silently fail.
 
 NoBrainer never autosaves a model behind the scene. When working with a
 database that does not support transactions such as RethinkDB, you need to be in
@@ -64,6 +65,6 @@ Learn more in the [Querying](/docs/querying) section.
 
 ## Optimized Updates
 
-When using `save` on a model, NoBrainer uses the [dirty tracking](/docs/dirty_tracking)
+When using updating a model, NoBrainer uses the [dirty tracking](/docs/dirty_tracking)
 information to only update the fields that changed. When no attribute changed,
 the database update query is skipped, but all callbacks are still executed.

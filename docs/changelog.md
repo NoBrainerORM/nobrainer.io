@@ -6,11 +6,22 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.24.0 -- May. 20, 2015
 
+* `save`/`update`/`create` no longer raises on failed validations.
+  We are back the original ActiveRecord behavior.
+  [#141](https://github.com/nviennot/nobrainer/issues/141).
+* Validations are now performed before calling the `before_save` callbacks.
+  We are back the original ActiveRecord behavior
+  [#142](https://github.com/nviennot/nobrainer/issues/142).
+* Allow circles to be used in `where(:field.near => circle)` queries.
+* Enforce valid fields in `order_by()`.
+* Allow `.not` to be chainable (e.g. `Model.where(:field.not.in => []`). Removed
+  the `.nin` and `.ne` criteria operators.
 * Allow `Model.where(:field.in => [])` to return an empty array
   [#144](https://github.com/nviennot/nobrainer/issues/144).
-* Forbid a belongs_to's foreign_key to conflict with another belongs_to's foreign_key.
+* Forbid a belongs_to's foreign_key declaration to conflict with another
+  belongs_to's foreign_key.
 * Allow to find associations with classes within same module
   [#136](https://github.com/nviennot/nobrainer/issues/136).
 * Make `criteria.run` private

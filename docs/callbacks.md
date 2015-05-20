@@ -36,16 +36,7 @@ attributes. If your intention is to halt the chain, you can always raise an
 exception, or add an error to the `instance.errors` array in the case of a
 `before_validation` callback.
 
-2. Model validation is performed after the `before_save/create/update` callbacks.
-In other words, model validation is performed right before the data is about
-to be persisted to the database. This decision was made because it became
-a common pattern to use `before_save` callbacks to set attributes instead of
-`before_validation`. It does not make much sense to validate the model data
-before changing it. This behavior has the drawback of having non validated data
-present while running before callbacks.  This downside is not so bad because in
-this case, the persist operation is likely to fail anyway.
-
-3. The `initialize` callbacks are also triggered during `reload`.
+2. The `initialize` callbacks are also triggered during `reload`.
 
 ## Orders of Callbacks
 
@@ -60,11 +51,11 @@ The following describes the order of callbacks:
 
 * When a new document is persisted with save:
 
-  * `before_save`
-  * `before_create`
   * uniqueness validations locks are acquired
   * `before_validation`
   * `after_validation`
+  * `before_save`
+  * `before_create`
   * document is inserted
   * uniqueness validations locks are released
   * `after_create`
@@ -72,11 +63,11 @@ The following describes the order of callbacks:
 
 * When an existing document is updated with save:
 
-  * `before_save`
-  * `before_update`
   * uniqueness validations locks are acquired
   * `before_validation`
   * `after_validation`
+  * `before_save`
+  * `before_update`
   * document is updated
   * uniqueness validations locks are released
   * `after_update`

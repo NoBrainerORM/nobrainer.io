@@ -111,21 +111,23 @@ end
 
 Validations are performed when calling the following methods on an instance:
 * `create`
-* `save?`
+* `create!`
 * `save`
-* `update?`
+* `save!`
 * `update`
+* `update!`
 
 If you want to bypass validations, you may pass the `:validate => false` option
 to these methods, which can be quite handy in a development console. Do not use
 such thing in your actual code.
 
-The non `?` version of these methods raise a `NoBrainer::Error::DocumentInvalid`
+The `!` version of these methods raise a `NoBrainer::Error::DocumentInvalid`
 exception when validation fails. If left uncaught in a Rails controller, a 422
 status code will be returned.
-The `?` versions populate the errors array attached to the instance.
-`save?()` and `update?()` return true or false depending if the validations
-failed.
+The vanilla versions populate the errors array attached to the instance.
+`save()` and `update()` return true or false depending if the validations
+failed. When using `create()`, you may call `persisted?` to check if the
+model was valid and persisted.
 
 ### Validations are *not* performed on:
 
@@ -136,36 +138,17 @@ failed.
 
 ## Presence Validations on belongs\_to Associations
 
-To add a presence validation on a `belongs_to` association, there are two ways.
-You are offered the trade-off between correctness and performance.
+Foreign keys in belongs\_to associations are always validated when the foreign
+key is present. If you wish to disable this behavior, you may pass `validates =>
+false` on the association declaration.
 
-The first way is to add the presence validation on the association:
+Additionally, you may add a presence validator as such:
 
 {% highlight ruby %}
 class Comment
   belongs_to :post, :required => true
 end
 {% endhighlight %}
-
-Adding a presence validation on the association instructs NoBrainer to verify
-that the object pointed by the foreign_key actually exists in the database.
-An extra database read query will be performed if the association is not already
-cached.
-
----
-
-The other way to add a presence validator is to declare it on the foreign key:
-
-{% highlight ruby %}
-class Comment
-  belongs_to :post
-  field :post_id, :required => true
-end
-{% endhighlight %}
-
-By declaring the presence validator on the foreign key, NoBrainer will only
-check that the foreign key contains something. No extra database lookup is
-performed to verify that the foreign key actually points to a valid object.
 
 ## The Uniqueness Validator
 
