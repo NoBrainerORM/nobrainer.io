@@ -36,7 +36,7 @@ declared scope:
 {% highlight ruby %}
 Model.where(:email => /@gmail/).active.count
 # Equivalent to
-Model.where(:email => /@gmail/).where(:active => true }.count
+Model.where(:email => /@gmail/).where(:active => true).count
 {% endhighlight %}
 
 Scopes can accept arguments. Example:

@@ -42,7 +42,7 @@ The following methods are available on a model instance:
 * `delete` removes the document from the database without firing the destroy
   callbacks.
 * `destroy` fires the destroy callbacks and removes the document from the database.
-* `reload` removes any instance variables that the instance may have to nuke any
+* `reload` removes all instance variables that the instance may have, to nuke any
   sort of cache. `reload` then loads a fresh record from the database and
   calls the `initialize()` method, which triggers the `initialize` callbacks.
   You may pass an option `:keep_ivars => true` to prevent `reload` from cleaning

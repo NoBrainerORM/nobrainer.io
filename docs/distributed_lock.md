@@ -84,7 +84,7 @@ NoBrainer can be configured to use distributed locks to perform non-racy uniquen
 validations. This mechanism is enabled by providing a *`Lock`* class through the
 `distributed_lock_class` setting when configuring NoBrainer. The default
 behavior is to use `NoBrainer::Lock`.
-You may use any lock service such as Redis or ZooKeeper by providing a `Lock`
+You may use any lock service, such as Redis or ZooKeeper, by providing a `Lock`
 class that complies to the following API:
 
 {% highlight ruby %}

@@ -6,7 +6,7 @@ next_section: configuration
 permalink: /differences_from_other_orms/
 ---
 
-NoBrainer breaks a couple of established patterns to provide an consistent API
+NoBrainer breaks a couple of established patterns to provide a consistent API
 with semantics as precise as possible.
 
 * RethinkDB does not support transactions, so you need to be in control of when
@@ -26,7 +26,7 @@ with semantics as precise as possible.
 * Uniqueness validators can leverage distributed locks to provide race-free
   semantics. This feature is crucial when using sharded databases such as RethinkDB
   as secondary indexes do not provide uniqueness guarantees.
-* Declaring a index with `multi => true` does not change the behavior of
+* Declaring an index with `multi => true` does not change the behavior of
   queries, unlike Mongoid. When the `any` keyword is used (e.g.
   `Post.where(:tags.any => 'programming')`), NoBrainer uses a multi
   index if declared, but otherwise falls back to generating a suitable RQL code.

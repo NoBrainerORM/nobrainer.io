@@ -12,7 +12,7 @@ permalink: /faq/
 NoBrainer is currently used in production systems, so I'd say yes.
 
 ### **Is NoBrainer thread safe?**
-Yes. If you encounter an issue, please create an GitHub issue.
+Yes. If you encounter an issue, please create a GitHub issue.
 
 ### **How is NoBrainer licensed?**
 NoBrainer is licensed under the LGPLv3.

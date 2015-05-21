@@ -61,7 +61,7 @@ end
 
 ### in
 
-You may use the `in` shorthand to specify a inclusion validator:
+You may use the `in` shorthand to specify an inclusion validator:
 
 {% highlight ruby %}
 class Model
@@ -87,7 +87,7 @@ class Model
 end
 {% endhighlight %}
 
-### length/min_lenght/max_length
+### length/min_length/max_length
 
 You may use the `format` shorthand to specify a format validator:
 
@@ -99,9 +99,9 @@ class Model
 end
 # Equivalent to:
 class Model
-  field :field1, :validates => { :lenght => (3..5) }
-  field :field2, :validates => { :lenght => { :minimum => 4 } }
-  field :field3, :validates => { :lenght => { :maximum => 10 } }
+  field :field1, :validates => { :length => (3..5) }
+  field :field2, :validates => { :length => { :minimum => 4 } }
+  field :field3, :validates => { :length => { :maximum => 10 } }
 end
 {% endhighlight %}
 

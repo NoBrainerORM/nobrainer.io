@@ -74,7 +74,7 @@ Author.eager_load(:posts => Post.where(:body => /rethinkdb/)
                     .eager_load(:comments => Comment.order_by(:created_at)))
 {% endhighlight %}
 
-Remember that NoBrainer will use the models default scopes on all association
+Remember that NoBrainer will use the model default scopes on all associations,
 except on the `belongs_to` associations.
 
 NoBrainer uses `in` queries such as `Model.where(foreign_key.in => [ids])` to retrieve

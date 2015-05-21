@@ -189,7 +189,7 @@ permalink: /changelog/
 
 * Removed `update()` and `replace()` for the model instance.
 * Removed `inc_all()` and `dec_all()` for criteria.
-* Reinstantiating a instance model from the database no longer goes through the
+* Reinstantiating an instance model from the database no longer goes through the
   setters to keep things consistent with the rest of the API.
 * Dirty tracking tracks changes from an undefined field, to a field set to `nil`.
 * Hashes are updated with `r.literal()` to avoid the use of `replace`.
