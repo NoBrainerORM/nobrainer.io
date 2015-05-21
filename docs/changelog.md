@@ -6,6 +6,10 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Allow nested hash queries (e.g. `Model.where(:lang => { :en => 'yes' } })`)
+
 ### 0.24.0 -- May. 20, 2015
 
 * `save`/`update`/`create` no longer raises on failed validations.
