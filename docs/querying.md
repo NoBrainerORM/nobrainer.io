@@ -110,7 +110,7 @@ Model.where(:or => [->(doc) { doc[:field1] < doc[:field2] },
   [`r.get_nearest`](http://www.rethinkdb.com/api/ruby/get_nearest/).
 
 * `where(:field.intersects => shape)` returns documents which `field` intersects
-  `shape`. The `shape` can be a or `NoBrainer::Geo::Circle`, `NoBrainer::Geo::Polygon`.
+  `shape`. The `shape` can be a `NoBrainer::Geo::LineString`, `NoBrainer::Geo::Circle`, or `NoBrainer::Geo::Polygon`.
 
 
 ---
@@ -242,7 +242,7 @@ Multiple callbacks can be passed by calling `after_find` multiple times.
 Calling `reload` on an instance will not trigger these callbacks again.
 
 Note that `Model.after_find().first` declares a callback on the
-model class, which triggers the callback on every fetched instances.
+model class, which triggers the callback on every fetched instance.
 Using `Model.all.after_find().first` only triggers the callback for that
 specific fetched instance.
 

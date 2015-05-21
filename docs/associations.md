@@ -122,7 +122,7 @@ post.comments.to_a # contains a comment.
 ## has\_many through Association
 
 The `has_many` syntax is the following: `has_many :targets, :through => :association`.
-`targets` must be an defined association on the through `association`. You may
+`targets` must be a defined association on the through `association`. You may
 go through any associations. No other options are supported.
 
 The implementation of `has_many` through is essentially a thin wrapper around the
