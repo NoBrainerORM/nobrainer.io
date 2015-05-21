@@ -40,16 +40,7 @@ exception, or add an error to the `instance.errors` array in the case of a
 
 ## Orders of Callbacks
 
-The following describes the order of callbacks:
-
-* When a document is initialized with `new`, or when loaded from the database,
-  or reinitialized with `reload`:
-
-  * `before_initialize`
-  * document is (re-)initialized
-  * `after_initialize`
-
-* When a new document is persisted with save:
+When a document is created:
 
   * uniqueness validations locks are acquired
   * `before_validation`
@@ -61,7 +52,7 @@ The following describes the order of callbacks:
   * `after_create`
   * `after_save`
 
-* When an existing document is updated with save:
+When a document is updated:
 
   * uniqueness validations locks are acquired
   * `before_validation`
@@ -73,21 +64,25 @@ The following describes the order of callbacks:
   * `after_update`
   * `after_save`
 
-* When an existing document is destroyed:
+When an existing document is destroyed:
 
   * `before_destroy`
   * document is deleted
   * `after_destroy`
 
-* When a document is fetched from the database:
+When a document is initialized with `new`, or reinitialized with `reload`:
 
   * `before_initialize`
+  * document is (re-)initialized
+  * `after_initialize`
+
+When a document is fetched from the database:
+
+  * `before_initialize`
+  * document is initialized
   * `after_initialize`
   * `after_find`
 
 The `after_find` callback will not be triggered again when calling `reload` on a model.
-
-The `after_save` and `after_update` callbacks are called on `save` regardless if the
-database was updated or not, which may happen when no attribute changed.
 
 `around_*` callbacks are available as usual.

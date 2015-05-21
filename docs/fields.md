@@ -191,14 +191,10 @@ field :email, :store_as => :e
 NoBrainer will translate all the references to that field when compiling queries
 and reading models back from the database.
 
-The only place you need to be careful is when using RQL, including passing RQL lambda.
-NoBrainer does not translate aliases with user provided RQL code.
-
 A simple index declared on an aliased field carries the name of alias in the database,
 unless specified otherwise by an `:store_as` option on the index.
 
-Warning: aliases are not applied when passing raw RQL to NoBrainer, for example
-in lambda expressions.
+**Warning**: When passing raw RQL to NoBrainer, aliases do not get translated.
 
 ## Lazy Fetching
 
