@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Removing `find_by()` due to conflicting semnantics with ActiveRecord
+  [#145](https://github.com/nviennot/nobrainer/issues/145).
 * Allow nested hash queries (e.g. `Model.where(:lang => { :en => 'yes' } })`)
 
 ### 0.24.0 -- May. 20, 2015
