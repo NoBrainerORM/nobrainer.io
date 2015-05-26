@@ -44,6 +44,7 @@ When a document is created:
 
   * uniqueness validations locks are acquired
   * `before_validation`
+  * validations are performed
   * `after_validation`
   * `before_save`
   * `before_create`
@@ -56,6 +57,7 @@ When a document is updated:
 
   * uniqueness validations locks are acquired
   * `before_validation`
+  * validations are performed
   * `after_validation`
   * `before_save`
   * `before_update`
