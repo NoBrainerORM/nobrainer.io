@@ -159,7 +159,7 @@ For performance reasons, NoBrainer only performs uniqueness validations when the
 fields change.
 
 The uniqueness validator uses distributed locks to ensure race-free semantics.
-Read more about this in the [Distributed Lock](/docs/types) section.
+Read more about this in the [Distributed Lock](/docs/distributed_locks) section.
 
 ### Using scopes
 
