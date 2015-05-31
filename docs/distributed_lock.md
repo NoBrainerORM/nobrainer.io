@@ -16,7 +16,7 @@ The following describes the interface of the lock.
 
 {% highlight ruby %}
 class NoBrainer::Lock
-  # The key to lock on to. Must be a String. e.g. "users:nico"
+  # The key to lock on to. Must be a String. e.g. "users:#{user.id}"
   def initialize(key)
   end
 
@@ -63,7 +63,7 @@ This mechanism is used internally by the uniqueness validator to prevent races.
 ## Usage example
 
 {% highlight ruby %}
-lock = NoBrainer::Lock.new("users:nico")
+lock = NoBrainer::Lock.new("users:#{user.id}")
 lock.lock
 # do stuff in the critical region.
 lock.unlock
