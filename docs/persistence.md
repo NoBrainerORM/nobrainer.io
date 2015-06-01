@@ -24,6 +24,7 @@ The following methods are available on the `Model` class:
   You may use `NoBrainer::Document::Id.generate` to generate MongoDB style ids
   to match the format of model instances.
 * `Model.sync` is a wrapper for [`r.sync()`](http://www.rethinkdb.com/api/ruby/#sync).
+* `first_or_create` and `first_or_create!`: see below.
 
 The following predicates are available on a model instance:
 
@@ -62,6 +63,38 @@ features in NoBrainer and all the writes need to be explicit.
 Database writes can also be performed on criteria with `update_all()`,
 `replace_all()`, `delete_all` and `destroy_all`.
 Learn more in the [Querying](/docs/querying) section.
+
+## first_or_create
+
+NoBrainer provides an API to fetch a record, or create it if not found. This is
+done atomically. The usage is:
+
+{% highlight ruby %}
+# passing params inline
+doc = Model.where(some_condition).first_or_create(additional_params)
+
+# with a block
+doc = Model.where(some_condition).first_or_create do
+  # Only called if where().first was not found.
+  additional_params
+end
+{% endhighlight %}
+
+NoBrainer performs the following stpes:
+
+1. A lock around `some_condition` is acquired.
+2. If `where(some_condition).first` matches a document, the lock is released and
+   the document is returned.
+3. Otherwise, `Model.create(some_condition.merge(additional_params))` is
+   performed, and the lock is released right after the persistance operation.
+
+`some_condition` must match a defined uniqueness validator to enforce the
+atomicity properly. NoBrainer will provide helpful error message if it cannot
+find any. This ensure that `first_or_create()` does not race with any other
+`create()` operations.
+
+This API comes in two flavors. `first_or_create()` does not raise an exception
+when validation fails, while `first_or_create!()` does.
 
 ## Optimized Updates
 

@@ -137,8 +137,8 @@ require 'rails/test_unit/railtie'
 require 'sprockets/railtie'
 {% endhighlight %}
 
-2) Comment all the configuration options in `config/environments/*.rb` that
-contains `active_record`.
+2) Comment all the configuration options in `config/environments/*.rb` and
+`config/application.rb` that contains `active_record`.
 
 3) Remove `config/database.yml`, and anything in `db/` except `db/seeds.rb`.
 

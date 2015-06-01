@@ -18,9 +18,7 @@ end
 {% endhighlight %}
 
 There is no migrations needed to use the model since NoBrainer creates the
-required tables for you by default. If you wish to change this behavior, you
-may change the NoBrainer [configuration](/docs/configuration) with
-`auto_create_databases = false` and `auto_create_tables = false`.
+required tables for you by default.
 
 The default table name is `class.name.tableize.gsub('/', '__')`.
 You may change the table name as described in the

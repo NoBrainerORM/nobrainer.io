@@ -11,7 +11,7 @@ NoBrainer comes with helpers to manage the RethinkDB database.
 ## Connection
 
 NoBrainer manages a driver-level connection to RethinkDB.
-`NoBrainer.connection` retrieves the connection.
+`NoBrainer.connection.raw` retrieves the managed RethinkDB connection.
 `NoBrainer.disconnect` disconnects the connection if connected.
 
 NoBrainer automatically disconnects the connection on forks, so you do not have
@@ -84,6 +84,3 @@ rake nobrainer:seed         # Load seed data from db/seeds.rb
 rake nobrainer:setup        # Equivalent to :sync_indexes_quiet + :seed
 rake nobrainer:reset        # Equivalent to :drop + :setup
 {% endhighlight %}
-
-Note that NoBrainer relies on the configuration settings `auto_create_databases`
-and `auto_create_tables` to create the database and tables.

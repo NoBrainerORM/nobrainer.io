@@ -10,7 +10,7 @@ The roadmap is the following. Items at the beginning of the list are somewhat hi
 
 * Write a bunch of recipes and patterns.
 * Play nice with `change()` feeds.
-* Provide some `first_or_create()` primitive.
+* Provide some `upsert()` primitive.
 * Add a way to remove an attribute from a document.
 * Support type definitions like `[Integer]`.
 * Accept multiple database connections strings for failovers, connection pool.

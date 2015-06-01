@@ -57,7 +57,6 @@ Model.in_category('games').created_before(1.week.ago).count
 
 Default scopes are scopes that are merged in criteria when constructing a query.
 Adding `unscoped` in the criteria will disable the use of the default scope.
-Adding `scoped` will add it back. Example:
 
 {% highlight ruby %}
 class Model
@@ -66,7 +65,6 @@ end
 
 Model.count # returns only active models
 Model.unscoped.count # returns all models
-Model.unscoped.scoped.count # returns active models
 {% endhighlight %}
 
 Note that many default scopes can be declared. All of them are applied, in the
@@ -85,16 +83,6 @@ end
 {% endhighlight %}
 
 Default scopes are applied at the beginning of the chain when building a query.
-The following example illustrates this fact:
-
-{% highlight ruby %}
-class Model
-  default_scope { order_by(:created_at) }
-end
-
-Model.each { } # ordered by created_at
-Model.unscoped.order_by(:id).scoped.each { } # ordered by ids, even though scoped is called after
-{% endhighlight %}
 
 The `unscoped` keyword has no effect on `has_many` associations have a custom `:scope` defined.
 

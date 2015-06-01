@@ -86,7 +86,9 @@ documents if `value1 != value2`, even when using a `default_scope`.
 * `where()` also accept belongs\_to associations. In which case, the foreign key is used.
 For example `Comment.where(:post => Post.first)` is valid. `Post.first.comments` is better though.
 
-* Nested hash queries with keywords are not yet supported. Use a RQL filter in this case.
+* Nested hash queries are supported. Example:
+  `where(:address => {:state.in => %w(NY CA)})` matches the `state `attribute from
+  the `address` hash.
 
 As an example, one can construct such query:
 
@@ -156,10 +158,8 @@ received from the database.
 
 ---
 
-### scoped/unscoped
+### unscoped
 
-* `criteria.scoped` will enable the use of the default scope on the model if
-defined. This behavior is the default.
 * `criteria.unscoped` will disable the default scope.
 
 ---
@@ -300,14 +300,16 @@ The bang flavors raise a `NoBrainer::Error::DocumentNotFound` exception if not f
 instead of returning `nil`.  If left uncaught in a Rails controller, a 404
 status code is returned.
 
-### find(), find_by()
+### find()
 
 * `Model.find(id)` is equivalent to `Model.where(:id => id).first!`.
 * `Model.find?(id)` is equivalent to `Model.where(:id => id).first`.
-* `Model.find_by(p)` is equivalent to `Model.where(p).first!`.
-* `Model.find_by?(p)` is equivalent to `Model.where(p).first`.
 
 Note that default scopes still apply.
+
+### first_or_create, first_or_create!
+
+See the [Persistence](/docs/persistence) section.
 
 ---
 

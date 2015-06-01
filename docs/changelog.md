@@ -6,7 +6,7 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.25.0 -- June 1, 2015
 
 * `first_or_create()` is now implemented.
 * Minor fix for uniqueness validators in the context of polymorphic classes.
@@ -24,7 +24,7 @@ permalink: /changelog/
   [#145](https://github.com/nviennot/nobrainer/issues/145).
 * Allow nested hash queries (e.g. `Model.where(:lang => { :en => 'yes' } })`)
 
-### 0.24.0 -- May. 20, 2015
+### 0.24.0 -- May 20, 2015
 
 * `save`/`update`/`create` no longer raises on failed validations.
   We are back to the original ActiveRecord behavior
