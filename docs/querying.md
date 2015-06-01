@@ -86,7 +86,7 @@ documents if `value1 != value2`, even when using a `default_scope`.
 * `where()` also accept belongs\_to associations. In which case, the foreign key is used.
 For example `Comment.where(:post => Post.first)` is valid. `Post.first.comments` is better though.
 
-* Nested hash queries are supported. Example:
+* Nested hash queries are supported. For example
   `where(:address => {:state.in => %w(NY CA)})` matches the `state `attribute from
   the `address` hash.
 
@@ -310,6 +310,15 @@ Note that default scopes still apply.
 ### first_or_create, first_or_create!
 
 See the [Persistence](/docs/persistence) section.
+
+
+### changes
+
+* `criteria.raw.changes(options={})` returns an changefeed similar to
+  `[r.changes()](http://rethinkdb.com/api/ruby/changes/)`.
+
+Note that you will get raw objects, and not model instances.
+If you'd like to get regular objects, please make a request on GitHub.
 
 ---
 

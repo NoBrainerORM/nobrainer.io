@@ -6,9 +6,10 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### 0.25.0 -- June 1, 2015
+### 0.25.1 -- June 1, 2015
 
-* `first_or_create()` is now implemented.
+* Added `criteria.changes()` which returns a changefeed.
+* Added `criteria.first_or_create()` for atomic creates.
 * Minor fix for uniqueness validators in the context of polymorphic classes.
 * Named scopes are cached when used in a chain (e.g. post.comments.recent).
 * Warn when not using `.raw` in a criteria when running under `run_with(profile: true)`.
