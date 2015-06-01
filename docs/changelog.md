@@ -8,7 +8,18 @@ permalink: /changelog/
 
 ### git HEAD
 
-* Removed performance warnings, as they don't seem so useful.
+* `first_or_create()` is now implemented.
+* Minor fix for uniqueness validators in the context of polymorphic classes.
+* Named scopes are cached when used in a chain (e.g. post.comments.recent).
+* Warn when not using `.raw` in a criteria when running under `run_with(profile: true)`.
+* Added a `synchronize { }` method for distributed locks.
+* Removed `criteria.scoped` method, it seems useless.
+* NoBrainer will now raise if a critera is leaked from a `NoBrainer.run_with()` block.
+* Removed `Model.store_in(db: 'xxx')` due to hard to deal with conflict
+  semantics with `run_with()`.
+* `NoBrainer.with_database()` is deprecated. `NoBrainer.run_with(db: 'xxx')`
+  should be used instead.
+* `NoBrainer.with()` has been renamed to `NoBrainer.run_with()`.
 * Removed `find_by()` due to conflicting semnantics with ActiveRecord
   [#145](https://github.com/nviennot/nobrainer/issues/145).
 * Allow nested hash queries (e.g. `Model.where(:lang => { :en => 'yes' } })`)
