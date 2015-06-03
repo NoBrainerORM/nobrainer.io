@@ -6,6 +6,11 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Bug fix: Previously assigned values wouldn't necessarily receive updates when
+  using `queue_atomic { }`.
+
 ### 0.25.1 -- June 1, 2015
 
 * Added `criteria.changes()` which returns a changefeed.
