@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Dirty tracking doesn't go through user defined getters, but works on internal
+  attributes.
 * Bug fix: Previously assigned values wouldn't necessarily receive updates when
   using `queue_atomic { }`.
 
