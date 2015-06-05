@@ -8,8 +8,10 @@ permalink: /changelog/
 
 ### git HEAD
 
-* Dirty tracking doesn't go through user defined getters, but works on internal
-  attributes.
+* Synchronizing indexes is now performed with a distributed lock to avoid races
+  during deployments when multiple servers attempt to synchronize indexes.
+* Dirty tracking no longer go through user defined getters, but operates on
+  internal attributes.
 * Bug fix: Previously assigned values wouldn't necessarily receive updates when
   using `queue_atomic { }`.
 
