@@ -101,6 +101,13 @@ end
 Note that the setters are _not_ used when reading a document from the database.
 Keep this in mind when your database does not match your schema.
 
+## Accessing raw attributes
+
+`self._read_attribute(attr)` and `self._write_attribute(attr, value)` access
+internal attributes, bypassing any type checking. These methods should not be
+used for regular use. Do not use these methods when overriding getters/setters
+(see above).
+
 ## Default Values
 
 To assign a default value to a field, you may pass a `default` option.

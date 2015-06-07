@@ -8,6 +8,7 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Updated reconnect logic to match latest RethinkDB messages.
 * Synchronizing indexes is now performed with a distributed lock to avoid races
   during deployments when multiple servers attempt to synchronize indexes.
 * Dirty tracking no longer go through user defined getters, but operates on
