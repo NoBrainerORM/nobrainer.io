@@ -6,8 +6,9 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.26.0 -- June 20, 2015
 
+* Added a `rails g nobrainer:install` task.
 * Updated reconnect logic to match latest RethinkDB messages.
 * Synchronizing indexes is now performed with a distributed lock to avoid races
   during deployments when multiple servers attempt to synchronize indexes.

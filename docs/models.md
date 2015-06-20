@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Models
-prev_section: configuration
+prev_section: installation
 next_section: fields
 permalink: /models/
 ---

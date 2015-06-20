@@ -1,14 +1,40 @@
 ---
 layout: docs
-title: Configuration
+title: Installation
 prev_section: differences_from_other_orms
 next_section: models
-permalink: /configuration/
+permalink: /installation/
 ---
 
-NoBrainer can be configured by calling `NoBrainer.configure { }`.  
-With a Rails application, you may place this configuration block in an
-initializer, such as `config/initializers/nobrainer.rb`.
+Installing the gem
+-------------------
+
+To install the NoBrainer gem, follow these two steps:
+
+1) Add `nobrainer` in your `Gemfile`:
+
+{% highlight ruby %}
+# Gemfile
+gem 'nobrainer'
+{% endhighlight %}
+
+2) Run `bundle install`.
+
+Configuring NoBrainer with Rails
+---------------------------------
+
+To install NoBrainer in a Rails application, simply run the installer:
+
+{% highlight bash %}
+$ rails g nobrainer:install
+{% endhighlight %}
+
+The installer disables ActiveRecord and creates an initializer that configures NoBrainer.
+
+Configuring NoBrainer Manually
+------------------------------
+
+NoBrainer can be configured by calling `NoBrainer.configure { }`.
 The settings are shown with their default values:
 
 {% highlight ruby %}
@@ -104,51 +130,4 @@ NoBrainer.configure do |config|
   # out of memory issues.
   # config.criteria_cache_max_entries = 10_000
 end
-{% endhighlight %}
-
-Removing ActiveRecord with Rails
---------------------------------
-
-NoBrainer can coexist with ActiveRecord at runtime. However, It is best to
-remove ActiveRecord unless you plan to use both SQL and RethinkDB in your
-application.
-
-### With a fresh Rails app
-
-If your Rails application is not yet created, you can create your rails app with:
-
-{% highlight bash %}
-rails new app_name --skip-active-record
-{% endhighlight %}
-
-### With an existing Rails app
-
-To remove ActiveRecord from an existing Rails application, three steps must be done:
-
-1) Open `config/application.rb`. On line 3, replace `require 'rails/all'` with:
-
-{% highlight ruby %}
-# require 'active_record/railtie'
-require 'action_controller/railtie'
-require 'action_view/railtie'
-require 'action_mailer/railtie'
-require 'active_job/railtie'
-require 'rails/test_unit/railtie'
-require 'sprockets/railtie'
-{% endhighlight %}
-
-2) Comment all the configuration options in `config/environments/*.rb` and
-`config/application.rb` that contains `active_record`.
-
-3) Remove `config/database.yml`, and anything in `db/` except `db/seeds.rb`.
-
-ActiveRecord with NoBrainer
----------------------------
-
-If ActiveRecord is present with NoBrainer there will be a conflict with the
-built in rake tasks and Rails generators. To get around this, prefix the
-`active_record` namespace before the generator name:
-
-{% highlight bash %}
-rails g active_record:migration migration_name
 {% endhighlight %}

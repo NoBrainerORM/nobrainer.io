@@ -137,7 +137,7 @@ User.where(:num_friends.gt => "10xx").first # raises an InvalidType error
 
 Note that NoBrainer can be configured with `user_timezone` and `db_timezone` to
 specify how timezones should be handled. Read more in the
-[Configuration](/docs/configuration) section to learn more.
+[Installation](/docs/installation) section to learn more.
 
 Read more about `Time` at the bottom of this page.
 

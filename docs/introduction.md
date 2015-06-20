@@ -5,7 +5,6 @@ next_section: differences_from_other_orms
 permalink: /introduction/
 ---
 
-
 NoBrainer is an ORM for [RethinkDB](http://rethinkdb.com).
 The goal of NoBrainer is to provide a similar interface compared to ActiveRecord
 and Mongoid to build data models on top of RethinkDB while providing precise
@@ -32,7 +31,7 @@ NoBrainer depends on a couple of things:
 
 ## Roadmap & Changelog
 
-Latest gem version: **0.25.1 -- June 1, 2015**.
+Latest gem version: **0.26.0 -- June 20, 2015**.
 
 master branch: [![Build Status](https://travis-ci.org/nviennot/nobrainer.svg?branch=master)](https://travis-ci.org/nviennot/nobrainer)
 
@@ -54,7 +53,7 @@ gem 'nobrainer'
 
 When using NoBrainer with Rails, NoBrainer comes with a set of default
 settings that allow you to start using NoBrainer right away without making any
-further [configuration](/docs/configuration) or database migrations.
+further [configuration](/docs/installation) or database migrations.
 
 ---
 

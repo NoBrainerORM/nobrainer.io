@@ -8,7 +8,6 @@ permalink: /roadmap/
 
 The roadmap is the following. Items at the beginning of the list are somewhat higher priority.
 
-* Provide a `rails g nobrainer:install` for easy install.
 * Write a bunch of recipes and patterns.
 * Provide some `upsert()` primitive.
 * Add a way to remove an attribute from a document.
