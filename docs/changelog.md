@@ -6,6 +6,15 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Optimized boot time.
+* Bug fix: the installer was saving its configuration file in
+  `config/initializer/nobrainer.rb`, but should have been
+  `config/initializers/nobrainer.rb`.
+* Added `Document#cache_key` for compatiblity with Rails caching mechanisms
+  [#149](https://github.com/nviennot/nobrainer/issues/149).
+
 ### 0.26.0 -- June 20, 2015
 
 * Added a `rails g nobrainer:install` task.

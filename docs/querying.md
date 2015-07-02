@@ -315,7 +315,7 @@ See the [Persistence](/docs/persistence) section.
 ### changes
 
 * `criteria.raw.changes(options={})` returns an changefeed similar to
-  `[r.changes()](http://rethinkdb.com/api/ruby/changes/)`.
+  [`r.changes()`](http://rethinkdb.com/api/ruby/changes/).
 
 Note that you will get raw objects, and not model instances.
 If you'd like to get regular objects, please make a request on GitHub.
