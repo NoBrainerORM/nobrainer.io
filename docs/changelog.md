@@ -8,6 +8,9 @@ permalink: /changelog/
 
 ### git HEAD
 
+* `belongs_to` associations no longer use the primary key name of the target
+  class to avoid depending on loading models in a certain order.
+  [#132](https://github.com/nviennot/nobrainer/issues/132).
 * Optimized boot time.
 * Bug fix: the installer was saving its configuration file in
   `config/initializer/nobrainer.rb`, but should have been
