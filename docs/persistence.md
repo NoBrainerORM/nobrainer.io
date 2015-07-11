@@ -67,14 +67,14 @@ Learn more in the [Querying](/docs/querying) section.
 ## first_or_create
 
 NoBrainer provides an API to fetch a record, or create it if not found. This is
-done atomically. The usage is:
+done atomically. The usage is shown below:
 
 {% highlight ruby %}
 # passing params inline
-doc = Model.where(some_condition).first_or_create(additional_params)
+doc = Model.where(some_condition).first_or_create!(additional_params)
 
-# with a block
-doc = Model.where(some_condition).first_or_create do
+# passing params within a block
+doc = Model.where(some_condition).first_or_create! do
   # Only called if where().first was not found.
   additional_params
 end
