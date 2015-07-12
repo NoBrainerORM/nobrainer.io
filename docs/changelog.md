@@ -6,7 +6,7 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.27.0 -- July 12, 2015
 
 * `belongs_to` associations no longer use the primary key name of the target
   class to avoid depending on loading models in a certain order.

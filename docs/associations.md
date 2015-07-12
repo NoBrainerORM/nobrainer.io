@@ -24,7 +24,7 @@ and the target refers to the other side of the association.
 The `belongs_to` syntax is the following: `belongs_to :target, options`
 
 The following describes the different options `belongs_to` accepts:
-* `:primary_key`: the primary key to use on the target. Defaults to the target's primary key.
+* `:primary_key`: the primary key to use on the target. Defaults to `:id`.
 * `:foreign_key`: the foreign key to use. Defaults to `#{target_name}_#{primary_key}`.
 * `:foreign_key_as`: the alias for the foreign key. Defaults to `nil`.
 * `:class_name`: the target class name. Defaults to `Target`.
@@ -44,9 +44,6 @@ The following describes the behavior of `belongs_to` associations:
 NoBrainer will always insert an `after_validation` callback to check that if there
 is a target set, then it must be `persisted?`. If the target is not persisted,
 NoBrainer will raise a `NoBrainer::Error::AssociationNotPersisted` exception.
-
-The specified or default primary key is used instead of `id` in methods names
-and behavior.
 
 You can read more about how presence validations are handled on belongs\_to
 associations in the [validations section](/docs/validations#presence_validations_on_belongs_to_associations).
