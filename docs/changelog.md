@@ -6,6 +6,11 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Implemented `touch()` on model instances to update the `updated_at` field
+  [#150](https://github.com/nviennot/nobrainer/issues/150).
+
 ### 0.27.0 -- July 12, 2015
 
 * `belongs_to` associations no longer use the primary key name of the target

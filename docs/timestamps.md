@@ -34,8 +34,3 @@ The above behavior would have the effect of always changing the attributes
 since callbacks are always triggered even when no attributes changed.
 This means that the `updated_at` timestamp is only set when a database
 update query is performed.
-
----
-
-There is no `touch()` method implemented. Please make a request on GitHub
-if you want it.
