@@ -8,6 +8,11 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Added system table models (e.g. `NoBrainer::System::TableConfig`).
+* Allow table to be configured (e.g. shards, replicas) with a task `rake
+  nobrainer:sync_schema` to apply these settings.
+* Bug fix: fix conflicting keys logic between where() and first_or_create()
+  [#151](https://github.com/nviennot/nobrainer/issues/151).
 * Implemented `touch()` on model instances to update the `updated_at` field
   [#150](https://github.com/nviennot/nobrainer/issues/150).
 
