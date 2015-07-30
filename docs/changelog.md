@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Allowing to specify multiple `rethinkdb_urls` in the configuration to provide
+  fault tolerance capabilities.
 * Added system table models (e.g. `NoBrainer::System::TableConfig`).
 * Allow table to be configured (e.g. shards, replicas) with a task `rake
   nobrainer:sync_schema` to apply these settings.
