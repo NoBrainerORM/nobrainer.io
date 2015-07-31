@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Provide a `NoBrainer.eagerload(docs, ...)` method to eager load associations
+  on a given array of model instances.
 * Allowing to specify multiple `rethinkdb_urls` in the configuration to provide
   fault tolerance capabilities.
 * Added system table models (e.g. `NoBrainer::System::TableConfig`).
