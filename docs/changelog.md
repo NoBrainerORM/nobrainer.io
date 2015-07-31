@@ -8,12 +8,13 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Various bug fixes with lazy fetching logic.
 * Provide a `NoBrainer.eagerload(docs, ...)` method to eager load associations
   on a given array of model instances.
 * Allowing to specify multiple `rethinkdb_urls` in the configuration to provide
   fault tolerance capabilities.
 * Added system table models (e.g. `NoBrainer::System::TableConfig`).
-* Allow table to be configured (e.g. shards, replicas) with a task `rake
+* Allow tables to be configured (e.g. shards, replicas) with a task `rake
   nobrainer:sync_schema` to apply these settings.
 * Bug fix: fix conflicting keys logic between where() and first_or_create()
   [#151](https://github.com/nviennot/nobrainer/issues/151).
