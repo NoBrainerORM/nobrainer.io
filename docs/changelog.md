@@ -8,8 +8,13 @@ permalink: /changelog/
 
 ### git HEAD
 
-* Various bug fixes with lazy fetching logic.
-* Provide a `NoBrainer.eagerload(docs, ...)` method to eager load associations
+
+* Added `_where()` to allow unsafe `where()` operation (which disables type
+  checking, and enable dynamic attributes).
+* Added the where modifier `undefined` as a shortcut for `where(:field.defined => !value)`.
+* Added the where modifier `include` as a shortcut for `where(:field.any.eq => value)`.
+* Minor bug fixes with lazy fetching logic and atomic operations.
+* Provide a `NoBrainer.eager_load(docs, ...)` method to eager load associations
   on a given array of model instances.
 * Allowing to specify multiple `rethinkdb_urls` in the configuration to provide
   fault tolerance capabilities.
