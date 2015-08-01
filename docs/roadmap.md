@@ -9,8 +9,7 @@ permalink: /roadmap/
 The roadmap is the following. Items at the beginning of the list are somewhat higher priority.
 
 * Write a bunch of recipes and patterns.
-* Add a way to remove an attribute from a document.
-* Support type definitions like `[Integer]`.
+* Support type definitions like `[Integer]` to specify typed arrays.
 * Provide a connection pool.
 * Provide 2PC primitives since we don't have transactions.
 * Support embedded documents. Embedding should be done by using the type system like regular fields.
