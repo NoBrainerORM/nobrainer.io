@@ -9,6 +9,7 @@ permalink: /changelog/
 ### git HEAD
 
 
+* Added `Model.upsert()` which uses `first_or_create` behind the scenes.
 * Added `_where()` to allow unsafe `where()` operation (which disables type
   checking, and enable dynamic attributes).
 * Added the where modifier `undefined` as a shortcut for `where(:field.defined => !value)`.
