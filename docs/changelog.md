@@ -8,6 +8,7 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Added SSL options for encrypted connections to the server.
 * Added `criteria.join()` to perform inner joins on associations.
 * Added `instance.unset(attr)` to remove a field from the document.
 * Added `Model.upsert()` which uses `first_or_create` behind the scenes.
