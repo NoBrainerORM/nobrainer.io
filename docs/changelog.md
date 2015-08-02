@@ -6,6 +6,14 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Added support for the `Enum` type, which adds a few helper methods similar to
+  ActiveRecord
+  [#153](https://github.com/nviennot/nobrainer/issues/153).
+* Added hooks `nobrainer_field_defined` and `nobrainer_field_undefined` for
+  custom types which are triggered when a field is defined and undefined.
+
 ### 0.28.0 -- Aug. 2, 2015
 
 * Added SSL options for encrypted connections to the server.
