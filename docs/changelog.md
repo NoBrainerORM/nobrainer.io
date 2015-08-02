@@ -6,7 +6,7 @@ next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.28.0 -- Aug. 2, 2015
 
 * Added SSL options for encrypted connections to the server.
 * Added `criteria.join()` to perform inner joins on associations.

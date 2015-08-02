@@ -16,6 +16,7 @@ The following methods are available on the `Model` class:
   and `attrs` is passed to `assign_attributes`.
 * `Model.create(attrs)` calls `Model.new(attrs)` and then `save`.
 * `Model.create!(attrs)` calls `Model.new(attrs)` and then `save!`.
+* `upsert`, `upsert!`, `first_or_create` and `first_or_create!`: see below.
 * `Model.insert_all([doc1, doc2, ..., docN])` is used for bulk inserts. This method
   receives a list of hashes, and will not instantiate any models. Instead it
   passes the documents in bulk to the database to perform efficient writes.
@@ -24,7 +25,6 @@ The following methods are available on the `Model` class:
   You may use `NoBrainer::Document::Id.generate` to generate MongoDB style ids
   to match the format of model instances.
 * `Model.sync` is a wrapper for [`r.sync()`](http://www.rethinkdb.com/api/ruby/#sync).
-* `first_or_create` and `first_or_create!`: see below.
 
 The following predicates are available on a model instance:
 
@@ -64,10 +64,28 @@ Database writes can also be performed on criteria with `update_all()`,
 `replace_all()`, `delete_all` and `destroy_all`.
 Learn more in the [Querying](/docs/querying) section.
 
-## first_or_create
+## upsert
 
 NoBrainer provides an API to fetch a record, or create it if not found. This is
-done atomically. The usage is shown below:
+done atomically. The usage is the following:
+
+{% highlight ruby %}
+model = Model.upsert(attrs)
+unless model.persisted?
+  # validations failed when creating the instance
+end
+
+model = Model.upsert!(attrs) # raises when validations fail.
+{% endhighlight %}
+
+Note that NoBrainer will need to match either the primary key in attrs, or a
+field that has a uniqueness validator as the `upsert` uses
+the `first_or_create` mechanism  as described below.
+
+## first_or_create
+
+NoBrainer provides an API to fetch a record, or create a record if not found.
+This is done atomically. The usage is shown below:
 
 {% highlight ruby %}
 # passing params inline

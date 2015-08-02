@@ -2,7 +2,7 @@
 layout: docs
 title: Distributed Locks
 prev_section: atomic_ops
-next_section: indexes
+next_section: table_configuration
 permalink: /distributed_locks/
 ---
 

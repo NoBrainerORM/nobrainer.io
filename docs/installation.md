@@ -47,7 +47,8 @@ NoBrainer.configure do |config|
   # variables RUBY_ENV, RAILS_ENV, RACK_ENV, or :production.
   # config.environment = config.default_environment
 
-  # The rethinkdb_url specifies the RethinkDB database connection url.
+  # rethinkdb_urls specifies the RethinkDB database connection urls.
+  # You may specify multiple urls to provide fault tolerance capabilities.
   # When left unspecified, NoBrainer picks a database connection by default.
   # The default is to use localhost, with a database name matching the
   # application name and the environment.
@@ -55,7 +56,11 @@ NoBrainer.configure do |config|
   # * RETHINKDB_URL, RDB_URL
   # * RETHINKDB_HOST, RETHINKDB_PORT, RETHINKDB_DB, RETHINKDB_AUTH
   # * RDB_HOST, RDB_PORT, RDB_DB, RDB_AUTH
-  # config.rethinkdb_url = config.default_rethinkdb_url
+  # config.rethinkdb_urls = [config.default_rethinkdb_url]
+
+  # ssl_options may be set to {:ca_certs => '/path/to/ca.crt'} to establish
+  # an SSL connection to the RethinkDB servers.
+  # config.ssl_options = nil
 
   # NoBrainer uses logger to emit debugging information.
   # The default logger is the Rails logger if run with Rails,
@@ -86,6 +91,11 @@ NoBrainer.configure do |config|
   # The default is :soft for development or test environment, otherwise :hard.
   # config.durability = config.default_durability
 
+  # Configures the default table configuration options. These values are
+  # reflected to the database when running `rake nobrainer:sync_schema'.
+  # config.table_options = \
+  #   { :shards => 1, :replicas => 1, :write_acks => :majority }
+
   # Persisted Strings have a configurable maximum length. To get rid of the
   # length validation, you may use the Text type instead.
   # config.max_string_length = 255
@@ -105,7 +115,7 @@ NoBrainer.configure do |config|
 
   # Configures which mechanism to use in order to perform non-racy uniqueness
   # validations. More about this behavior in the Distributed Locks section.
-  # config.distributed_lock_class = NoBrainer::Lock
+  # config.distributed_lock_class = "NoBrainer::Lock"
 
   # Configures the default timing lock options.
   # config.lock_options = { :expire => 60, :timeout => 10 }

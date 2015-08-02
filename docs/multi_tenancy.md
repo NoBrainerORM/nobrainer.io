@@ -22,12 +22,12 @@ controllers, or rack middlewares.
 
 ## Model specific behavior
 
-With NoBrainer you may specify which Model gets stored where with the `store_in`
+With NoBrainer you may specify which Model gets stored where with the `table_config`
 declaration. For example, to store the User model in `some_table`:
 
 {% highlight ruby %}
 class Project
-  store_in :table => 'some_table'
+  table_config :name => 'some_table'
 end
 {% endhighlight %}
 
@@ -35,7 +35,7 @@ You may also use lazily evaluated lambdas. For example:
 
 {% highlight ruby %}
 class Project
-  store_in :table => ->{ "project_#{Thread.current[:client]}" }
+  table_config :name => ->{ "project_#{Thread.current[:client]}" }
 end
 {% endhighlight %}
 

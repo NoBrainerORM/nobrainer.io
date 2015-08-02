@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Indexes
-prev_section: distributed_locks
+prev_section: table_configuration
 next_section: management
 permalink: /indexes/
 ---
@@ -127,13 +127,13 @@ Once declared, indexes need to be created before being usable.
 When using Rails, you may use the rake task:
 
 {% highlight bash %}
-rake nobrainer:sync_indexes
+$ rake nobrainer:sync_schema
 {% endhighlight %}
 
 You can also update indexes programmatically:
 
 {% highlight ruby %}
-NoBrainer.sync_indexes # Synchronize index definitions.
+NoBrainer.sync_schema # Synchronize table schema
 {% endhighlight %}
 
 NoBrainer maintains a list of index metadata in a table named `nobrainer_index_meta`.
@@ -141,7 +141,7 @@ This way, NoBrainer can keep track of the indexes state on the database, and upd
 indexes which definition have changed.
 
 NoBrainer waits for the index creation by default.
-You may pass `:wait => false` to `sync_indexes` to skip the wait.
+You may pass `:wait => false` to `sync_schema` to skip the wait.
 
 ## Aliases
 

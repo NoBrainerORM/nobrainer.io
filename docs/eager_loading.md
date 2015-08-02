@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Eager Loading
-prev_section: scopes
+prev_section: joins
 next_section: caching
 permalink: /eager_loading/
 ---
@@ -39,7 +39,7 @@ comments.each do |comment|
 end
 {% endhighlight %}
 
-## Using eager_load()
+## Using eager_load() in a query
 
 We can use `eager_load` to eager load the models to reduce the number of queries to 3:
 
@@ -85,3 +85,15 @@ read performance (at the cost of write performance).
 NoBrainer prefers such queries because RethinkDB outer joins cannot be used with
 an index, and also joins often retrieve too much data when instances are shared
 across associations.
+
+## Using eager_load on an array
+
+NoBrainer allows to eager loading associations on a given array of model
+instances with `NoBrainer.eager_load()`. The first argument is the array of
+model instances, and the second argument is the same as the criteria argument.
+For example:
+
+{% highlight ruby %}
+posts = Post.where(...).to_a
+NoBrainer.eager_load(posts, :comments)
+{% endhighlight %}

@@ -27,7 +27,7 @@ are equivalent.
 The `where()` method selects documents for which its given predicates are true.
 The rules are the following:
 
-* `where(p1,...,pN)` returns the documents that matches all the predicates `p1,...,pN`.
+* `where(p)` returns the documents that matches the predicates p.
 
 * `where(p1).where(p2)` is equivalent to `where(p1, p2)`
 
@@ -50,17 +50,13 @@ to avoid programming mistakes. If you knwo what you are doing, you may use `:_or
 * `:attr.lt => value` evaluates to true when `attr` is less than `value`.
 * `:attr.le => value` evaluates to true when `attr` is less than or equal to `value`.
 * `:attr.lte => value` evaluates to `:attr.le => value`.
-* `:attr.in => [value1,...,valueN]` evaluates to true when `attr` is in the specified array.
 * `:attr.defined => true` evaluates to true when `attr` is defined.
-* `:attr.defined => false` evaluates to true when `attr` is undefined.
-* `:attr.near => value` evaluates to true when `attr` is near `value`.
-* `:attr.intersects => value` evaluates to true when `attr` intersects `value`.
+* `:attr.undefined => true` evaluates to true when `attr` is undefined.
+* `:attr.in => [value1,...,valueN]` evaluates to true when `attr` is in the specified array.
+* `:attr.include => value` evaluates to true when the array `attr` includes `value`.
 * `:attr.any.op => value` evalues to true when any of the `attr` values match `value` with `op`.
 * `:attr.all.op => value` evalues to true when all of the `attr` values match `value` with `op`.
 * `:attr.not.op => value` evalues to true when the `attr` value does not match `value` with `op`.
-* `:attr.any => value` evalues to `:attr.any.eq => value`.
-* `:attr.all => value` evalues to `:attr.all.eq => value`.
-* `:attr.not => value` evalues to `:attr.not.eq => value`.
 * `lambda { |doc| rql_expression(doc) }` evaluates the RQL expression.
 
 A couple of notes:
@@ -90,6 +86,9 @@ For example `Comment.where(:post => Post.first)` is valid. `Post.first.comments`
   `where(:address => {:state.in => %w(NY CA)})` matches the `state `attribute from
   the `address` hash.
 
+* `where()` performs type checking and only operates on defined attributes. To
+  bypass these checks, you may use `_where()`.
+
 As an example, one can construct such query:
 
 {% highlight ruby %}
@@ -98,20 +97,6 @@ Model.where(:or => [->(doc) { doc[:field1] < doc[:field2] },
      .where(:field4 => /ohai/, :field5.any.gt(4))
 
 {% endhighlight %}
-
----
-
-### Geo queries
-
-* `where(:field.near => circle)` returns documents which `field` is within
-  `circle`.  The `circle` must be coercible to a `NoBrainer::Geo::Circle`
-  (c.f. [types](http://nobrainer.io/docs/types/#geocircle)).
-  You may pass an additional option `:max_results` when leveraging indexes with
-  [`r.get_nearest`](http://www.rethinkdb.com/api/ruby/get_nearest/).
-
-* `where(:field.intersects => shape)` returns documents which `field` intersects
-  `shape`. The `shape` can be a `NoBrainer::Geo::LineString`, `NoBrainer::Geo::Circle`, or `NoBrainer::Geo::Polygon`.
-
 
 ---
 
@@ -164,98 +149,12 @@ received from the database.
 
 ---
 
-### pluck()/without()/lazy_load()
-
-* `criteria.pluck(fields)` retreives only the specified fields from the
-documents.
-* `criteria.without(fields)` retreives all but the specified fields from
-the documents.
-* `criteria.lazy_load(fields)` retreives all but the specified fields from
-the documents, but allow lazy fetching.
-
-These methods have an API similar to the RQL one. However, they differ in
-different ways:
-
-* Missing attributes from models will not be readable. An error
-`NoBrainer::Error::MissingAttribute` will be raised if accessed.
-* `lazy_load()` is the same thing as `without()`, except that accessing a
-missing attribute does not raise an exception, but provides the attribute value
-by running an extra query.
-* When using both `pluck()` and `without()` in a query, all `without()`
-declarations are ignored, `pluck()` wins.
-* The primary key or the `_type` field for polymorphic
-classes cannot be removed from the documents, unless you use `.raw` to skip the
-model instantiation.
-* You can undo a `pluck()` or a `without()` by passing a hash with false values.
-For example: `without(:field1, :field2).without(:field1 => false)` is equivalent
-to `without(:field2)`.
-
----
-
-### with_index/without_index/used_index/indexed?
-
-* `criteria.with_index(index_name)` forces the use of index_name during the where() RQL
-generation. If the index cannot be used, an exception is raised.
-* `criteria.with_index` forces the use of an index to prevent slow queries.
-If an index cannot be used, an exception is raised.
-* `criteria.without_index` disables the use of indexes.
-* `criteria.used_index` shows the index name used if any.
-* `criteria.indexed?` returns `true` when an index is in use.
-
----
-
-### with_cache/without_cache
-
-* `criteria.with_cache` enables the use of the cache.
-* `criteria.without_cache` disable the use of the cache.
-* `criteria.reload` kills the cache.
-
-Read more about caches in the [Caching](/docs/caching) section.
-
----
-
-### without_distinct
-
-* `criteria.without_distinct`: When constructing RQL queries operating on multi
-  indexes, do not use the [`r.distinct`](http://rethinkdb.com/api/ruby/#distinct)
-  operator.
-
----
-
 ### eager_load()
 
 * `criteria.eager_load(:some_association)` eager loads the association. Read more
 about eager loading in the [Eager Loading](/docs/eager_loading) section.
 
 ---
-
-### after_find()
-
-* `criteria.after_find(->(doc) { puts "Loaded #{doc}" })` runs the specified
-  callback whenever a document is instantiated through the criteria.
-
-Multiple callbacks can be passed by calling `after_find` multiple times.
-`after_find` accepts lambdas as arguments or blocks.
-
-Calling `reload` on an instance will not trigger these callbacks again.
-
-Note that `Model.after_find().first` declares a callback on the
-model class, which triggers the callback on every fetched instance.
-Using `Model.all.after_find().first` only triggers the callback for that
-specific fetched instance.
-
-The [Callbacks](/docs/callbacks) section describes the order in which the
-`after_find` callback is executed.
-
-The `after_find` feature is used internally by the `has_many` association to set the
-corresponding reverse `belongs_to` association.
-
-### extend()
-
-* `criteria.extend(module, ...)` extends the current criteria and any chained
-criteria with the given modules. Note that a block may also be given to `extend()`.
-
-## Evaluating a Criteria
 
 ### count
 
@@ -300,6 +199,8 @@ The bang flavors raise a `NoBrainer::Error::DocumentNotFound` exception if not f
 instead of returning `nil`.  If left uncaught in a Rails controller, a 404
 status code is returned.
 
+---
+
 ### find()
 
 * `Model.find(id)` is equivalent to `Model.where(:id => id).first!`.
@@ -307,10 +208,13 @@ status code is returned.
 
 Note that default scopes still apply.
 
+---
+
 ### first_or_create, first_or_create!
 
 See the [Persistence](/docs/persistence) section.
 
+---
 
 ### changes
 
@@ -332,6 +236,49 @@ If you'd like to get regular objects, please make a request on GitHub.
 Note that you may also pass a lambda expression instead of a field. For example,
 `criteria.min { |doc| doc['field1'] + doc['field2'] }` returns a document
 for which `field1 + field2` is minimum
+
+---
+
+### Geo queries
+
+* `where(:field.near => circle)` returns documents which `field` is within
+  `circle`.  The `circle` must be coercible to a `NoBrainer::Geo::Circle`
+  (c.f. [types](http://nobrainer.io/docs/types/#geocircle)).
+  You may pass an additional option `:max_results` when leveraging indexes with
+  [`r.get_nearest`](http://www.rethinkdb.com/api/ruby/get_nearest/).
+
+* `where(:field.intersects => shape)` returns documents which `field` intersects
+  `shape`. The `shape` can be a `NoBrainer::Geo::LineString`, `NoBrainer::Geo::Circle`, or `NoBrainer::Geo::Polygon`.
+
+---
+
+### after_find()
+
+* `criteria.after_find(->(doc) { puts "Loaded #{doc}" })` runs the specified
+  callback whenever a document is instantiated through the criteria.
+
+Multiple callbacks can be passed by calling `after_find` multiple times.
+`after_find` accepts lambdas as arguments or blocks.
+
+Calling `reload` on an instance will not trigger these callbacks again.
+
+Note that `Model.after_find().first` declares a callback on the
+model class, which triggers the callback on every fetched instance.
+Using `Model.all.after_find().first` only triggers the callback for that
+specific fetched instance.
+
+The [Callbacks](/docs/callbacks) section describes the order in which the
+`after_find` callback is executed.
+
+The `after_find` feature is used internally by the `has_many` association to set the
+corresponding reverse `belongs_to` association.
+
+---
+
+### extend()
+
+* `criteria.extend(module, ...)` extends the current criteria and any chained
+criteria with the given modules. Note that a block may also be given to `extend()`.
 
 ## Manipulating Criteria
 

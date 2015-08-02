@@ -18,9 +18,10 @@ NoBrainer exposes a `run` method to run arbitrary RQL command through the
 The following shows an example of the usage of `NoBrainer.run`
 
 {% highlight ruby %}
-# These three statements are equivalent:
+# These four statements are equivalent:
 User.count
 NoBrainer.run(User.rql_table.count)
+NoBrainer.run { User.rql_table.count }
 NoBrainer.run { |r| r.table('users').count }
 {% endhighlight %}
 
