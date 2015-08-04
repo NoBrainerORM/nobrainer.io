@@ -8,6 +8,9 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Removed the query retry on connection failure. This was useful when
+  `r.table().wait` was not available.
+* Added support for EventMachine by using fibers.
 * Added support for the `Enum` type, which adds a few helper methods similar to
   ActiveRecord
   [#153](https://github.com/nviennot/nobrainer/issues/153).

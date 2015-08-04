@@ -8,7 +8,6 @@ permalink: /roadmap/
 
 The roadmap is the following. Items at the beginning of the list are somewhat higher priority.
 
-* Support EventMachine with em-synchrony.
 * Write a bunch of recipes and patterns.
 * Support type definitions like `[Integer]` to specify typed arrays.
 * Provide a lazy migration mechanism.
