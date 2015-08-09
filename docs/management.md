@@ -36,7 +36,7 @@ When using Rails, NoBrainer implements a few rake tasks:
 $ rake nobrainer:drop         # Drop the database
 $ rake nobrainer:sync_schema  # Synchronize the schema
 $ rake nobrainer:seed         # Load seed data from db/seeds.rb
-$ rake nobrainer:setup        # Equivalent to :sync_indexes_quiet + :seed
+$ rake nobrainer:setup        # Equivalent to :sync_schema + :seed
 $ rake nobrainer:reset        # Equivalent to :drop + :setup
 {% endhighlight %}
 
