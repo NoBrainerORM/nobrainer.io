@@ -8,6 +8,7 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Cleaned up the rake tasks. Added `rake nobrainer:rebalance`.
 * Removed the query retry on connection failure. This was useful when
   `r.table().wait` was not available.
 * Added support for EventMachine by using fibers.
