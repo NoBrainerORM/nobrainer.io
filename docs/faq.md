@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: FAQ
-prev_section: communication
-next_section: credits
 permalink: /faq/
 ---
 
@@ -31,6 +29,6 @@ dirty tracking and remember the value as explained on issue
 ### **How to enable RQL query logging?**
 Configure NoBrainer's logger with a level of `Logger::DEBUG`.
 
-### **How to sync the indexes at boot time?**
+### **How to sync the DB schema at boot time?**
 
-You can add `NoBrainer.sync_indexes if Rails.env.development?` in an initializer for example.
+You can add `NoBrainer.sync_schema if Rails.env.development?` in an initializer for example.

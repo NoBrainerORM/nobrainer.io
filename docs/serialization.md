@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Serialization
-prev_section: timestamps
-next_section: persistence
 permalink: /serialization/
 ---
 

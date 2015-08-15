@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Persistence
-prev_section: serialization
-next_section: callbacks
 permalink: /persistence/
 ---
 
@@ -66,16 +64,16 @@ Learn more in the [Querying](/docs/querying) section.
 
 ## upsert
 
-NoBrainer provides an API to fetch a record, or create it if not found. This is
-done atomically. The usage is the following:
+NoBrainer provides an API to fetch and update a record, or create it if not
+found. This is done atomically. Validations are The usage is shown as below:
 
 {% highlight ruby %}
-model = Model.upsert(attrs)
-unless model.persisted?
-  # validations failed when creating the instance
+instance = Model.upsert(attrs)
+unless instance.errors.present?
+  # validations failed when creating or updating the instance
 end
 
-model = Model.upsert!(attrs) # raises when validations fail.
+instance = Model.upsert!(attrs) # raises when validations fail.
 {% endhighlight %}
 
 Note that NoBrainer will need to match either the primary key in attrs, or a

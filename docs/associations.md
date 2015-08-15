@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Associations
-prev_section: dirty_tracking
-next_section: querying
 permalink: /associations/
 ---
 

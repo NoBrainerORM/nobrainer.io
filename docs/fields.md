@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Fields
-prev_section: models
-next_section: types
 permalink: /fields/
 ---
 

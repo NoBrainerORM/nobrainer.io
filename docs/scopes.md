@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Scopes
-prev_section: querying
-next_section: joins
 permalink: /scopes/
 ---
 

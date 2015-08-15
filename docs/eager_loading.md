@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Eager Loading
-prev_section: joins
-next_section: caching
 permalink: /eager_loading/
 ---
 

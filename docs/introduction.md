@@ -1,7 +1,6 @@
 ---
 layout: docs
 title: Introduction
-next_section: differences_from_other_orms
 permalink: /introduction/
 ---
 
@@ -31,7 +30,7 @@ NoBrainer depends on a couple of things:
 
 ## Roadmap & Changelog
 
-Latest gem version: **0.28.0 -- Aug. 2, 2015**.
+Latest gem version: **0.29.0 -- Aug. 19, 2015**.
 
 master branch: [![Build Status](https://travis-ci.org/nviennot/nobrainer.svg?branch=master)](https://travis-ci.org/nviennot/nobrainer)
 

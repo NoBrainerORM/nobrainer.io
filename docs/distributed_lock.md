@@ -1,16 +1,26 @@
 ---
 layout: docs
 title: Distributed Locks
-prev_section: atomic_ops
-next_section: table_configuration
 permalink: /distributed_locks/
 ---
 
-## NoBrainer::Lock
-
 NoBrainer provides a distributed lock mechanism. The lock mechanism uses a
-separate table `nobrainer_locks` to leverage RethinkDB's primary key uniqueness
-property.
+separate table `nobrainer_locks` to store its locks.
+The distributed lock mechanism is used internally by the uniqueness validator
+to prevent races.
+
+## Usage example
+
+The following example shows how to execute a piece of code with a distributed
+lock held:
+
+{% highlight ruby %}
+NoBrainer::Lock.new("jobs:generate_sitemap").synchronize do
+  # critical region
+end
+{% endhighlight %}
+
+## NoBrainer::Lock Interface
 
 The following describes the interface of the lock.
 
@@ -20,19 +30,28 @@ class NoBrainer::Lock
   def initialize(key)
   end
 
-  # Acquires the lock. Raises LockUnavailable if the lock couldn't be
-  # acquired before timing out.
+  # Runs the passed block with the lock held. Raises LockUnavailable if
+  # the lock cannot be acquired before timing out.
   # options accepts:
   # - :expire which set the amount of time in seconds the lock expires.
   # - :timeout which set the amount of time in seconds to wait before
   #   giving up on acquiring the lock.
   # The default values are configurable with NoBrainer::Config.lock_options
   # and are set to :expire => 60, :timeout => 10.
+  def synchronize(options={}, &block)
+  end
+
+  # Acquires the lock. Raises LockUnavailable if the lock couldn't be
+  # acquired before timing out.
+  # options accepts:
+  # - :expire which set the amount of time in seconds the lock expires.
+  # - :timeout which set the amount of time in seconds to wait before
+  #   giving up on acquiring the lock.
   def lock(options={})
   end
 
   # Attempts to obtain the lock and returns immediately. Returns true if the
-  # lock was granted.
+  # lock was granted, false otherwise.
   # options accepts:
   # - :expire which set the amount of time in seconds
   #   the lock expires in seconds.
@@ -61,56 +80,3 @@ class NoBrainer::Lock
   end
 end
 {% endhighlight %}
-
-This mechanism is used internally by the uniqueness validator to prevent races.
-
-## Usage example
-
-{% highlight ruby %}
-lock = NoBrainer::Lock.new("users:#{user.id}")
-lock.lock
-# do stuff in the critical region.
-lock.unlock
-{% endhighlight %}
-
-## Race Free Uniqueness Validations
-
-When working with traditional ORMs, the uniqueness validator is known to be
-racy: two concurrent requests may both pass the validation, and both could
-persist successfully the same supposedly unique field.
-Uniqueness validators are useful in conjunction with unique secondary indexes.
-Since RethinkDB is a sharded database, implementing unique
-secondary indexes is a performance problem, and so the RethinkDB team rightfully
-decided not to implement them. To really ensure uniqueness, one must either
-leverage the primary key uniqueness guarantee, or use a distributed lock.
-
-NoBrainer can be configured to use distributed locks to perform non-racy uniqueness
-validations. This mechanism is enabled by providing a *`Lock`* class through the
-`distributed_lock_class` setting when configuring NoBrainer. The default
-behavior is to use `NoBrainer::Lock`.
-You may use any lock service, such as Redis or ZooKeeper, by providing a `Lock`
-class that complies to the following API:
-
-{% highlight ruby %}
-class Lock
-  # The initializer must accept a key argument as a String.
-  # The key follow the following format:
-  #   "nobrainer:database_name:table_name:field_name:field_value"
-  # Example: "nobrainer:production:users:username:nico"
-  def initialize(key)
-  end
-
-  # Acquires a lock on @key. Returns nothing. May raise exceptions.
-  def lock
-  end
-
-  # Releases the lock on @key. Returns nothing. May raise exceptions.
-  def unlock
-  end
-end
-{% endhighlight %}
-
-The locks are acquired after the `before_create/update` callbacks, and before
-the `after_create/update` callbacks.
-NoBrainer alpha sorts the keys to be acquired to avoid deadlock issues when
-performing multiple uniqueness validations on the same document.

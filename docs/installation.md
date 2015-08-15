@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Installation
-prev_section: differences_from_other_orms
-next_section: models
 permalink: /installation/
 ---
 
@@ -62,6 +60,10 @@ NoBrainer.configure do |config|
   # an SSL connection to the RethinkDB servers.
   # config.ssl_options = nil
 
+  # driver specifies which driver to use. You may use :regular or :em.
+  # Use :em if you use EventMachine with em-synchrony.
+  # config.driver = :regular
+
   # NoBrainer uses logger to emit debugging information.
   # The default logger is the Rails logger if run with Rails,
   # otherwise Logger.new(STDERR) with a WARN level.
@@ -78,14 +80,6 @@ NoBrainer.configure do |config|
   # application. NoBrainer will emit a warning if you do so.
   # You can turn off the warning if you want to use both.
   # config.warn_on_active_record = true
-
-  # When the network connection is lost, NoBrainer can retry running a given
-  # query a few times before giving up. Note that this can be a problem with
-  # non idempotent write queries such as increments.
-  # Setting it to 0 disable retries during reconnections.
-  # The default is 1 for development or test environment, otherwise 15.
-  # config.max_retries_on_connection_failure = \
-  #   config.default_max_retries_on_connection_failure
 
   # Configures the durability for database writes.
   # The default is :soft for development or test environment, otherwise :hard.

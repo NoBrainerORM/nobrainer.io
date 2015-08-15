@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Multi Tenancy
-prev_section: management
-next_section: roadmap
 permalink: /multi_tenancy/
 ---
 
@@ -48,8 +46,8 @@ NoBrainer does not automatically create indexes when auto creating a database
 or table. To create the indexes on a custom database, you may use the following:
 
 {% highlight ruby %}
-NoBrainer.run_with(:db => 'db_name') { NoBrainer.sync_indexes }
+NoBrainer.run_with(:db => 'db_name') { NoBrainer.sync_schema }
 {% endhighlight %}
 
-Make sure all your models are loaded before calling `sync_indexes` if you are
+Make sure all your models are loaded before calling `sync_schema` if you are
 not using Rails.

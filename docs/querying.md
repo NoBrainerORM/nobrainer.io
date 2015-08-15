@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Querying
-prev_section: associations
-next_section: scopes
 permalink: /querying/
 ---
 

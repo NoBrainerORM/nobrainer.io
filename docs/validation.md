@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Validations
-prev_section: callbacks
-next_section: dirty_tracking
 permalink: /validations/
 ---
 
@@ -51,13 +49,18 @@ You may use the `uniq` (or `unique`) shorthand to specify a uniqueness validator
 
 {% highlight ruby %}
 class Model
-  field :name, :uniq => true
+  field :email, :uniq => true
+  field :name,  :uniq => {:scope => :team}
 end
 # Equivalent to:
 class Model
-  field :name, :validates => { :uniqueness => true }
+  validates_uniqueness_of :email
+  validates_uniqueness_of :name, :scope => :team
 end
 {% endhighlight %}
+
+NoBrainer provides race-free semantics with uniqueness validators. You may
+read more about it [below](#the_uniqueness_validator).
 
 ### in
 
@@ -152,14 +155,25 @@ end
 
 ## The Uniqueness Validator
 
-The uniqueness validator ensures that a field value can be present at most once
-table wide.
+The uniqueness validator ensures that a field value can be present at most
+once table wide. 
 
-For performance reasons, NoBrainer only performs uniqueness validations when the involved
-fields change.
+When working with traditional ORMs, the uniqueness validator is known to be
+racy: two concurrent requests may both pass the validation, and both could
+persist successfully the same supposedly unique field.
+Uniqueness validators are useful in conjunction with unique secondary indexes.
+Since RethinkDB is a sharded database, implementing unique
+secondary indexes is a performance problem, and so the RethinkDB team rightfully
+decided not to implement them. To properly ensure uniqueness with RethinkDB,
+one must either leverage the primary key uniqueness guarantee, or use a
+distributed lock.  For this reason, NoBrainer uses its implementation of
+[distributed locks](/docs/distributed_locks) to ensure race-free semantics.
 
-The uniqueness validator uses distributed locks to ensure race-free semantics.
-Read more about this in the [Distributed Lock](/docs/distributed_locks) section.
+The locks are acquired after the `before_create/update` callbacks, and before
+the `after_create/update` callbacks. NoBrainer alpha sorts the keys to be
+acquired to avoid deadlock issues when performing multiple uniqueness
+validations on the same document. For performance reasons, NoBrainer only
+performs uniqueness validations when the involved fields change.
 
 ### Using scopes
 

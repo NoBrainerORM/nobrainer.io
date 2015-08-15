@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Callbacks
-prev_section: persistence
-next_section: validations
 permalink: /callbacks/
 ---
 

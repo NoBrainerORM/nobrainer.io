@@ -1,7 +1,6 @@
 ---
 layout: docs
 title: Credits
-prev_section: faq
 permalink: /credits/
 ---
 

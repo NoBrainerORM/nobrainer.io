@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Table Configuration
-prev_section: distributed_locks
-next_section: indexes
 permalink: /table_configuration/
 ---
 
@@ -27,7 +25,7 @@ class Model
 end
 {% endhighlight %}
 
-## Synchronizing table schema
+## Synchronizing Table Schema
 
 When changing the configuration of tables, the new schema must be reflected on
 the database.
@@ -38,10 +36,10 @@ When using Rails, you may use the rake task:
 $ rake nobrainer:sync_schema
 {% endhighlight %}
 
-You can also update the database schema programmatically:
+Programmatically, you may invoke `sync_schema`:
 
 {% highlight ruby %}
-NoBrainer.sync_indexes
+NoBrainer.sync_schema
 {% endhighlight %}
 
 NoBrainer waits for the tables to be ready by default.

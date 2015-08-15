@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Timestamps
-prev_section: types
-next_section: serialization
 permalink: /timestamps/
 ---
 

@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Joins
-prev_section: scopes
-next_section: eager_loading
 permalink: /joins/
 ---
 

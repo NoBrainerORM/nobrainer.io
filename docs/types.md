@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Types
-prev_section: fields
-next_section: timestamps
 permalink: /types/
 ---
 

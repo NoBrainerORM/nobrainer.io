@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Differences from other ORMs
-prev_section: introduction
-next_section: installation
 permalink: /differences_from_other_orms/
 ---
 

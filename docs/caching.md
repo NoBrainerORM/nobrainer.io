@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Caching
-prev_section: eager_loading
-next_section: rql_layer
 permalink: /caching/
 ---
 

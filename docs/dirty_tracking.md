@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Dirty Tracking
-prev_section: validations
-next_section: associations
 permalink: /dirty_tracking/
 ---
 

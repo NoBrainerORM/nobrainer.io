@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: 3rd-party Integration
-prev_section: changelog
-next_section: communication
 permalink: /3rd_party_integration/
 ---
 

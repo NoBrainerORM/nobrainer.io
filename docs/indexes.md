@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Indexes
-prev_section: table_configuration
-next_section: management
 permalink: /indexes/
 ---
 

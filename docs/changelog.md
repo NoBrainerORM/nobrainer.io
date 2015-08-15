@@ -1,13 +1,15 @@
 ---
 layout: docs
 title: Changelog
-prev_section: roadmap
-next_section: 3rd_party_integration
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.29.0 -- Aug. 19, 2015
 
+* When redefining the primary key, the default primary key generator is no
+  longer used.
+* Try to emit validation errors when `upsert()` fails with missing keys.
+* `upsert()` updates the document when found.
 * Allow `:class` to be used as a shorthand for `:class_name` in association
   declarations.
 * Cleaned up the rake tasks. Added `rake nobrainer:rebalance`.
