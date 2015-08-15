@@ -8,6 +8,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Allow `:class` to be used as a shorthand for `:class_name` in association
+  declarations.
 * Cleaned up the rake tasks. Added `rake nobrainer:rebalance`.
 * Removed the query retry on connection failure. This was useful when
   `r.table().wait` was not available.
