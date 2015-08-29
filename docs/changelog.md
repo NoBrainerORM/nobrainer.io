@@ -4,6 +4,10 @@ title: Changelog
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Allow polymorphic queries with first_or_create under certain conditions
+
 ### 0.29.0 -- Aug. 19, 2015
 
 * When redefining the primary key, the default primary key generator is no
