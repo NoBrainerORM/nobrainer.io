@@ -6,7 +6,8 @@ permalink: /changelog/
 
 ### git HEAD
 
-* Allow polymorphic queries with first_or_create under certain conditions
+* Allow compound indexes to be declared with an implicit name.
+* Allow polymorphic queries with first_or_create under certain conditions.
 
 ### 0.29.0 -- Aug. 19, 2015
 

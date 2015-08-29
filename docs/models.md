@@ -35,6 +35,10 @@ end
 NoBrainer uses a `_type` attribute in the subclass documents to be able to query
 and instantiate the proper classes.
 
+Note that when using Rails, you might have to use `require_dependency` to ensure
+that all subclasses are loaded. See more in the Rails guide,
+[Autoloading and STI](http://guides.rubyonrails.org/autoloading_and_reloading_constants.html#autoloading-and-sti).
+
 ## Reflection
 
 Sometimes it's useful to go through all the models to do something fancy.
