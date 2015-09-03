@@ -63,10 +63,6 @@ class NoBrainer::Lock
   def unlock
   end
 
-  # Surround the passed block with calls to lock and unlock.
-  def synchronize(options={}, &block)
-  end
-
   # Resets the expiration date of the lock. Raises LostLock if the lock
   # cannot be refreshed due to loosing the lock.
   # options accepts:

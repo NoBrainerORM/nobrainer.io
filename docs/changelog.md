@@ -6,6 +6,9 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Implementation of `NoBrainer::ReentrantLock`. Like `Lock`, but can be locked
+  multiple times before being unlocked
+  [#160](https://github.com/nviennot/nobrainer/issues/160).
 * Allow compound indexes to be declared with an implicit name.
 * Allow polymorphic queries with first_or_create under certain conditions.
 
