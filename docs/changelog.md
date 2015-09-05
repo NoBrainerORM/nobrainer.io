@@ -6,6 +6,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Fix problem with joins and nil join keys.
+* Add virtual attributes that can be specified with custom RQL.
 * Implementation of `NoBrainer::ReentrantLock`. Like `Lock`, but can be locked
   multiple times before being unlocked
   [#160](https://github.com/nviennot/nobrainer/issues/160).
