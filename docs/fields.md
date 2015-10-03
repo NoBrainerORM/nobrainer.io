@@ -219,6 +219,26 @@ user.email  # In memory access.
 user.avatar # Performs an extra query to fetch the data.
 {% endhighlight %}
 
+## Virtual Attributes
+
+NoBrainer can merge RQL values which appear as regular attributes on the model
+instance. Using `virtual_field` allows to specify a custom RQL expression that
+will be evaluated by the database when performing queries.
+
+The following example adds a `current_user_following` virtual attribute to a
+`User` model that returns whether the current user follows that user or not.
+
+{% highlight ruby %}
+class User
+  virtual_field :current_user_following do |doc|
+    if Thread.current[:current_user]
+      Followship.where(:follower_id => doc[:id], :following_id => Thread.current[:current_user].id).to_rql.is_empty.not
+    end
+  end
+end
+{% endhighlight %}
+
+
 ## Reflection
 
 You can access the field definitions with `Model.fields`.  

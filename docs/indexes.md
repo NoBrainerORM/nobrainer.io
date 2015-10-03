@@ -41,7 +41,10 @@ class Author
   # Multi index
   index :tags, :multi => true
 
-  # Compound index
+  # Compound index with implicit name
+  index [:first_name, :last_name]
+
+  # Compound index with explicit name
   index :full_name_compound, [:first_name, :last_name]
 
   # Arbitrary index

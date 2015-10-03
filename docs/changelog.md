@@ -4,7 +4,7 @@ title: Changelog
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.30.0 -- Oct. 3, 2015
 
 * Fix problem with joins and nil join keys.
 * Add virtual attributes that can be specified with custom RQL.
@@ -12,7 +12,7 @@ permalink: /changelog/
   multiple times before being unlocked
   [#160](https://github.com/nviennot/nobrainer/issues/160).
 * Allow compound indexes to be declared with an implicit name.
-* Allow polymorphic queries with first_or_create under certain conditions.
+* Allow polymorphic queries with `first_or_create` under certain conditions.
 
 ### 0.29.0 -- Aug. 19, 2015
 
