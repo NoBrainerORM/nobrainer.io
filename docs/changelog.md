@@ -4,6 +4,11 @@ title: Changelog
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Fixed lazy fetching when fetching an undefined value.
+* Added back `model.update_attributes()` for compatibility with other gems.
+
 ### 0.30.0 -- Oct. 3, 2015
 
 * Fix problem with joins and nil join keys.
