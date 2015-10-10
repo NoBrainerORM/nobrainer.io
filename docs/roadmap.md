@@ -6,6 +6,8 @@ permalink: /roadmap/
 
 The roadmap is the following. Items at the beginning of the list are somewhat higher priority.
 
+* Allow `.default()` on symbols within `where()` queries to provide default
+  values.
 * Permit loading attributes when performing atomic operations.
 * Write a bunch of recipes and patterns.
 * Support type definitions like `[Integer]` to specify typed arrays.
