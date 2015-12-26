@@ -6,6 +6,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Use index for `where(XXX.defined => true)` queries
+  [#180](https://github.com/nviennot/nobrainer/issues/180).
 * Fixed lazy fetching when fetching an undefined value.
 * Added back `model.update_attributes()` for compatibility with other gems.
 
