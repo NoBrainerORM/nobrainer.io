@@ -26,4 +26,4 @@ end
 
 ## Example
 
-A full example can be found in the [recipes section](/docs/real_time_example/).
+A full example can be found in the [recipes section](/docs/real_time_tutorial/).
