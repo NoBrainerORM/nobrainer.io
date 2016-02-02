@@ -6,6 +6,12 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Allow `belongs_to` associations to be used in `upsert()`
+  [#186](https://github.com/nviennot/nobrainer/issues/186).
+* Added `:uniq` and `:unique` options shorthands to the `belongs_to` keyword.
+* Allow self-referential `belongs_to` association
+  [#184](https://github.com/nviennot/nobrainer/issues/184).
+* Primary key time offset operates on a fixed timezone.
 * Guard against partial model definitions.
 * Use index for `where(XXX.defined => true)` queries
   [#180](https://github.com/nviennot/nobrainer/issues/180).
