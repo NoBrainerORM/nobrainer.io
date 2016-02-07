@@ -31,6 +31,8 @@ The following describes the different options `belongs_to` accepts:
 * `:validates`: passes a validation to `target`, and not `target_id`. Useful
   to provide a presence validation.
 * `:required`: a shorthand for `:validates => { :presence => true }`.
+* `:uniq` (or `:unique`): a shorthand to specify a uniquness validation on the
+  foreign key.
 
 The following describes the behavior of `belongs_to` associations:
 

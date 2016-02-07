@@ -4,7 +4,7 @@ title: Changelog
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.31.0 -- Feb. 7, 2016
 
 * Allow `belongs_to` associations to be used in `upsert()`
   [#186](https://github.com/nviennot/nobrainer/issues/186).
