@@ -4,6 +4,14 @@ title: Changelog
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Added `order()` to be an alias of `order_by()`
+  [#194](https://github.com/nviennot/nobrainer/issues/194).
+* Added Rails 5 compatiblity
+  [#191](https://github.com/nviennot/nobrainer/issues/191).
+* Added `attribute_will_change!()` for compatiblity as an no-op.
+
 ### 0.31.0 -- Feb. 7, 2016
 
 * Allow `belongs_to` associations to be used in `upsert()`
