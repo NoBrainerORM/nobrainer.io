@@ -82,7 +82,7 @@ You may use the `format` shorthand to specify a format validator:
 
 {% highlight ruby %}
 class Model
-  field :name, :format => { /\A[a-z]+\z/ }
+  field :name, :format => /\A[a-z]+\z/
 end
 # Equivalent to:
 class Model
@@ -92,7 +92,7 @@ end
 
 ### length/min_length/max_length
 
-You may use the `format` shorthand to specify a format validator:
+You may use the `length`, `min_length`, `max_length` shorthand to specify a length validator:
 
 {% highlight ruby %}
 class Model
