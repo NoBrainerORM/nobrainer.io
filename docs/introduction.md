@@ -20,7 +20,7 @@ NoBrainer depends on a couple of things:
 
 * The RethinkDB database.
 * NoBrainer runs on Ruby MRI 2.x.
-* NoBrainer does not depend on Rails, but plays nicely with Rails 4.
+* NoBrainer does not depend on Rails, but plays nicely with Rails 4 and Rails 5.
 * NoBrainer depends on the [`rethinkdb`](https://rubygems.org/gems/rethinkdb),
       [`activemodel`](https://github.com/rails/rails/tree/master/activemodel),
       [`activesupport`](https://github.com/rails/rails/tree/master/activesupport),
