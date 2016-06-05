@@ -19,6 +19,7 @@ class User
   field :verified,     :type => Boolean
   field :num_friends,  :type => Integer
   field :last_seen_at, :type => Time
+  field :status,       :type => Enum, :in => [:pending, :accepted, :rejected]
 end
 {% endhighlight %}
 
@@ -29,7 +30,8 @@ The following types are currently supported:
 * `Integer`
 * `Float`
 * `Boolean`
-* `Symbols`
+* `Symbol`
+* `Enum`
 * `Time`
 * `Date`
 * `Binary`
@@ -121,10 +123,38 @@ User.where(:num_friends.gt => "10xx").first # raises an InvalidType error
   must either be `true`, `yes`, `t`, `1` or `false`, `no`, `f`, `0`.
 * `1` and `0` integers are accepted.
 
-### Symbols
+### Symbol
 
 * Symbols are accepted.
 * Non empty strings are accepted. The cast operation is `value.strip.to_sym`.
+
+### Enum
+
+Enum is similar to the `Symbol` type, except it adds additional methods.
+
+* First, the `:in` option is mandatory when declaring an Enum field to specify
+  the possible values.
+* Each of the values specified in the `:in` option generates two methods.
+For each allowed `value`, a method `value?` returns whether the defined
+field is set to `value`; and a method `value!` changes the field to `value`.
+Note that `save` must still be invoked to persist the changes to the database.
+* These method names can be prefixed or suffixed by specifying a `:prefix` or
+`:suffix` option to avoid naming conflicts.
+
+Example:
+
+{% highlight ruby %}
+class User
+  include NoBrainer::Document
+  field :status, :type => Enum, :in => [:pending, :accepted, :rejected],
+                                :default => :pending
+end
+user = User.new
+user.pending? # true
+user.rejected!
+user.pending?  # false
+user.rejected? # true
+{% endhighlight %}
 
 ### Time
 
