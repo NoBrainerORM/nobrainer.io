@@ -4,12 +4,13 @@ title: Changelog
 permalink: /changelog/
 ---
 
-### git HEAD
+### 0.32.0 -- June 5, 2016
 
 * Added `order()` to be an alias of `order_by()`
   [#194](https://github.com/nviennot/nobrainer/issues/194).
 * Added Rails 5 compatiblity
-  [#191](https://github.com/nviennot/nobrainer/issues/191).
+  [#191](https://github.com/nviennot/nobrainer/issues/191),
+  [#209](https://github.com/nviennot/nobrainer/issues/209).
 * Added `attribute_will_change!()` for compatiblity as an no-op.
 
 ### 0.31.0 -- Feb. 7, 2016
