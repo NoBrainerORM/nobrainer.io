@@ -4,6 +4,11 @@ title: Changelog
 permalink: /changelog/
 ---
 
+### git HEAD
+
+* Bug fix where using large indexes caused systematic index rebuilds with `sync_indexes`
+  [#210](https://github.com/nviennot/nobrainer/issues/210).
+
 ### 0.32.0 -- June 5, 2016
 
 * Added `order()` to be an alias of `order_by()`
