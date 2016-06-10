@@ -6,6 +6,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Bug fix with Rails5 where strong params where no longer compatible
+  [#211](https://github.com/nviennot/nobrainer/issues/211).
 * Bug fix where using large indexes caused systematic index rebuilds with `sync_indexes`
   [#210](https://github.com/nviennot/nobrainer/issues/210).
 
