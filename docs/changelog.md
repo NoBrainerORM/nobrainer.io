@@ -6,6 +6,10 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Bug fix where long keys (>255 chars) in NoBrainer::Lock are rejected
+  [#214](https://github.com/nviennot/nobrainer/issues/214).
+* Add support for user/password authentication on connections
+  [#213](https://github.com/nviennot/nobrainer/issues/213).
 * Bug fix with Rails5 where strong params where no longer compatible
   [#211](https://github.com/nviennot/nobrainer/issues/211).
 * Bug fix where using large indexes caused systematic index rebuilds with `sync_indexes`
