@@ -6,6 +6,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Fix model reloading with Rails 5.
+* Added a `run_options` configuration for `r.run()` options.
 * Bug fix where long keys (>255 chars) in NoBrainer::Lock are rejected
   [#214](https://github.com/nviennot/nobrainer/issues/214).
 * Add support for user/password authentication on connections
