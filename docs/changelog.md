@@ -6,6 +6,8 @@ permalink: /changelog/
 
 ### git HEAD
 
+* Removed `.unscoped` when fetching belongs_to associations to be consistent with `find()`.
+* `update_all()` operates without ordering.
 * Fix model reloading with Rails 5.
 * Added a `run_options` configuration for `r.run()` options.
 * Bug fix where long keys (>255 chars) in NoBrainer::Lock are rejected
