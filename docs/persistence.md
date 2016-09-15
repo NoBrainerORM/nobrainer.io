@@ -20,8 +20,8 @@ The following methods are available on the `Model` class:
   passes the documents in bulk to the database to perform efficient writes.
   If the documents primary keys are left unspecified, the database will assign
   default UUIDs and `insert_all` will return the list of generated ids.
-  You may use `NoBrainer::Document::Id.generate` to generate MongoDB style ids
-  to match the format of model instances.
+  You may use `NoBrainer::Document::PrimaryKey::Generator.generate` to generate
+  MongoDB style ids to match the format of model instances.
 * `Model.sync` is a wrapper for [`r.sync()`](http://www.rethinkdb.com/api/ruby/#sync).
 
 The following predicates are available on a model instance:
