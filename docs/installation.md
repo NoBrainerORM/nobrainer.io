@@ -51,9 +51,8 @@ NoBrainer.configure do |config|
   # The default is to use localhost, with a database name matching the
   # application name and the environment.
   # NoBrainer also reads environment variables when defined:
-  # * RETHINKDB_URL, RDB_URL
-  # * RETHINKDB_HOST, RETHINKDB_PORT, RETHINKDB_DB, RETHINKDB_AUTH
-  # * RDB_HOST, RDB_PORT, RDB_DB, RDB_AUTH
+  # * RDB_URL, RDB_USER, RDB_PASSWORD, RDB_HOST, RDB_PORT, RDB_DB
+  # * All the above, but with RETHINKDB instead of RDB
   # config.rethinkdb_urls = [config.default_rethinkdb_url]
 
   # ssl_options may be set to {:ca_certs => '/path/to/ca.crt'} to establish
@@ -81,9 +80,10 @@ NoBrainer.configure do |config|
   # You can turn off the warning if you want to use both.
   # config.warn_on_active_record = true
 
-  # Configures the durability for database writes.
-  # The default is :soft for development or test environment, otherwise :hard.
-  # config.durability = config.default_durability
+  # Configures the run options passed to r.run() when executing queries.
+  # The options are listed in the RethinkDB run() documentation.
+  # The default durability is :soft for development or test environments, otherwise :hard.
+  # config.run_options = { :durability => config.default_durability }
 
   # Configures the default table configuration options. These values are
   # reflected to the database when running `rake nobrainer:sync_schema'.
@@ -95,17 +95,17 @@ NoBrainer.configure do |config|
   # config.max_string_length = 255
 
   # user_timezone can be configured with :utc, :local, or :unchanged.
-  # When reading an attribute from a model which type is Time, the timezone
-  # of that time is translated according to this setting.
+  # When reading a Time attribute from a model, the timezone of that attribute
+  # is set according to the following setting.
   # config.user_timezone = :local
 
   # db_timezone can be configured with :utc, :local, or :unchanged.
-  # When writting to the database, the timezone of Time attributes are
-  # translated according to this setting.
+  # When writing a Time attribute into the database, the timezone of that
+  # attribute is set according to the following setting.
   # config.db_timezone = :utc
 
   # Default options used when compiling geo queries.
-  # config.geo_options => { :geo_system => 'WGS84', :unit => 'm' }
+  # config.geo_options = { :geo_system => 'WGS84', :unit => 'm' }
 
   # Configures which mechanism to use in order to perform non-racy uniqueness
   # validations. More about this behavior in the Distributed Locks section.
@@ -129,7 +129,7 @@ NoBrainer.configure do |config|
   # generated without conflicts.
   # config.machine_id = config.default_machine_id
 
-  # Criteria cache elements. For example, the result of a has_many association
+  # Criteria cache documents. For example, the result of a has_many association
   # is cached. The per criteria cache is disabled if it grows too big to avoid
   # out of memory issues.
   # config.criteria_cache_max_entries = 10_000
