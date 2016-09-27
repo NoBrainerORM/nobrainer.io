@@ -127,6 +127,10 @@ set. For example, calling `Model.create(:created_at => nil)` will not trigger
 the default value assignment on `created_at`. Please create a GitHub issue
 if this behavior is a problem for you.
 
+Note that specifying a default value at some point in time does not apply
+the default value to existing documents in the database. Existing documents must
+be manually migrated.
+
 ## Readonly Fields
 
 When declaring a field with `:readonly => true`, the field cannot be reassigned
