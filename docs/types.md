@@ -316,6 +316,10 @@ Regarding date/time types, here is what you need to know:
   in mind when using `==` on times. Applying `to_i` before comparing times is a
   good workaround to millisecond rounding issues.
 
+## Enum notes
+
+When adding an `Enum` field, values will not added to existing records in the database. You must perform a migration to add the enum value to your existing records. Otherwise, any queries for enum will be imprecise.
+
 ---
 
 If this behavior does not match your expectations, please open an issue on
