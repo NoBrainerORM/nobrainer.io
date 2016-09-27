@@ -9,7 +9,8 @@ permalink: /changelog/
 * Allow connection passwords to have special characters through standard URL encodings.
   [#230](https://github.com/nviennot/nobrainer/issues/232).
 * Detect connection failures when connected to a proxy.
-* For rails applications, also comment active_record lines in config/initializers/*.rb
+* For rails applications, also comment `active_record` related lines in
+  `config/initializers/*.rb` during installation
   [#222](https://github.com/nviennot/nobrainer/issues/222).
 * Removed `.unscoped` when fetching belongs_to associations to be consistent with `find()`.
 * `update_all()` operates without ordering.
