@@ -53,10 +53,14 @@ NoBrainer.configure do |config|
   # NoBrainer also reads environment variables when defined:
   # * RDB_URL, RDB_USER, RDB_PASSWORD, RDB_HOST, RDB_PORT, RDB_DB
   # * All the above, but with RETHINKDB instead of RDB
+  # URLs follow the following convention:
+  #    rethinkdb://user:password@host:port/db_name
   # config.rethinkdb_urls = [config.default_rethinkdb_url]
 
   # ssl_options may be set to {:ca_certs => '/path/to/ca.crt'} to establish
   # an SSL connection to the RethinkDB servers.
+  # The options are the same as the one documented at
+  # https://www.rethinkdb.com/api/ruby/connect/
   # config.ssl_options = nil
 
   # driver specifies which driver to use. You may use :regular or :em.
