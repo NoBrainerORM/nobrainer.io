@@ -36,7 +36,7 @@ The predicates are described below:
 * `:or => [p1,...,pN]`: evaluates to true when at least one of the predicates is true.  
 Be aware that `[:a => 1, :b => 2]` is the same as `[{:a => 1, :b => 2}]`, which
 is not the same as `[{:a => 1}, {:b => 2}]`. NoBrainer prevents the former usage
-to avoid programming mistakes. If you knwo what you are doing, you may use `:_or`.
+to avoid programming mistakes. If you know what you are doing, you may use `:_or`.
 * `:not => p`: evaluates to true when `p` is false.
 * `:attr => value` evaluates to `:attr.eq => value`
 * `:attr.eq => /regexp/` evaluates to true when `attr` matches the regular expression.
