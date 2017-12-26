@@ -47,3 +47,8 @@ structure for NoBrainer documents using the materialized path pattern.
 
 Note: The data structures used may lead to data inconsistencies in the face of
 network partitions as this implementation would need transactions or 2pcs.
+
+## DelayedJob
+[delayed_job_nobrainer](https://github.com/eilers/delayed_job_nobrainer) is a backend for [DelayedJob](https://github.com/collectiveidea/delayed_job). 
+DelayedJob implements delayed background tasks into Rails and is one of the Backends for [ActiveJobs](http://edgeguides.rubyonrails.org/active_job_basics.html).
+
