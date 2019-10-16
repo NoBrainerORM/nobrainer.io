@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Scopes
-permalink: /scopes/
+permalink: /docs/scopes/
 ---
 
 ## Scope Definitions

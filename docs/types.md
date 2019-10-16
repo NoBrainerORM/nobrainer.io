@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Types
-permalink: /types/
+permalink: /docs/types/
 ---
 
 NoBrainer uses a field type mechanism to automatically cast and validates field

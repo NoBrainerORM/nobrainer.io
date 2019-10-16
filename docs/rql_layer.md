@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: RQL Layer
-permalink: /rql_layer/
+permalink: /docs/rql_layer/
 ---
 
 NoBrainer gives you a lot of sugar so you do not have to write RQL queries

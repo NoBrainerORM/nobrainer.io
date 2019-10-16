@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Callbacks
-permalink: /callbacks/
+permalink: /docs/callbacks/
 ---
 
 ## Declaring Callbacks

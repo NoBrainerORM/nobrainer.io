@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: DB Management
-permalink: /db_management/
+permalink: /docs/db_management/
 ---
 
 NoBrainer comes with helpers to manage the RethinkDB database.

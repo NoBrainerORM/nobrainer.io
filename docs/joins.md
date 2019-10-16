@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Joins
-permalink: /joins/
+permalink: /docs/joins/
 ---
 
 ## Performing Inner Table Joins

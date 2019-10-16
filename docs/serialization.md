@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Serialization
-permalink: /serialization/
+permalink: /docs/serialization/
 ---
 
 ## ActiveModel Serialization

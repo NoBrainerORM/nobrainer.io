@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Table Configuration
-permalink: /table_configuration/
+permalink: /docs/table_configuration/
 ---
 
 ## Configuring Tables

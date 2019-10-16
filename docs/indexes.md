@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Indexes
-permalink: /indexes/
+permalink: /docs/indexes/
 ---
 
 RethinkDB supports four kinds of secondary indexes:

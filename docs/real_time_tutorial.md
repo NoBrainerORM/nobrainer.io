@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Real Time Tutorial
-permalink: /real_time_tutorial/
+permalink: /docs/real_time_tutorial/
 ---
 
 The following showcases an example of using RethinkDB, NoBrainer,

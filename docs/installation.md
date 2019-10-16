@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Installation
-permalink: /installation/
+permalink: /docs/installation/
 ---
 
 Installing the gem

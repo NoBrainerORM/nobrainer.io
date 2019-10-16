@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Persistence
-permalink: /persistence/
+permalink: /docs/persistence/
 ---
 
 ## Persistence API

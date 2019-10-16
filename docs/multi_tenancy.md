@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Multi Tenancy
-permalink: /multi_tenancy/
+permalink: /docs/multi_tenancy/
 ---
 
 ## Changing databases at the connection level

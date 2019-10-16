@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: 3rd-party Integration
-permalink: /3rd_party_integration/
+permalink: /docs/3rd_party_integration/
 ---
 
 NoBrainer can be extended to support other functionnality and play nicely with

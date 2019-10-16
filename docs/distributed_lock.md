@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Distributed Locks
-permalink: /distributed_locks/
+permalink: /docs/distributed_locks/
 ---
 
 NoBrainer provides a distributed lock mechanism. The lock mechanism uses a

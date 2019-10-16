@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Roadmap
-permalink: /roadmap/
+permalink: /docs/roadmap/
 ---
 
 The roadmap is the following. Items at the beginning of the list are somewhat higher priority.

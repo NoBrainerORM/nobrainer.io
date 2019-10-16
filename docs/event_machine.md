@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Event Machine
-permalink: /event_machine/
+permalink: /docs/event_machine/
 ---
 
 At the moment, the RethinkDB Ruby driver only supports EventMachine for

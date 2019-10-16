@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Models
-permalink: /models/
+permalink: /docs/models/
 ---
 
 ## Model Declaration

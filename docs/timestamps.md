@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Timestamps
-permalink: /timestamps/
+permalink: /docs/timestamps/
 ---
 
 ## Enabling Timestamps

@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: FAQ
-permalink: /faq/
+permalink: /docs/faq/
 ---
 
 ## General Topics

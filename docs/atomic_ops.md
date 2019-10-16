@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Atomic Operations
-permalink: /atomic_ops/
+permalink: /docs/atomic_ops/
 ---
 
 NoBrainer supports atomic operations on document attributes to avoid races

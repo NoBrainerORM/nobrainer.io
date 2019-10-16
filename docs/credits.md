@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Credits
-permalink: /credits/
+permalink: /docs/credits/
 ---
 
 ### RethinkDB

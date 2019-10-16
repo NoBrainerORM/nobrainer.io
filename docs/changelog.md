@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Changelog
-permalink: /changelog/
+permalink: /docs/changelog/
 ---
 
 ### 0.33.0 -- Sep. 27, 2016

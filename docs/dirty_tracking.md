@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Dirty Tracking
-permalink: /dirty_tracking/
+permalink: /docs/dirty_tracking/
 ---
 
 ## Dirty Tracking

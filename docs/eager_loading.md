@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Eager Loading
-permalink: /eager_loading/
+permalink: /docs/eager_loading/
 ---
 
 ## The N+1 Queries issue

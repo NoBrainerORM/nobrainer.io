@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Associations
-permalink: /associations/
+permalink: /docs/associations/
 ---
 
 ## Associations

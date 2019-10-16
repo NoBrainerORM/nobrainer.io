@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Differences from other ORMs
-permalink: /differences_from_other_orms/
+permalink: /docs/differences_from_other_orms/
 ---
 
 NoBrainer breaks a couple of established patterns to provide a consistent API

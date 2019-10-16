@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Introduction
-permalink: /introduction/
+permalink: /docs/introduction/
 ---
 
 NoBrainer is an ORM for [RethinkDB](http://rethinkdb.com).

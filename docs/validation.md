@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Validations
-permalink: /validations/
+permalink: /docs/validations/
 ---
 
 ## Declaring Validators

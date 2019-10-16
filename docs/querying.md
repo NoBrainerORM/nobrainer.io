@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Querying
-permalink: /querying/
+permalink: /docs/querying/
 ---
 
 NoBrainer supports a rich query language that supports a wide range of features.

@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Communication
-permalink: /communication/
+permalink: /docs/communication/
 ---
 
 To ask a question or raise a concern, you may use the following:

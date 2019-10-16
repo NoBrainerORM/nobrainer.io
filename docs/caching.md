@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Caching
-permalink: /caching/
+permalink: /docs/caching/
 ---
 
 NoBrainer caches data in three places:

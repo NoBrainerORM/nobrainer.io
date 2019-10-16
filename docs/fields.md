@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Fields
-permalink: /fields/
+permalink: /docs/fields/
 ---
 
 ## Field Declaration
