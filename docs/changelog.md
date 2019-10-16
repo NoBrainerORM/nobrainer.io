@@ -4,6 +4,11 @@ title: Changelog
 permalink: /docs/changelog/
 ---
 
+### 0.34.0 -- Oct. 16, 2019
+
+* Add support for Rails 6
+* Add support for `nonvoting_replica_tags` table configuration
+
 ### 0.33.0 -- Sep. 27, 2016
 
 * Allow connection passwords to have special characters through standard URL encodings.

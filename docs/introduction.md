@@ -30,7 +30,7 @@ NoBrainer depends on a couple of things:
 
 ## Roadmap & Changelog
 
-Latest gem version: **0.33.0 -- Sep. 27, 2016**.
+Latest gem version: **0.34.0 -- Oct. 16, 2019**.
 
 master branch: [![Build Status](https://travis-ci.org/nviennot/nobrainer.svg?branch=master)](https://travis-ci.org/nviennot/nobrainer)
 
