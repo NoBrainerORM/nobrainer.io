@@ -12,7 +12,8 @@ Nevertheless, NoBrainer breaks a couple of established patterns to provide a
 consistent API. You may read more about these differences in the [next
 section](/docs/differences_from_other_orms/).
 
-NoBrainer is written and maintained by <a href="https://twitter.com/nviennot">Nicolas Viennot</a>.
+NoBrainer was created by <a href="https://github.com/nviennot">Nicolas Viennot</a>
+and is maintained by <a href="https://github.com/zedtux">Guillaume Hain</a>.
 
 ## Dependencies
 
