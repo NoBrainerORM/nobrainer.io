@@ -189,7 +189,7 @@ Read more about `Date` at the bottom of this page.
 ### Array
 
 * Arrays containing any types are accepted.
-* Arrays containing a specific type may be specified with the `of` method or array literal, for example: `Array.of(String)` or `[String]`.
+* Arrays containing a specific type may be specified with the `of` method or array literal, for example: `Array.of(String)` or `[String]`. (Starting with version 0.36.0)
 
 ### Set
 
