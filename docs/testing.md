@@ -28,7 +28,7 @@ docker-compose build gem
 After this is done, you can run the suite with:
 
 {% highlight ruby %}
-docker-compose up -d
+docker-compose up
 {% endhighlight %}
 
 Docker Compose will first download the Docker image of RethinkDB and then start
