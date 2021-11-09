@@ -28,18 +28,16 @@ docker-compose build gem
 After this is done, you can run the suite with:
 
 {% highlight ruby %}
-docker-compose up
+docker-compose run --rm gem rspec
 {% endhighlight %}
 
-Docker Compose will first download the Docker image of RethinkDB and then start
-the database and run the entire test suite.
-Keep this window open, RethinkDB runs and you'll be able to `exec` in the `gem`
-container some commands.
+On the first run, Docker Compose will download the Docker image of RethinkDB
+and then it will start the database and finally run the entire test suite.
 
 Now change the code as you need and then when you need to run some tests:
 
 {% highlight ruby %}
-docker-compose exec gem bundle exec rspec <path to your spec file(s)>
+docker-compose run --rm gem rspec <path to your spec file(s)>
 {% endhighlight %}
 
 ### Cleanup
