@@ -81,6 +81,9 @@ Author.where(:tags.any => 'programmer')
 # Use the full_name_compound index
 Author.where(:first_name => 'John', :last_name => 'Saucisse')
 
+# Use the leading part(s) of the full_name_compound index
+Author.where(:first_name => 'John')
+
 # Explicit use of indexes
 
 # Use the simple index first_name
