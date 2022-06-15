@@ -17,4 +17,7 @@ jobs:
       run: |
         docker run \
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/builder:3.8 /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+        jekyll/builder:3.8 \
+        /bin/bash -c "apk add python \
+                      && chmod -R 777 /srv/jekyll \
+                      && jekyll build --future"
