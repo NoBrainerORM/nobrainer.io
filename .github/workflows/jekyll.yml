@@ -24,5 +24,5 @@ jobs:
     - uses: helaili/jekyll-action@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        pre_build_commands: 'apk --update add python'
+        pre_build_commands: 'apk --update add python2'
         target_branch: 'gh-pages-test'
