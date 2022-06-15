@@ -29,6 +29,12 @@ jobs:
     - uses: helaili/jekyll-action@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        pre_build_commands: 'apk --update add python'
+
+    # Specify the Jekyll source location as a parameter
+    - uses: helaili/jekyll-action@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
         jekyll_src: 'sample_site'
 
     # Specify the target branch (optional)
