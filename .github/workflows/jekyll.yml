@@ -21,3 +21,4 @@ jobs:
         /bin/bash -c "apk add python \
                       && chmod -R 777 /srv/jekyll \
                       && jekyll build --future"
+        ls -al
