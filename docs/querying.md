@@ -52,6 +52,7 @@ to avoid programming mistakes. If you know what you are doing, you may use `:_or
 * `:attr.undefined => true` evaluates to true when `attr` is undefined.
 * `:attr.in => [value1,...,valueN]` evaluates to true when `attr` is in the specified array.
 * `:attr.include => value` evaluates to true when the array `attr` includes `value`.
+* `:attr.during => (start_time, end_time)` evaluates to true when `attr` is between the start and end time range.
 * `:attr.any.op => value` evalues to true when any of the `attr` values match `value` with `op`.
 * `:attr.all.op => value` evalues to true when all of the `attr` values match `value` with `op`.
 * `:attr.not.op => value` evalues to true when the `attr` value does not match `value` with `op`.
