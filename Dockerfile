@@ -1,19 +1,17 @@
-FROM ubuntu:xenial
+FROM ruby:2.7-alpine3.15
 
 WORKDIR /build
 
-RUN apt-get update \
-	&& apt-get install -y build-essential ruby-dev python-pip \
+RUN apk --update add build-base python2 py-pip \
 	&& pip install Pygments
 
 env LANG=C.UTF-8
 env LANGUAGE=C.UTF-8
 env LC_ALL=C.UTF-8
 
-COPY Gemfile .
-COPY Gemfile.lock .
+COPY Gemfile* ./
 
-RUN gem update --system \
+RUN gem update --system 3.2.3 \
 	&& gem install -N bundler \
 	&& bundler install
 
