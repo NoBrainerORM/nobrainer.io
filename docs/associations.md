@@ -22,17 +22,19 @@ and the target refers to the other side of the association.
 The `belongs_to` syntax is the following: `belongs_to :target, options`
 
 The following describes the different options `belongs_to` accepts:
-* `:primary_key`: the primary key to use on the target. Defaults to `:id`.
+* `:class_name`: the target class name. Defaults to `Target`.
 * `:foreign_key`: the foreign key to use. Defaults to `#{target_name}_#{primary_key}`.
 * `:foreign_key_as`: the alias for the foreign key. Defaults to `nil`.
-* `:class_name`: the target class name. Defaults to `Target`.
 * `:index`: when true, the foreign key field gets an index declared to speed to
   the corresponding `has_many` association. Defaults to `nil`.
-* `:validates`: passes a validation to `target`, and not `target_id`. Useful
-  to provide a presence validation.
+* `:polymorphic`: when true, the model can belongs to any models, following [the
+  Ruby On Rails Polymorphic Associations](https://guides.rubyonrails.org/association_basics.html#polymorphic-associations) convention.
+* `:primary_key`: the primary key to use on the target. Defaults to `:id`.
 * `:required`: a shorthand for `:validates => { :presence => true }`.
 * `:uniq` (or `:unique`): a shorthand to specify a uniquness validation on the
   foreign key.
+* `:validates`: passes a validation to `target`, and not `target_id`. Useful
+  to provide a presence validation.
 
 The following describes the behavior of `belongs_to` associations:
 
