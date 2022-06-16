@@ -41,9 +41,10 @@ that all subclasses are loaded. See more in the Rails guide,
 
 ## Polymorphic Associations
 
-NoBrainer supports the Ruby On Rails polymorphic associations which stores the
-remote model name in a `_type` column and the remote model ID in a `_id` column
-so that you can link any models to the polymorphic association.
+Starting with version 0.43.0, NoBrainer supports the Ruby On Rails polymorphic
+associations which stores the remote model name in a `_type` column and the
+remote model ID in a `_id` column so that you can link any models to the
+polymorphic association.
 
 {% highlight ruby %}
 class Picture
