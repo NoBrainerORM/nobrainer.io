@@ -30,6 +30,9 @@ class Author
   field :tags
   field :first_name
   field :last_name
+  field :city
+  field :state
+  field :country
   has_many :posts
 
   # Indexes can also be declared with the index keyword as such:
@@ -43,6 +46,7 @@ class Author
 
   # Compound index with implicit name
   index [:first_name, :last_name]
+  index [:country, :state, :city]
 
   # Compound index with explicit name
   index :full_name_compound, [:first_name, :last_name]
@@ -80,6 +84,9 @@ Author.where(:tags.any => 'programmer')
 
 # Use the full_name_compound index
 Author.where(:first_name => 'John', :last_name => 'Saucisse')
+
+# Use the leading parts of a compound index
+Author.where(:country => 'US', :state => 'WA')
 
 # Explicit use of indexes
 
