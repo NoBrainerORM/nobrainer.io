@@ -1,0 +1,867 @@
+
+
+
+  
+/*! normalize.css v2.1.3 | MIT License | git.io/normalize */
+
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Correct `block` display not defined in IE 8/9.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block;
+}
+
+/**
+ * Correct `inline-block` display not defined in IE 8/9.
+ */
+
+audio,
+canvas,
+video {
+    display: inline-block;
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9.
+ * Hide the `template` element in IE, Safari, and Firefox < 22.
+ */
+
+[hidden],
+template {
+    display: none;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+
+html {
+    font-family: sans-serif; /* 1 */
+    -ms-text-size-adjust: 100%; /* 2 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+
+body {
+    margin: 0;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+
+a {
+    background: transparent;
+}
+
+/**
+ * Address `outline` inconsistency between Chrome and other browsers.
+ */
+
+a:focus {
+    outline: thin dotted;
+}
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari 5, and Chrome.
+ */
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9, Safari 5, and Chrome.
+ */
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
+ */
+
+b,
+strong {
+    font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+
+dfn {
+    font-style: italic;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+
+hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+
+mark {
+    background: #ff0;
+    color: #000;
+}
+
+/**
+ * Correct font family set oddly in Safari 5 and Chrome.
+ */
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, serif;
+    font-size: 1em;
+}
+
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+
+pre {
+    white-space: pre-wrap;
+}
+
+/**
+ * Set consistent quote types.
+ */
+
+q {
+    quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+    font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+
+/**
+ * Remove border when inside `a` element in IE 8/9.
+ */
+
+img {
+    border: 0;
+}
+
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 8/9 and Safari 5.
+ */
+
+figure {
+    margin: 0;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+
+fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+
+legend {
+    border: 0; /* 1 */
+    padding: 0; /* 2 */
+}
+
+/**
+ * 1. Correct font family not being inherited in all browsers.
+ * 2. Correct font size not being inherited in all browsers.
+ * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
+ */
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 2 */
+    margin: 0; /* 3 */
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+button,
+input {
+    line-height: normal;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+
+button,
+select {
+    text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+    cursor: default;
+}
+
+/**
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+
+input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box; /* 2 */
+    box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/**
+ * 1. Remove default vertical scrollbar in IE 8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+
+textarea {
+    overflow: auto; /* 1 */
+    vertical-align: top; /* 2 */
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*
+ * Gridism
+ * A simple, responsive, and handy CSS grid by @cobyism
+ * https://github.com/cobyism/gridism
+ */
+
+/* Preserve some sanity */
+.grid,
+.unit {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Set up some rules to govern the grid */
+.grid {
+  display: block;
+  clear: both;
+}
+.grid .unit {
+  float: left;
+  width: 100%;
+  padding: 10px;
+}
+
+/* This ensures the outer gutters are equal to the (doubled) inner gutters. */
+.grid .unit:first-child { padding-left: 20px; }
+.grid .unit:last-child { padding-right: 20px; }
+
+/* Nested grids already have padding though, so let’s nuke it */
+.unit .unit:first-child { padding-left: 0; }
+.unit .unit:last-child { padding-right: 0; }
+.unit .grid:first-child > .unit { padding-top: 0; }
+.unit .grid:last-child > .unit { padding-bottom: 0; }
+
+/* Let people nuke the gutters/padding completely in a couple of ways */
+.no-gutters .unit,
+.unit.no-gutters {
+  padding: 0 !important;
+}
+
+/* Wrapping at a maximum width is optional */
+.wrap .grid,
+.grid.wrap {
+  max-width: 978px;
+  margin: 0 auto;
+}
+
+/* Width classes also have shorthand versions numbered as fractions
+ * For example: for a grid unit 1/3 (one third) of the parent width,
+ * simply apply class="w-1-3" to the element. */
+.grid .whole,          .grid .w-1-1 { width: 100%; }
+.grid .half,           .grid .w-1-2 { width: 50%; }
+.grid .one-third,      .grid .w-1-3 { width: 33.3332%; }
+.grid .two-thirds,     .grid .w-2-3 { width: 66.6665%; }
+.grid .one-quarter,    .grid .w-1-4 { width: 25%; }
+.grid .three-quarters, .grid .w-3-4 { width: 75%; }
+.grid .one-fifth,      .grid .w-1-5 { width: 20%; }
+.grid .two-fifths,     .grid .w-2-5 { width: 40%; }
+.grid .three-fifths,   .grid .w-3-5 { width: 60%; }
+.grid .four-fifths,    .grid .w-4-5 { width: 80%; }
+.grid .golden-small,   .grid .w-g-s { width: 38.2716%; } /* Golden section: smaller piece */
+.grid .golden-large,   .grid .w-g-l { width: 61.7283%; } /* Golden section: larger piece */
+
+/* Clearfix after every .grid */
+.grid {
+  *zoom: 1;
+}
+.grid:before, .grid:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.grid:after {
+  clear: both;
+}
+
+/* Utility classes */
+.align-center { text-align: center; }
+.align-left   { text-align: left; }
+.align-right  { text-align: right; }
+.pull-left    { float: left; }
+.pull-right   { float: right; }
+
+/* Responsive Stuff */
+@media screen and (max-width: 568px) {
+  /* Stack anything that isn’t full-width on smaller screens */
+  .grid .unit {
+    width: 100% !important;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .unit .grid .unit {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  /* Sometimes, you just want to be different on small screens */
+  .center-on-mobiles {
+    text-align: center !important;
+  }
+  .hide-on-mobiles {
+    display: none !important;
+  }
+}
+
+/* Expand the wrap a bit further on larger screens */
+@media screen and (min-width: 1180px) {
+  .wider .grid {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+}
+
+pre .hll { background-color: #ffffcc }
+pre .c { color: #89A0A6 } /* Comment */
+pre .err { color: #F8F8F2 } /* Error */
+pre .g { color: #F8F8F2 } /* Generic */
+pre .k { color: #F92672; font-weight: bold } /* Keyword */
+pre .l { color: #F8F8F2 } /* Literal */
+pre .n { color: #F8F8F2 } /* Name */
+pre .o { color: #F8F8F2 } /* Operator */
+pre .x { color: #F8F8F2 } /* Other */
+pre .p { color: #F8F8F2 } /* Punctuation */
+pre .cm { color: #89A0A6 } /* Comment.Multiline */
+pre .cp { color: #A6E22E } /* Comment.Preproc */
+pre .c1 { color: #89A0A6 } /* Comment.Single */
+pre .cs { color: #89A0A6 } /* Comment.Special */
+pre .gd { color: #F92672; background-color: #402526 } /* Generic.Deleted */
+pre .ge { color: #808080; text-decoration: underline } /* Generic.Emph */
+pre .gr { color: #960050; background-color: #1E0010 } /* Generic.Error */
+pre .gh { color: #ef5939 } /* Generic.Heading */
+pre .gi { color: #66FF2E; background-color: #233526 } /* Generic.Inserted */
+pre .go { color: #007070; background-color: #232526 } /* Generic.Output */
+pre .gp { color: #F8F8F2 } /* Generic.Prompt */
+pre .gs { color: #F8F8F2 } /* Generic.Strong */
+pre .gu { color: #ef5939 } /* Generic.Subheading */
+pre .gt { color: #F92672; font-weight: bold; background-color: #232526 } /* Generic.Traceback */
+pre .kc { color: #F92672; font-weight: bold } /* Keyword.Constant */
+pre .kd { color: #F92672; font-weight: bold } /* Keyword.Declaration */
+pre .kn { color: #F92672; font-weight: bold } /* Keyword.Namespace */
+pre .kp { color: #66D9EF } /* Keyword.Pseudo */
+pre .kr { color: #F92672; font-weight: bold } /* Keyword.Reserved */
+pre .kt { color: #66D9EF } /* Keyword.Type */
+pre .ld { color: #F8F8F2 } /* Literal.Date */
+pre .m { color: #AE81FF } /* Literal.Number */
+pre .s { color: #E6DB74 } /* Literal.String */
+pre .na { color: #A6E22E } /* Name.Attribute */
+pre .nb { color: #66D9EF } /* Name.Builtin */
+pre .nc { color: #66D9EF } /* Name.Class */
+pre .no { color: #66D9EF } /* Name.Constant */
+pre .nd { color: #F8F8F2 } /* Name.Decorator */
+pre .ni { color: #66D9EF; font-style: italic } /* Name.Entity */
+pre .ne { color: #A6E22E; font-weight: bold } /* Name.Exception */
+pre .nf { color: #A6E22E } /* Name.Function */
+pre .nl { color: #E6DB74 } /* Name.Label */
+pre .nn { color: #66D9EF } /* Name.Namespace */
+pre .nx { color: #F8F8F2 } /* Name.Other */
+pre .py { color: #F8F8F2 } /* Name.Property */
+pre .nt { color: #F92672; font-weight: bold } /* Name.Tag */
+pre .nv { color: #FD971F } /* Name.Variable */
+pre .ow { color: #F92672 } /* Operator.Word */
+pre .w { color: #F8F8F2 } /* Text.Whitespace */
+pre .mf { color: #AE81FF } /* Literal.Number.Float */
+pre .mh { color: #AE81FF; font-weight: bold } /* Literal.Number.Hex */
+pre .mi { color: #AE81FF; font-weight: bold } /* Literal.Number.Integer */
+pre .mo { color: #AE81FF; font-weight: bold } /* Literal.Number.Oct */
+pre .sb { color: #E6DB74 } /* Literal.String.Backtick */
+pre .sc { color: #E6DB74 } /* Literal.String.Char */
+pre .sd { color: #E6DB74 } /* Literal.String.Doc */
+pre .s2 { color: #E6DB74 } /* Literal.String.Double */
+pre .se { color: #E6DB74 } /* Literal.String.Escape */
+pre .sh { color: #E6DB74 } /* Literal.String.Heredoc */
+pre .si { color: #E6DB74 } /* Literal.String.Interpol */
+pre .sx { color: #E6DB74 } /* Literal.String.Other */
+pre .sr { color: #E6DB74 } /* Literal.String.Regex */
+pre .s1 { color: #E6DB74 } /* Literal.String.Single */
+pre .ss { color: #AE81FF; font-weight: bold } /* Literal.String.Symbol */
+pre .bp { color: #66D9EF } /* Name.Builtin.Pseudo */
+pre .vc { color: #FD971F } /* Name.Variable.Class */
+pre .vg { color: #FD971F } /* Name.Variable.Global */
+pre .vi { color: #FD971F } /* Name.Variable.Instance */
+pre .il { color: #AE81FF; font-weight: bold } /* Literal.Number.Integer.Long */
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.clear {
+  display: block;
+}
+
+.clear:after {
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+body {
+  font-size: 16px;
+  font-weight: 300;
+  color: #ddd;
+  background-color: #222;
+  background-image: url('/img/background.png');
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #555;
+}
+
+body > header h1, body > header h3 {
+  text-align: center;
+}
+
+body > footer {
+  font-size: 12px;
+  text-align: right;
+}
+
+article {
+  background: rgba(192, 192, 192, 0.2);
+  border-radius: 10px;
+  margin: 0 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.1);
+  padding: 30px 30px 30px;
+}
+
+aside {
+  padding-left: 20px;
+}
+
+aside h4 {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0 0 10px 0;
+  margin-left: -30px;
+  display: block;
+  border-bottom: 1px solid #c00;
+}
+
+aside ul {
+  padding-left: 0;
+}
+
+aside ul:first-child {
+  margin-top: 0;
+}
+
+aside li {
+  list-style-type: none;
+}
+
+aside li a {
+  font-size: 16px;
+  position: relative
+}
+
+aside li.current a:before {
+  content: "★";
+  position: absolute;
+  left: -30px;
+}
+
+.docs article {
+  min-height: 800px;
+}
+
+.section-nav {
+  text-align: center;
+  padding-top: 40px;
+  position: relative;
+  margin: 20px -20px 10px;
+}
+
+.section-nav > div {
+  width: 49.5%;
+}
+
+.section-nav a, .section-nav span {
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 8px 12px 10px;
+  border-radius: 5px;
+  /*border: 1px solid #333;*/
+  box-shadow: 0 1px 3px rgba(0,0,0,.3), inset 0 1px 1px rgba(255,255,255,.5);
+  background: #777;
+}
+
+.section-nav a:hover {
+  color: #fff;
+  background: #888;
+}
+
+.section-nav .next, .section-nav .prev {
+  position: relative;
+}
+
+.section-nav .next:after, .section-nav .prev:before {
+  font-size: 36px;
+  color: #222;
+  font-weight: 800;
+  text-shadow: 0 1px 0 rgba(255,255,255,.4);
+  position: absolute;
+  top: -7px;
+}
+
+.section-nav .next:after {
+  content: "›";
+  right: 10px;
+}
+
+.section-nav .prev:before {
+  content: "‹";
+  left: 10px;
+}
+
+.section-nav .prev, .section-nav .prev:hover {
+  padding-left: 30px;
+}
+
+.section-nav .next, .section-nav .next:hover {
+  padding-right: 30px;
+}
+
+.section-nav .disabled {
+  opacity: .5;
+  cursor: default;
+}
+
+code {
+  color: #fff;
+  font-weight: bold;
+}
+pre {
+  font-family: "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+  /* line-height: 0.5em; */
+  padding: 10px;
+  margin-top: 20px;
+  margin-left: 0;
+  margin-right: 0;
+  -moz-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+  box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+pre code {
+  font-weight: normal;
+}
+
+code { font-size: 14px; }
+
+article h1 {
+  margin-top: 0px;
+  text-align: center;
+}
+
+article h1, h2, h3 {
+  color: white;
+}
+
+article h2:after {
+  display: block;
+  content: "";
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #777;
+}
+
+article h3:before {
+  content: "★ ";
+  color: #bbb;
+}
+
+/* HTML Elements */
+
+a, a code {
+  color: #fc0;
+  text-decoration: none;
+  transition: all .25s;
+   -moz-transition: all .25s;
+   -webkit-transition: all .25s;
+}
+
+a:hover {
+  color: #f90;
+}
+
+strong {
+  font-weight: 700;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+.left { float: left; }
+.right { float: right; }
+.align-right { text-align: right; }
+.align-left { text-align: left; }
+.align-center { text-align: center; }
+
+/* Article HTML */
+
+article h2,
+article h3,
+article h4,
+article h5,
+article h6 {
+  margin: 1em 0;
+}
+
+article h4 {
+  color: #fff;
+}
+
+h5, h6 {
+  font-size: 1em;
+  font-style: italic;
+}
+
+article ul li p {
+  margin: 0;
+}
+
+article ul li, article ol li {
+  line-height: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+article ul li blockquote {
+  margin: 10px 0;
+}
+
+.like-buttons {
+  text-align: right;
+  margin-top: -51px;
+  margin-right: 5px;
+}
+
+.twitter {
+  margin-top: 8px;
+  margin-right: 17px;
+}
+
+
+
